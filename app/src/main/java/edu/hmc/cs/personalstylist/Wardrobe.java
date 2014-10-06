@@ -67,6 +67,10 @@ public class Wardrobe {
         return articleList.remove(article);
     }
 
+    public int wardrobeLength() {
+        return articleList.size();
+    }
+
     /**
      * Returns the first article of clothing with the specified name. If no such
      * article exists, returns null.
