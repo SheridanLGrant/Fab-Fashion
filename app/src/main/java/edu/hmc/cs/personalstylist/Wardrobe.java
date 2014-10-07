@@ -67,6 +67,20 @@ public class Wardrobe {
         return articleList.remove(article);
     }
 
+    /**
+     * Remove an article of clothing. Returns true if the article was successfully removed.
+     *
+     * @param name The name of the article of clothing to remove
+     * @return
+     */
+    public boolean removeArticle(String name) {
+        Clothing articleToRemove = getArticle(name);
+        if (name != null) {
+            return removeArticle(articleToRemove);
+        }
+        return false;
+    }
+
     public int wardrobeLength() {
         return articleList.size();
     }
