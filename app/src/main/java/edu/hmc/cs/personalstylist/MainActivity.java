@@ -1,12 +1,17 @@
 package edu.hmc.cs.personalstylist;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import android.view.View;
+import android.widget.EditText;
+import edu.hmc.cs.personalstylist.Wardrobe;
 
 public class MainActivity extends Activity {
+    public final static String NAME_MESSAGE = "edu.hmc.cs.personalstylist.nameMessage";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,5 +37,23 @@ public class MainActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void enterName(View view) {
+        Intent enterName = new Intent(this, DisplayName.class);
+        EditText name = (EditText) findViewById(R.id.enter_name);
+        String message = name.getText().toString();
+        enterName.putExtra(NAME_MESSAGE, message);
+
+        startActivity(enterName);
+    }
+
+    public void viewWardrobe(View view) {
+    }
+
+    public void enterArticle(View view) {
+    }
+
+    public void chooseOutfit(View view) {
     }
 }
