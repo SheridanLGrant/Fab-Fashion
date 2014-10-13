@@ -11,6 +11,8 @@ import edu.hmc.cs.personalstylist.Wardrobe;
 
 public class MainActivity extends Activity {
     public final static String NAME_MESSAGE = "edu.hmc.cs.personalstylist.nameMessage";
+    public final static String WARDROBE_MESSAGE = "edu.hmc.cs.personalstylist.wardrobeMessage";
+    public final static String ARTICLE_MESSAGE = "edu.hmc.cs.personalstylist.articleMessage";
 
 
     @Override
@@ -49,9 +51,20 @@ public class MainActivity extends Activity {
     }
 
     public void viewWardrobe(View view) {
+        Intent viewWardrobe = new Intent(this, DisplayWardrobe.class);
+
+        // Make this refer to something in strings.xml
+        viewWardrobe.putExtra(WARDROBE_MESSAGE, "Your Wardrobe");
+
+        startActivity(viewWardrobe);
     }
 
     public void enterArticle(View view) {
+        Intent enterArticle = new Intent(this, EnterArticle.class);
+
+        enterArticle.putExtra(ARTICLE_MESSAGE, "New Article of Clothing");
+
+        startActivity(enterArticle);
     }
 
     public void chooseOutfit(View view) {
