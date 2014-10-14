@@ -2,7 +2,21 @@
 <resources>
 
     <string name="app_name">Personal Stylist</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="wardrobe">Welcome to Your Wardrobe</string>
     <string name="action_settings">Settings</string>
+    <string name="enter_name">Enter your name</string>
+    <string name="view_wardrobe">View your Wardrobe</string>
+    <string name="title_activity_display_name">My Name Is: </string>
+    <string name="title_activity_display_wardrobe">Your Wardrobe</string>
+    <string name="title_activity_enter_article">New Article of Clothing</string>
+    <string name="enter_article">Enter an Article of Clothing</string>
+    <string name="get_outfit">Pick an Outfit for Today</string>
+    <string name="wardrobe_name">Your Wardrobe</string>
+    <string name="clothing_type">Clothing Type</string>
+    <string name="clothing_color">Clothing Color</string>
+    <string name="clothing_formality">Clothing Formality</string>
+    <string name="clothing_temperature">Clothing Temperature</string>
+    <string name="enter_clothing_name">Enter this clothing article\'s name</string>
+
 
 </resources>
