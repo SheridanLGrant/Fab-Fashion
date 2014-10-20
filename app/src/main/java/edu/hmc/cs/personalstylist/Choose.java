@@ -20,11 +20,11 @@ public class Choose {
          * @param articleList, formalityPref, weatherPref
          * @return ArrayList of viableBottoms
          */
-    public ArrayList removeTopsItems(ArrayList articleList, Wardrobe.ClothingFormality formalityPref, Wardrobe.ClothingTemperature weatherPref) {
+    public static ArrayList removeTopsItems(ArrayList articleList, Wardrobe.ClothingFormality formalityPref, Wardrobe.ClothingTemperature weatherPref) {
         ArrayList viableTops = null;
         for (int i = 0; i < articleList.size(); ++i) {
             Wardrobe.Clothing clothingArticle = (Wardrobe.Clothing) articleList.get(i);
-            if (clothingArticle.formality == formalityPref &&
+            if (clothingArticle.type == Wardrobe.ClothingType.SHIRT && clothingArticle.formality == formalityPref &&
                     clothingArticle.temperature == weatherPref) {
                 viableTops.add(clothingArticle);
             }
@@ -41,11 +41,11 @@ public class Choose {
          */
 
 
-    public ArrayList removeBottomsItems(ArrayList articleList, Wardrobe.ClothingFormality formalityPref, Wardrobe.ClothingTemperature weatherPref) {
+    public static ArrayList removeBottomsItems(ArrayList articleList, Wardrobe.ClothingFormality formalityPref, Wardrobe.ClothingTemperature weatherPref) {
         ArrayList viableBottoms = null;
         for (int i = 0; i < articleList.size(); ++i) {
             Wardrobe.Clothing clothingArticle = (Wardrobe.Clothing) articleList.get(i);
-            if (clothingArticle.formality == formalityPref &&
+            if (clothingArticle.type == Wardrobe.ClothingType.PANTS && clothingArticle.formality == formalityPref &&
                     clothingArticle.temperature == weatherPref) {
                 viableBottoms.add(clothingArticle);
             }
