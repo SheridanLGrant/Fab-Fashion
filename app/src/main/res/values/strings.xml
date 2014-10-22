@@ -17,6 +17,7 @@
     <string name="clothing_formality">Clothing Formality</string>
     <string name="clothing_temperature">Clothing Temperature</string>
     <string name="enter_clothing_name">Enter this clothing article\'s name</string>
+    <string name="enter_item">Enter this article of clothing</string>
 
 
 </resources>

@@ -122,4 +122,7 @@ public class EnterArticle extends Activity {
         listDataChild.put(listDataHeader.get(2), formalities);
         listDataChild.put(listDataHeader.get(3), temperatures);
     }
+
+    public void enterItem(View view) {
+    }
 }

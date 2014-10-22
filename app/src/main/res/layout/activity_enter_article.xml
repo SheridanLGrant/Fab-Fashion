@@ -21,4 +21,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/clothingType"
         android:layout_weight="0.01" />
+
+    <Button
+        android:text="@string/enter_item"
+        android:onClick="enterItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>
