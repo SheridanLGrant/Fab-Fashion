@@ -1,24 +1,47 @@
 package edu.hmc.cs.personalstylist;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import java.io.File;
+
 import edu.hmc.cs.personalstylist.Wardrobe;
 
 public class MainActivity extends Activity {
     public final static String NAME_MESSAGE = "edu.hmc.cs.personalstylist.nameMessage";
     public final static String WARDROBE_MESSAGE = "edu.hmc.cs.personalstylist.wardrobeMessage";
     public final static String ARTICLE_MESSAGE = "edu.hmc.cs.personalstylist.articleMessage";
+    Wardrobe wardrobe;
+    Context context;
+    File wardrobeFile;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        boolean worked = getWardrobe();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    public boolean getWardrobe() {
+
+        wardrobeFile = context.getFilesDir();
+
+        if (wardrobeFile.exists()) {
+            Log.d("Hey", "The file already exists");
+        }
+
+        return true;
     }
 
 
@@ -37,6 +60,11 @@ public class MainActivity extends Activity {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
+        }
+
+        else if (id == R.id.action_enter_article) {
+            Intent enterArticle = new Intent(this, EnterArticle.class);
+            startActivity(enterArticle);
         }
         return super.onOptionsItemSelected(item);
     }

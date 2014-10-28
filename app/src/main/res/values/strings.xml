@@ -18,6 +18,8 @@
     <string name="clothing_temperature">Clothing Temperature</string>
     <string name="enter_clothing_name">Enter this clothing article\'s name</string>
     <string name="enter_item">Enter this article of clothing</string>
+    <string name="action_enter_item">Enter a new article of clothing.</string>
+    <string name="action_choose_outfit">Choose an outfit for today.</string>
 
 
 </resources>
