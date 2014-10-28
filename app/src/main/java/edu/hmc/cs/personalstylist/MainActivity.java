@@ -19,30 +19,47 @@ public class MainActivity extends Activity {
     public final static String NAME_MESSAGE = "edu.hmc.cs.personalstylist.nameMessage";
     public final static String WARDROBE_MESSAGE = "edu.hmc.cs.personalstylist.wardrobeMessage";
     public final static String ARTICLE_MESSAGE = "edu.hmc.cs.personalstylist.articleMessage";
+    public final static String ARTICLE_NAME = "edu.hmc.cs.personalstylist.articleName";
+    public final static String CLOTHING_TYPE = "edu.hmc.cs.personalstylist.clothingType";
     Wardrobe wardrobe;
-    Context context;
-    File wardrobeFile;
+//    Context context;
+//    File wardrobeFile;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        boolean worked = getWardrobe();
+    // Here we want to read the wardrobe in.
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
 
-    public boolean getWardrobe() {
+        Intent receivedIntent = getIntent();
+        String receivedName = receivedIntent.getStringExtra(ARTICLE_NAME);
+        String receivedType = receivedIntent.getStringExtra(CLOTHING_TYPE);
 
-        wardrobeFile = context.getFilesDir();
-
-        if (wardrobeFile.exists()) {
-            Log.d("Hey", "The file already exists");
+        if (receivedType == "shirt") {
+            TextView text = (TextView) findViewById(R.id.wardrobeTop);
+            text.setText(receivedName);
+        } else if (receivedType == "pants") {
+            TextView text = (TextView) findViewById(R.id.wardrobeMiddle);
+            text.setText(receivedName);
+        } else if (receivedType == "shoes") {
+            TextView text = (TextView) findViewById(R.id.wardrobeBottom);
+            text.setText(receivedName);
         }
-
-        return true;
     }
+
+//    public boolean getWardrobe() {
+//
+//        wardrobeFile = context.getFilesDir();
+//
+//        if (wardrobeFile.exists()) {
+//            Log.d("Hey", "The file already exists");
+//        }
+//
+//        return true;
+//    }
 
 
     @Override
@@ -69,14 +86,6 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void enterName(View view) {
-        Intent enterName = new Intent(this, DisplayName.class);
-        EditText name = (EditText) findViewById(R.id.enter_name);
-        String message = name.getText().toString();
-        enterName.putExtra(NAME_MESSAGE, message);
-
-        startActivity(enterName);
-    }
 
     public void viewWardrobe(View view) {
         Intent viewWardrobe = new Intent(this, DisplayWardrobe.class);

@@ -14,7 +14,7 @@
 
     <item android:id="@+id/action_choose_outfit"
         android:title="@string/action_choose_outfit"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/jersey"
         android:showAsAction="always"
         />
 </menu>
