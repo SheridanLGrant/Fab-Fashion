@@ -21,6 +21,9 @@ public class MainActivity extends Activity {
     public final static String ARTICLE_MESSAGE = "edu.hmc.cs.personalstylist.articleMessage";
     public final static String ARTICLE_NAME = "edu.hmc.cs.personalstylist.articleName";
     public final static String CLOTHING_TYPE = "edu.hmc.cs.personalstylist.clothingType";
+    public final static String CLOTHING_COLOR = "edu.hmc.cs.personalstylist.clothingColor";
+    public final static String CLOTHING_FORMALITY = "edu.hmc.cs.personalstylist.clothingFormality";
+    public final static String CLOTHING_TEMPERATURE = "edu.hmc.cs.personalstylist.clothingTemperature";
     Wardrobe wardrobe;
 //    Context context;
 //    File wardrobeFile;
@@ -34,19 +37,26 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        TextView topText = (TextView) findViewById(R.id.wardrobeTop);
+        TextView middleText = (TextView) findViewById(R.id.wardrobeMiddle);
+        TextView bottomText = (TextView) findViewById(R.id.wardrobeBottom);
+        topText.setText("Google Shirt");
+        middleText.setText("Sexy Overalls");
+        bottomText.setText("Stilettos");
+
+
         Intent receivedIntent = getIntent();
         String receivedName = receivedIntent.getStringExtra(ARTICLE_NAME);
         String receivedType = receivedIntent.getStringExtra(CLOTHING_TYPE);
+        String receivedColor = receivedIntent.getStringExtra(CLOTHING_COLOR);
 
-        if (receivedType == "shirt") {
-            TextView text = (TextView) findViewById(R.id.wardrobeTop);
-            text.setText(receivedName);
-        } else if (receivedType == "pants") {
-            TextView text = (TextView) findViewById(R.id.wardrobeMiddle);
-            text.setText(receivedName);
-        } else if (receivedType == "shoes") {
-            TextView text = (TextView) findViewById(R.id.wardrobeBottom);
-            text.setText(receivedName);
+        if ("shirt".equals(receivedType)) {
+            topText.setText(receivedName);
+        } else if ("pants".equals(receivedType)) {
+            middleText.setText(receivedName);
+        } else if ("shoes".equals(receivedType)) {
+            bottomText.setText(receivedName);
         }
     }
 
