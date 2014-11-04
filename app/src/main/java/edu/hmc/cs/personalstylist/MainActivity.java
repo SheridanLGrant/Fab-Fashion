@@ -28,6 +28,7 @@ import edu.hmc.cs.personalstylist.Clothing;
 public class MainActivity extends Activity {
     public final static String NAME_MESSAGE = "edu.hmc.cs.personalstylist.nameMessage";
     public final static String WARDROBE_MESSAGE = "edu.hmc.cs.personalstylist.wardrobeMessage";
+    public final static String WARDROBE_VIEW_MESSAGE = "edu.hmc.cs.personalstylist.wardrobeViewMessage";
     public final static String ARTICLE_MESSAGE = "edu.hmc.cs.personalstylist.articleMessage";
     public final static String ARTICLE_NAME = "edu.hmc.cs.personalstylist.articleName";
     public final static String CLOTHING_TYPE = "edu.hmc.cs.personalstylist.clothingType";
@@ -36,6 +37,7 @@ public class MainActivity extends Activity {
     public final static String CLOTHING_TEMPERATURE = "edu.hmc.cs.personalstylist.clothingTemperature";
 //    Wardrobe wardrobe;
     ArrayList<Clothing> wardrobe = new ArrayList<Clothing>();
+    String wardrobeMessage;
     Context context;
     String file;
 
@@ -60,14 +62,7 @@ public class MainActivity extends Activity {
             while( (c = fIn.read()) != -1) {
                 temp = temp + Character.toString((char)c);
             }
-//            wardrobe = gson.fromJson(temp, Wardrobe.class);
-//            TextView testRead = (TextView) findViewById(R.id.testRead);
-//            if (wardrobe.wardrobeLength() < 1) {
-//                testRead.setText("worked");
-//            } else {
-//                testRead.setText("did not work");
-//            }
-//            Toast.makeText(getBaseContext(), "wardrobe found", Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), "wardrobe found", Toast.LENGTH_LONG).show();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -88,27 +83,13 @@ public class MainActivity extends Activity {
             }
         } else {
             wardrobe = gson.fromJson(temp, clothingList);
+            // Will error if empty wardrobe
             Clothing first = wardrobe.get(wardrobe.size()-1);
             testRead.setText((CharSequence) first.name);
 
         }
 
-
-//        try {
-//            FileInputStream fIn = openFileInput(file);
-//            int c;
-//            String temp="";
-//            while( (c = fIn.read()) != -1) {
-//                temp = temp + Character.toString((char)c);
-//            }
-//            TextView testRead = (TextView) findViewById(R.id.testRead);
-//            testRead.setText(temp);
-//            Toast.makeText(getBaseContext(), "wardrobe found", Toast.LENGTH_LONG).show();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        wardrobeMessage = gson.toJson(wardrobe, clothingList);
 
 
         TextView topText = (TextView) findViewById(R.id.wardrobeTop);
@@ -122,7 +103,6 @@ public class MainActivity extends Activity {
         Intent receivedIntent = getIntent();
         String receivedName = receivedIntent.getStringExtra(ARTICLE_NAME);
         String receivedType = receivedIntent.getStringExtra(CLOTHING_TYPE);
-        String receivedColor = receivedIntent.getStringExtra(CLOTHING_COLOR);
 
         if ("shirt".equals(receivedType)) {
             topText.setText(receivedName);
@@ -174,7 +154,7 @@ public class MainActivity extends Activity {
         Intent viewWardrobe = new Intent(this, DisplayWardrobe.class);
 
         // Make this refer to something in strings.xml
-        viewWardrobe.putExtra(WARDROBE_MESSAGE, "Your Wardrobe");
+        viewWardrobe.putExtra(WARDROBE_VIEW_MESSAGE, "Your Wardrobe");
 
         startActivity(viewWardrobe);
     }
@@ -182,7 +162,7 @@ public class MainActivity extends Activity {
     public void enterArticle(View view) {
         Intent enterArticle = new Intent(this, EnterArticle.class);
 
-        enterArticle.putExtra(ARTICLE_MESSAGE, "New Article of Clothing");
+        enterArticle.putExtra(WARDROBE_MESSAGE, wardrobeMessage);
 
         startActivity(enterArticle);
     }

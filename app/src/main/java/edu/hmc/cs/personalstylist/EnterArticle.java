@@ -43,6 +43,7 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
     public final static String ARTICLE_NAME = "edu.hmc.cs.personalstylist.articleName";
     public final static String CLOTHING_TYPE = "edu.hmc.cs.personalstylist.clothingType";
     public final static String CLOTHING_COLOR = "edu.hmc.cs.personalstylist.clothingColor";
+    public final static String WARDROBE_MESSAGE = "edu.hmc.cs.personalstylist.wardrobeMessage";
     public final static String CLOTHING_FORMALITY = "edu.hmc.cs.personalstylist.clothingFormality";
     public final static String CLOTHING_TEMPERATURE = "edu.hmc.cs.personalstylist.clothingTemperature";
     String articleName;
@@ -51,6 +52,7 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
     String clothingFormality;
     String clothingTemperature;
     ArrayList<Clothing> wardrobe = new ArrayList<Clothing>();
+    String wardrobeMessage;
     Context context;
     String file;
 
@@ -60,7 +62,7 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
-//        String message = intent.getStringExtra(MainActivity.WARDROBE_MESSAGE);
+        wardrobeMessage = intent.getStringExtra(WARDROBE_MESSAGE);
 
         setContentView(R.layout.activity_enter_article);
 
@@ -132,58 +134,25 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
 
 
         // Read wardrobe data
-        file = "wardrobeData";
         Gson gson = new Gson();
-        String temp="";
         Type clothingList = new TypeToken<ArrayList<Clothing>>() {}.getType();
 
-        try {
-            FileInputStream fIn = openFileInput(file);
-            int c;
-            while( (c = fIn.read()) != -1) {
-                temp = temp + Character.toString((char)c);
-            }
-//            wardrobe = gson.fromJson(temp, Wardrobe.class);
-//            TextView testRead = (TextView) findViewById(R.id.testRead);
-//            if (wardrobe.wardrobeLength() < 1) {
-//                testRead.setText("worked");
-//            } else {
-//                testRead.setText("did not work");
-//            }
-//            Toast.makeText(getBaseContext(), "wardrobe found", Toast.LENGTH_LONG).show();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-        if ("".equals(temp)) {
-            String wardrobeName = gson.toJson(wardrobe, clothingList);
-            try {
-                FileOutputStream fOut = openFileOutput(file, context.MODE_PRIVATE);
-                fOut.write(wardrobeName.getBytes());
-                fOut.close();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            wardrobe = gson.fromJson(temp, clothingList);
-        }
+        wardrobe = gson.fromJson(wardrobeMessage, clothingList);
 
         Clothing article = new Clothing(articleName, clothingType, clothingColor, clothingFormality, clothingTemperature);
 
         wardrobe.add(article);
-        String wardrobeName = gson.toJson(wardrobe, clothingList);
+        wardrobeMessage = gson.toJson(wardrobe, clothingList);
+
+
+        // send wardrobeMessage back to main, also send bool to check that file need not be read.
 
 
 //        ONLY STORE DATA ONPAUSE(). STORE PATHS TO IMAGES ON DEVICE.
         file = "wardrobeData";
         try {
             FileOutputStream fOut = openFileOutput(file, context.MODE_PRIVATE);
-            fOut.write(wardrobeName.getBytes());
+            fOut.write(wardrobeMessage.getBytes());
             fOut.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
