@@ -10,10 +10,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
-import edu.hmc.cs.personalstylist.Wardrobe;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import edu.hmc.cs.personalstylist.Clothing;
 
 public class MainActivity extends Activity {
     public final static String NAME_MESSAGE = "edu.hmc.cs.personalstylist.nameMessage";
@@ -24,18 +34,81 @@ public class MainActivity extends Activity {
     public final static String CLOTHING_COLOR = "edu.hmc.cs.personalstylist.clothingColor";
     public final static String CLOTHING_FORMALITY = "edu.hmc.cs.personalstylist.clothingFormality";
     public final static String CLOTHING_TEMPERATURE = "edu.hmc.cs.personalstylist.clothingTemperature";
-    Wardrobe wardrobe;
-//    Context context;
-//    File wardrobeFile;
+//    Wardrobe wardrobe;
+    ArrayList<Clothing> wardrobe = new ArrayList<Clothing>();
+    Context context;
+    String file;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-    // Here we want to read the wardrobe in.
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        // Read wardrobe data
+        file = "wardrobeData";
+        Gson gson = new Gson();
+        String temp="";
+        TextView testRead = (TextView) findViewById(R.id.testRead);
+        Type clothingList = new TypeToken<ArrayList<Clothing>>() {}.getType();
+
+        try {
+            FileInputStream fIn = openFileInput(file);
+            int c;
+            while( (c = fIn.read()) != -1) {
+                temp = temp + Character.toString((char)c);
+            }
+//            wardrobe = gson.fromJson(temp, Wardrobe.class);
+//            TextView testRead = (TextView) findViewById(R.id.testRead);
+//            if (wardrobe.wardrobeLength() < 1) {
+//                testRead.setText("worked");
+//            } else {
+//                testRead.setText("did not work");
+//            }
+//            Toast.makeText(getBaseContext(), "wardrobe found", Toast.LENGTH_LONG).show();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if ("".equals(temp)) {
+            String wardrobeName = gson.toJson(wardrobe, clothingList);
+            testRead.setText(wardrobeName);
+            try {
+                FileOutputStream fOut = openFileOutput(file, context.MODE_PRIVATE);
+                fOut.write(wardrobeName.getBytes());
+                fOut.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            wardrobe = gson.fromJson(temp, clothingList);
+            Clothing first = wardrobe.get(wardrobe.size()-1);
+            testRead.setText((CharSequence) first.name);
+
+        }
+
+
+//        try {
+//            FileInputStream fIn = openFileInput(file);
+//            int c;
+//            String temp="";
+//            while( (c = fIn.read()) != -1) {
+//                temp = temp + Character.toString((char)c);
+//            }
+//            TextView testRead = (TextView) findViewById(R.id.testRead);
+//            testRead.setText(temp);
+//            Toast.makeText(getBaseContext(), "wardrobe found", Toast.LENGTH_LONG).show();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
 
         TextView topText = (TextView) findViewById(R.id.wardrobeTop);
