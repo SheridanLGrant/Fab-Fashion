@@ -38,12 +38,28 @@ public class Clothing {
     public String formality = "";
     public String temperature = "";
 
-     public Clothing(String givenName, String givenType, String givenColor, String givenFormality, String givenTemperature) {
+    public Clothing(String givenName, String givenType, String givenColor, String givenFormality, String givenTemperature) {
          this.name = givenName;
          this.type = givenType;
          this.color = givenColor;
          this.formality = givenFormality;
          this.temperature = givenTemperature;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getFormality() {
+        return this.formality;
+    }
+
+    public String getTemperature() {
+        return this.temperature;
     }
 
     /**

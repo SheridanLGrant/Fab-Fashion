@@ -8,7 +8,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -93,44 +95,35 @@ public class MainActivity extends Activity {
 
         }
 
-
-//        try {
-//            FileInputStream fIn = openFileInput(file);
-//            int c;
-//            String temp="";
-//            while( (c = fIn.read()) != -1) {
-//                temp = temp + Character.toString((char)c);
-//            }
-//            TextView testRead = (TextView) findViewById(R.id.testRead);
-//            testRead.setText(temp);
-//            Toast.makeText(getBaseContext(), "wardrobe found", Toast.LENGTH_LONG).show();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
-
-        TextView topText = (TextView) findViewById(R.id.wardrobeTop);
-        TextView middleText = (TextView) findViewById(R.id.wardrobeMiddle);
-        TextView bottomText = (TextView) findViewById(R.id.wardrobeBottom);
-        topText.setText("Google Shirt");
-        middleText.setText("Sexy Overalls");
-        bottomText.setText("Stilettos");
-
-
-        Intent receivedIntent = getIntent();
-        String receivedName = receivedIntent.getStringExtra(ARTICLE_NAME);
-        String receivedType = receivedIntent.getStringExtra(CLOTHING_TYPE);
-        String receivedColor = receivedIntent.getStringExtra(CLOTHING_COLOR);
-
-        if ("shirt".equals(receivedType)) {
-            topText.setText(receivedName);
-        } else if ("pants".equals(receivedType)) {
-            middleText.setText(receivedName);
-        } else if ("shoes".equals(receivedType)) {
-            bottomText.setText(receivedName);
+        Clothing currentArticle;
+        for (int i = 0; i < wardrobe.size(); i++) {
+            currentArticle = wardrobe.get(i);
+            String type = currentArticle.getType();
+            if ("shirt".equals(type)) {
+                LinearLayout view = (LinearLayout) findViewById(R.id.topLayout);
+                Button button = new Button(this);
+                button.setText(currentArticle.getName());
+                view.addView(button);
+            }
+            else if ("pants".equals(type)) {
+                LinearLayout view = (LinearLayout) findViewById(R.id.bottomLayout);
+                Button button = new Button(this);
+                button.setText(currentArticle.getName());
+                view.addView(button);
+            }
+            else if ("shoes".equals(type)) {
+                LinearLayout view = (LinearLayout) findViewById(R.id.shoeLayout);
+                Button button = new Button(this);
+                button.setText(currentArticle.getName());
+                view.addView(button);
+            }
         }
+
+
+
+
+
+
     }
 
 //    public boolean getWardrobe() {
