@@ -29,8 +29,8 @@ public class Choose {
         ArrayList<Clothing> viableClothing = new ArrayList<Clothing>();
         for (int i = 0; i < wardrobe.size(); ++i) {
             Clothing clothingArticle = wardrobe.get(i);
-            if (clothingArticle.getFormality() == formalityPref &&
-                    clothingArticle.getTemperature() == temperaturePref) {
+            if (clothingArticle.getFormality().equals(formalityPref) &&
+                    clothingArticle.getTemperature().equals(temperaturePref)) {
                 viableClothing.add(clothingArticle);
             }
         }
