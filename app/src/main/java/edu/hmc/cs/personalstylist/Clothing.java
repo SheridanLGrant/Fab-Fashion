@@ -54,6 +54,10 @@ public class Clothing {
         return this.name;
     }
 
+    public String getColor() {
+        return this.color;
+    }
+
     public String getFormality() {
         return this.formality;
     }
