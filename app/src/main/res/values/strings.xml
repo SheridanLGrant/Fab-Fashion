@@ -20,6 +20,7 @@
     <string name="enter_item">Enter this article of clothing</string>
     <string name="action_enter_item">Enter a new article of clothing.</string>
     <string name="action_choose_outfit">Choose an outfit for today.</string>
+    <string name="title_activity_choose_outfit">Choose Outfit</string>
 
 
 </resources>

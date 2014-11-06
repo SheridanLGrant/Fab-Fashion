@@ -60,6 +60,15 @@ limitations under the License.-->
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.hmc.cs.MainActivity" />
         </activity>
+
+        <activity
+            android:name="edu.hmc.cs.personalstylist.ChooseOutfit"
+            android:label="@string/title_activity_enter_article"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.hmc.cs.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

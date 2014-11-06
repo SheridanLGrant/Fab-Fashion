@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -103,6 +105,15 @@ public class MainActivity extends Activity {
                 LinearLayout view = (LinearLayout) findViewById(R.id.topLayout);
                 Button button = new Button(this);
                 button.setText(currentArticle.getName());
+//                button.setOnClickListener(new View.OnClickListener() {
+//                    public void onClick(View v) {
+//                        PopupMenu popup = new PopupMenu(this, v);
+//                        popup.setOnMenuItemClickListener(this);
+//                        MenuInflater inflater = popup.getMenuInflater();
+//                        inflater.inflate(R.menu.formality, popup.getMenu());
+//                        popup.show();
+//                    }
+//                });
                 view.addView(button);
             }
             else if ("pants".equals(type)) {
@@ -126,15 +137,37 @@ public class MainActivity extends Activity {
 
     }
 
-//    public boolean getWardrobe() {
+
+//    @Override
+//    public boolean onMenuItemClick(MenuItem menuItem) {
 //
-//        wardrobeFile = context.getFilesDir();
-//
-//        if (wardrobeFile.exists()) {
-//            Log.d("Hey", "The file already exists");
+//        String clicked = (String) menuItem.getTitle();
+//        if (clicked.equals("shirt") || clicked.equals("pants") || clicked.equals("shoes")) {
+//            TextView view = (TextView) findViewById(R.id.selected_type);
+//            view.setText(clicked);
+//        } else if (clicked.equals("red") || clicked.equals("white") || clicked.equals("blue")) {
+//            TextView view = (TextView) findViewById(R.id.selected_color);
+//            view.setText(clicked);
+//        } else if (clicked.equals("wedding") || clicked.equals("day at the office") || clicked.equals("eating ice cream alone")) {
+//            TextView view = (TextView) findViewById(R.id.selected_formality);
+//            view.setText(clicked);
+//        } else {
+//            TextView view = (TextView) findViewById(R.id.selected_temperature);
+//            view.setText(clicked);
 //        }
 //
+//
 //        return true;
+//
+//    }
+
+
+//    public void showPopUp(View v) {
+//        PopupMenu popup = new PopupMenu(this, v);
+//        popup.setOnMenuItemClickListener(this);
+//        MenuInflater inflater = popup.getMenuInflater();
+//        inflater.inflate(R.menu.formality, popup.getMenu());
+//        popup.show();
 //    }
 
 
@@ -158,6 +191,9 @@ public class MainActivity extends Activity {
         else if (id == R.id.action_enter_article) {
             Intent enterArticle = new Intent(this, EnterArticle.class);
             startActivity(enterArticle);
+        } else if (id == R.id.action_choose_outfit) {
+            Intent chooseOutfit = new Intent(this, ChooseOutfit.class);
+            startActivity(chooseOutfit);
         }
         return super.onOptionsItemSelected(item);
     }
