@@ -14,11 +14,13 @@ import edu.hmc.cs.personalstylist.Clothing;
  */
 public class Choose {
 
-    public ArrayList<Clothing> wardrobe;
+    public ArrayList<Clothing> wardrobe = new ArrayList<Clothing>();
 
     public Choose(ArrayList<Clothing> listOfClothes) {
         this.wardrobe = listOfClothes;
     }
+
+
         /**
          * Eliminates non-viable clothing from list of bottoms, returns the remaining list
          *
@@ -27,14 +29,16 @@ public class Choose {
          */
     public ArrayList<Clothing> viableClothing(String formalityPref, String temperaturePref) {
         ArrayList<Clothing> viableClothing = new ArrayList<Clothing>();
-        for (int i = 0; i < wardrobe.size(); ++i) {
+        for (int i = 0; i < wardrobe.size(); i++) {
             Clothing clothingArticle = wardrobe.get(i);
-            if (clothingArticle.getFormality().equals(formalityPref) &&
-                    clothingArticle.getTemperature().equals(temperaturePref)) {
+            String f = clothingArticle.getFormality();
+            String t = clothingArticle.getTemperature();
+            if (formalityPref.equals(f) &&
+                    temperaturePref.equals(t)) {
                 viableClothing.add(clothingArticle);
             }
         }
-            return viableClothing;
+        return viableClothing;
 
     }
 

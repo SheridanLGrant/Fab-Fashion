@@ -57,7 +57,6 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
         // Read wardrobe data
         Gson gson = new Gson();
         String temp="";
-        TextView testRead = (TextView) findViewById(R.id.testRead);
         Type clothingList = new TypeToken<ArrayList<Clothing>>() {}.getType();
 
         try {
@@ -83,7 +82,6 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
 
         if ("".equals(temp) || "[]".equals(temp)) {
             wardrobeString = gson.toJson(wardrobe, clothingList);
-            testRead.setText(wardrobeString);
             try {
                 FileOutputStream fOut = openFileOutput(file, context.MODE_PRIVATE);
                 fOut.write(wardrobeString.getBytes());
@@ -96,7 +94,6 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
         } else {
             wardrobe = gson.fromJson(wardrobeString, clothingList);
             Clothing first = wardrobe.get(wardrobe.size()-1);
-            testRead.setText((CharSequence) first.name);
 
         }
 

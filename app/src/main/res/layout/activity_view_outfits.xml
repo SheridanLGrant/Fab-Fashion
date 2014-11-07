@@ -21,29 +21,13 @@
         android:textSize="30sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/testRead"
+        android:id="@+id/testViewOutfit"
         android:layout_gravity="center_horizontal" />
 
     <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="97dp"
-        android:id="@+id/shoeScroller"
-        android:fillViewport="false" >
-
-        <LinearLayout
-            android:id="@+id/chooseShoeLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-
-        </LinearLayout>
-    </HorizontalScrollView>
-
-    <HorizontalScrollView
-        android:layout_width="match_parent"
         android:layout_height="92dp"
-        android:id="@+id/topScroller"
+        android:id="@+id/topScrollerChoose"
         android:fillViewport="true">
 
         <LinearLayout
@@ -59,10 +43,26 @@
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="93dp"
-        android:id="@+id/bottomScroller">
+        android:id="@+id/bottomScrollerChoose">
 
         <LinearLayout
             android:id="@+id/chooseBottomLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="97dp"
+        android:id="@+id/shoeScrollerChoose"
+        android:fillViewport="false" >
+
+        <LinearLayout
+            android:id="@+id/chooseShoeLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal" >

@@ -58,10 +58,10 @@ public class ChooseOutfit extends Activity implements PopupMenu.OnMenuItemClickL
     }
     public void moveToOutfitView(View v){
         Intent outfitChoose = new Intent(this, viewOutfit.class);
-        TextView tempText = (TextView) findViewById(R.id.selected_temperature);
+        TextView tempText = (TextView) findViewById(R.id.choose_selected_temperature);
         String tempPref = (String) tempText.getText();
-        TextView formText = (TextView) findViewById(R.id.selected_formality);
-        String formPref = (String) tempText.getText();
+        TextView formText = (TextView) findViewById(R.id.choose_selected_formality);
+        String formPref = (String) formText.getText();
         outfitChoose.putExtra(CLOTHING_FORMALITY, formPref);
         outfitChoose.putExtra(CLOTHING_TEMPERATURE, tempPref);
         startActivity(outfitChoose);
@@ -74,10 +74,10 @@ public class ChooseOutfit extends Activity implements PopupMenu.OnMenuItemClickL
         String clicked = (String) menuItem.getTitle();
 
         if (clicked.equals("wedding") || clicked.equals("day at the office") || clicked.equals("eating ice cream alone")) {
-            TextView view = (TextView) findViewById(R.id.selected_formality);
+            TextView view = (TextView) findViewById(R.id.choose_selected_formality);
             view.setText(clicked);
         } else {
-            TextView view = (TextView) findViewById(R.id.selected_temperature);
+            TextView view = (TextView) findViewById(R.id.choose_selected_temperature);
             view.setText(clicked);
         }
 

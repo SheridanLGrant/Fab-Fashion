@@ -25,7 +25,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/selected_temperature"
+        android:id="@+id/choose_selected_temperature"
         android:layout_below="@+id/temp_button"
         android:layout_centerHorizontal="true" />
 
@@ -41,7 +41,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/selected_formality"
+        android:id="@+id/choose_selected_formality"
         android:layout_below="@+id/form_button"
         android:layout_centerHorizontal="true" />
 

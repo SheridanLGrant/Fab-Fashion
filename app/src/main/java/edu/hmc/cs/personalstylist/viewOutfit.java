@@ -35,7 +35,7 @@ public class viewOutfit extends Activity {
     //    Wardrobe wardrobe;
     ArrayList<Clothing> wardrobe = new ArrayList<Clothing>();
     Context context;
-    String file;
+    String file = "wardrobeData";
 
 
     @Override
@@ -50,10 +50,9 @@ public class viewOutfit extends Activity {
 
 
         // Read wardrobe data
-        file = "wardrobeData";
         Gson gson = new Gson();
         String temp="";
-        TextView testRead = (TextView) findViewById(R.id.testRead);
+        TextView testRead = (TextView) findViewById(R.id.testViewOutfit);
         Type clothingList = new TypeToken<ArrayList<Clothing>>() {}.getType();
 
         try {
@@ -76,9 +75,9 @@ public class viewOutfit extends Activity {
             e.printStackTrace();
         }
 
+
         if ("".equals(temp) || "[]".equals(temp)) {
             String wardrobeName = gson.toJson(wardrobe, clothingList);
-            testRead.setText(wardrobeName);
             try {
                 FileOutputStream fOut = openFileOutput(file, context.MODE_PRIVATE);
                 fOut.write(wardrobeName.getBytes());
@@ -90,16 +89,18 @@ public class viewOutfit extends Activity {
             }
         } else {
             wardrobe = gson.fromJson(temp, clothingList);
-            Clothing first = wardrobe.get(wardrobe.size()-1);
-            testRead.setText((CharSequence) first.name);
-
         }
+
 
         String formPref = outfitChoose.getStringExtra(CLOTHING_FORMALITY);
         String tempPref = outfitChoose.getStringExtra(CLOTHING_TEMPERATURE);
 
         Choose outfitChoice = new Choose(wardrobe);
         ArrayList<Clothing> newWardrobe = outfitChoice.viableClothing(formPref, tempPref);
+        testRead.setText(wardrobe.get(0).getTemperature());
+//        if (newWardrobe.size() == 0) {
+//
+//        }
 
 
         Clothing currentArticle;
@@ -134,11 +135,6 @@ public class viewOutfit extends Activity {
                 view.addView(button);
             }
         }
-
-
-
-
-
 
     }
 

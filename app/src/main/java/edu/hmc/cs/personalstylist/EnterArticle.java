@@ -122,8 +122,8 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
         TextView formality = (TextView) findViewById(R.id.selected_formality);
         clothingFormality = (String) formality.getText();
 
-        TextView temperature = (TextView) findViewById(R.id.selected_formality);
-        clothingFormality = (String) temperature.getText();
+        TextView temperature = (TextView) findViewById(R.id.selected_temperature);
+        clothingTemperature = (String) temperature.getText();
 
         Intent returnToMain = new Intent(this, MainActivity.class);
         returnToMain.putExtra(ARTICLE_NAME, articleName);
