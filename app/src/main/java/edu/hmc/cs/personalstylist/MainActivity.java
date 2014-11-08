@@ -258,8 +258,6 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
         } else {
             for (int i = 0; i < wardrobe.size(); i++) {
                 if (clicked.equals(("Delete: " + wardrobe.get(i).getName()))) {
-                    TextView view = (TextView) findViewById(R.id.testRead);
-                    view.setText("worked");
                     deletion = i;
                     removeFlag = true;
                 }
