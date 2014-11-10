@@ -54,6 +54,8 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
     Context context;
     String file;
 
+    Type clothingList = new TypeToken<ArrayList<Clothing>>() {}.getType();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -125,6 +127,11 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
         TextView temperature = (TextView) findViewById(R.id.selected_temperature);
         clothingTemperature = (String) temperature.getText();
 
+        // Check that the user entered valid data
+        if (articleName == "" || clothingType == "") {
+            quitWithoutSaving();
+        }
+
         Intent returnToMain = new Intent(this, MainActivity.class);
         returnToMain.putExtra(ARTICLE_NAME, articleName);
         returnToMain.putExtra(CLOTHING_TYPE, clothingType);
@@ -132,10 +139,37 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
 
 
         // Read wardrobe data
-        file = "wardrobeData";
         Gson gson = new Gson();
+        readWardrobeData(gson);
+
+        Clothing article = new Clothing(articleName, clothingType, clothingColor, clothingFormality, clothingTemperature);
+
+        wardrobe.add(article);
+        String wardrobeName = gson.toJson(wardrobe, clothingList);
+
+//      ONLY STORE DATA ONPAUSE(). STORE PATHS TO IMAGES ON DEVICE.
+        storeWardrobeData(wardrobeName);
+
+        startActivity(returnToMain);
+    }
+
+    // Called if the user does not enter a valid name or clothing type
+    private void quitWithoutSaving() {
+        Context context = getApplicationContext();
+        CharSequence message = "Article not saved: please enter a valid name and clothing type";
+        int duration = Toast.LENGTH_LONG;
+
+        Toast toast = Toast.makeText(context, message, duration);
+        toast.show();
+
+        Intent retryEntry = new Intent(this, EnterArticle.class);
+        startActivity(retryEntry);
+    }
+
+
+    private void readWardrobeData(Gson gson) {
+        file = "wardrobeData";
         String temp="";
-        Type clothingList = new TypeToken<ArrayList<Clothing>>() {}.getType();
 
         try {
             FileInputStream fIn = openFileInput(file);
@@ -157,7 +191,6 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
             e.printStackTrace();
         }
 
-
         if ("".equals(temp)) {
             String wardrobeName = gson.toJson(wardrobe, clothingList);
             try {
@@ -172,14 +205,10 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
         } else {
             wardrobe = gson.fromJson(temp, clothingList);
         }
-
-        Clothing article = new Clothing(articleName, clothingType, clothingColor, clothingFormality, clothingTemperature);
-
-        wardrobe.add(article);
-        String wardrobeName = gson.toJson(wardrobe, clothingList);
+    }
 
 
-//        ONLY STORE DATA ONPAUSE(). STORE PATHS TO IMAGES ON DEVICE.
+    private void storeWardrobeData(String wardrobeName) {
         file = "wardrobeData";
         try {
             FileOutputStream fOut = openFileOutput(file, context.MODE_PRIVATE);
@@ -190,13 +219,8 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        startActivity(returnToMain);
-
-
-
-
     }
+
 
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
@@ -215,7 +239,6 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
             TextView view = (TextView) findViewById(R.id.selected_temperature);
             view.setText(clicked);
         }
-
 
         return true;
     }

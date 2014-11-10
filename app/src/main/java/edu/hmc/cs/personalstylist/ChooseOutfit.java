@@ -56,6 +56,7 @@ public class ChooseOutfit extends Activity implements PopupMenu.OnMenuItemClickL
         inflater.inflate(R.menu.temperature, popup.getMenu());
         popup.show();
     }
+
     public void moveToOutfitView(View v){
         Intent outfitChoose = new Intent(this, viewOutfit.class);
         TextView tempText = (TextView) findViewById(R.id.choose_selected_temperature);

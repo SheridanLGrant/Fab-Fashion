@@ -91,12 +91,18 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else {
+        }
+        else {
             wardrobe = gson.fromJson(wardrobeString, clothingList);
-            Clothing first = wardrobe.get(wardrobe.size()-1);
-
         }
 
+        displayStoredWardrobe();
+
+    }
+
+
+
+    private void displayStoredWardrobe() {
         Clothing currentArticle;
         for (int i = 0; i < wardrobe.size(); i++) {
             currentArticle = wardrobe.get(i);
@@ -128,13 +134,9 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
                 view.addView(button);
             }
         }
-
-
-
-
-
-
     }
+
+
 
 
 //    @Override
@@ -220,7 +222,6 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
         }
 
         popup.getMenu().add("Delete: " + b.getText());
-
 
 
         popup.setOnMenuItemClickListener(this);
