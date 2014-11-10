@@ -256,7 +256,8 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
 
         if (!clicked.startsWith("Del")) {
             return true;
-        } else {
+        }
+        else {
             for (int i = 0; i < wardrobe.size(); i++) {
                 if (clicked.equals(("Delete: " + wardrobe.get(i).getName()))) {
                     deletion = i;
@@ -279,10 +280,7 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
             }
-
-
         }
-
 
         return true;
     }

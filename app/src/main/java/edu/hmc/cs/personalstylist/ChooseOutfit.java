@@ -41,6 +41,7 @@ public class ChooseOutfit extends Activity implements PopupMenu.OnMenuItemClickL
         }
         return super.onOptionsItemSelected(item);
     }
+
     public void showPopUpFormality(View v){
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
@@ -66,7 +67,6 @@ public class ChooseOutfit extends Activity implements PopupMenu.OnMenuItemClickL
         outfitChoose.putExtra(CLOTHING_FORMALITY, formPref);
         outfitChoose.putExtra(CLOTHING_TEMPERATURE, tempPref);
         startActivity(outfitChoose);
-
     }
 
     @Override
@@ -81,7 +81,6 @@ public class ChooseOutfit extends Activity implements PopupMenu.OnMenuItemClickL
             TextView view = (TextView) findViewById(R.id.choose_selected_temperature);
             view.setText(clicked);
         }
-
 
         return true;
     }
