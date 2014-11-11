@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -12,8 +13,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View.OnClickListener;
@@ -45,6 +48,9 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
     String wardrobeString;
     Context context;
     String file = "wardrobeData";
+
+    // For image buttons
+    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 
 
     @Override
@@ -112,28 +118,34 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
             String formality = currentArticle.getFormality();
             String temperature = currentArticle.getTemperature();
 
+            ImageButton button = createImageButton(currentArticle);
+
             if ("shirt".equals(type)) {
                 LinearLayout view = (LinearLayout) findViewById(R.id.topLayout);
-                Button button = new Button(this);
-                button.setText(currentArticle.getName());
-                button.setOnClickListener(this);
                 view.addView(button);
             }
             else if ("pants".equals(type)) {
                 LinearLayout view = (LinearLayout) findViewById(R.id.bottomLayout);
-                Button button = new Button(this);
-                button.setText(currentArticle.getName());
-                button.setOnClickListener(this);
                 view.addView(button);
             }
             else if ("shoes".equals(type)) {
                 LinearLayout view = (LinearLayout) findViewById(R.id.shoeLayout);
-                Button button = new Button(this);
-                button.setText(currentArticle.getName());
-                button.setOnClickListener(this);
                 view.addView(button);
             }
         }
+    }
+
+
+
+    private ImageButton createImageButton(Clothing currentArticle) {
+        ImageButton button = new ImageButton(this);
+        button.setImageResource(R.drawable.jersey);
+        button.setLayoutParams(params);
+        button.setOnClickListener(this);
+        button.setBackgroundColor(Color.TRANSPARENT);
+        button.setTag(currentArticle.getName());
+
+        return button;
     }
 
 
@@ -206,9 +218,9 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
     // popup.getMenu().add(groupId, itemId, order, title);
     @Override
     public void onClick(View v) {
-        Button b = (Button) v;
+        ImageButton b = (ImageButton) v;
         PopupMenu popup = new PopupMenu(this, b);
-        popup.getMenu().add("Name: " + b.getText());
+        popup.getMenu().add("Name: " + b.getTag());
 
         // get data
         CharSequence type = "Type: ";
@@ -221,7 +233,7 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
             popup.getMenu().add(type + "shoes");
         }
 
-        popup.getMenu().add("Delete: " + b.getText());
+        popup.getMenu().add("Delete: " + b.getTag());
 
 
         popup.setOnMenuItemClickListener(this);
