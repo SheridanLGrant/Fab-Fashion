@@ -7,22 +7,31 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity">
+    android:weightSum="1"
+    android:id="@+id/view_outfits"> //need to set up ID
 
     <TextView
         android:textSize="25sp"
-        android:text="@string/wardrobe"
+        android:text="Outfits"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:textSize="30sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/testViewOutfit"
+        android:layout_gravity="center_horizontal" />
 
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="92dp"
-        android:id="@+id/topScroller"
+        android:id="@+id/topScrollerChoose"
         android:fillViewport="true">
 
         <LinearLayout
-            android:id="@+id/topLayout"
+            android:id="@+id/chooseTopLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
@@ -34,10 +43,10 @@
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="93dp"
-        android:id="@+id/bottomScroller">
+        android:id="@+id/bottomScrollerChoose">
 
         <LinearLayout
-            android:id="@+id/bottomLayout"
+            android:id="@+id/chooseBottomLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
@@ -49,11 +58,11 @@
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="97dp"
-        android:id="@+id/shoeScroller"
+        android:id="@+id/shoeScrollerChoose"
         android:fillViewport="false" >
 
         <LinearLayout
-            android:id="@+id/shoeLayout"
+            android:id="@+id/chooseShoeLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
@@ -61,15 +70,6 @@
 
         </LinearLayout>
     </HorizontalScrollView>
-
-
-    <!--<TextView-->
-        <!--android:textSize="30sp"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/testRead"-->
-        <!--android:layout_gravity="center_horizontal" />-->
-
 
 
 </LinearLayout>

@@ -6,6 +6,7 @@ import android.test.InstrumentationTestCase;
 import android.util.Log;
 
 import java.io.WriteAbortedException;
+import java.util.ArrayList;
 
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
@@ -89,4 +90,64 @@ public class ApplicationTest extends InstrumentationTestCase {
         assertTrue(wardrobe.removeArticle("testshirt"));
         assertEquals(wardrobe.wardrobeLength(), 0);
     }
+
+//    /// Test to choose formal tops.
+//    public void test_formalTops() throws Exception {
+//        Wardrobe singleWardrobe = new Wardrobe();
+//        singleWardrobe.addArticle("tester", Wardrobe.ClothingType.SHIRT,
+//                Wardrobe.ClothingColor.RED, Wardrobe.ClothingFormality.FORMAL,
+//                Wardrobe.ClothingTemperature.COLD);
+//
+//        singleWardrobe.addArticle("tester1", Wardrobe.ClothingType.SHIRT,
+//                Wardrobe.ClothingColor.BLUE, Wardrobe.ClothingFormality.FORMAL,
+//                Wardrobe.ClothingTemperature.COLD);
+//
+//        singleWardrobe.addArticle("tester2", Wardrobe.ClothingType.SHIRT,
+//                Wardrobe.ClothingColor.RED, Wardrobe.ClothingFormality.CASUAL,
+//                Wardrobe.ClothingTemperature.COLD);
+//
+//        singleWardrobe.addArticle("tester3", Wardrobe.ClothingType.SHOES,
+//                Wardrobe.ClothingColor.RED, Wardrobe.ClothingFormality.FORMAL,
+//                Wardrobe.ClothingTemperature.COLD);
+//
+//        ArrayList viableTops;
+//        viableTops = Choose.removeTopsItems(singleWardrobe.articleList, Wardrobe.ClothingFormality.FORMAL, Wardrobe.ClothingTemperature.COLD);
+//
+//        int len = viableTops.size();
+//        assertEquals(len, 2); //Removes casual shirt and formal shoe
+//        assertEquals(singleWardrobe.wardrobeLength(), 4);
+//        assertTrue(viableTops.contains(singleWardrobe.getArticle("tester")));
+//        assertTrue(viableTops.contains(singleWardrobe.getArticle("tester1")));
+//
+//    }
+//
+//    /// Test to choose formal bottoms.
+//    public void test_formalBottoms() throws Exception {
+//        Wardrobe singleWardrobe = new Wardrobe();
+//        singleWardrobe.addArticle("tester", Wardrobe.ClothingType.PANTS,
+//                Wardrobe.ClothingColor.RED, Wardrobe.ClothingFormality.FORMAL,
+//                Wardrobe.ClothingTemperature.COLD);
+//
+//        singleWardrobe.addArticle("tester1", Wardrobe.ClothingType.PANTS,
+//                Wardrobe.ClothingColor.BLUE, Wardrobe.ClothingFormality.FORMAL,
+//                Wardrobe.ClothingTemperature.COLD);
+//
+//        singleWardrobe.addArticle("tester2", Wardrobe.ClothingType.PANTS,
+//                Wardrobe.ClothingColor.RED, Wardrobe.ClothingFormality.CASUAL,
+//                Wardrobe.ClothingTemperature.COLD);
+//
+//        singleWardrobe.addArticle("tester3", Wardrobe.ClothingType.SHOES,
+//                Wardrobe.ClothingColor.RED, Wardrobe.ClothingFormality.FORMAL,
+//                Wardrobe.ClothingTemperature.COLD);
+//
+//        ArrayList viableBottoms;
+//        viableBottoms = Choose.removeBottomsItems(singleWardrobe.articleList, Wardrobe.ClothingFormality.FORMAL, Wardrobe.ClothingTemperature.COLD);
+//
+//        int len = viableBottoms.size();
+//        assertEquals(len, 2); //Removes casual shirt and formal shoe
+//        assertEquals(singleWardrobe.wardrobeLength(), 4);
+//        assertTrue(viableBottoms.contains(singleWardrobe.getArticle("tester")));
+//        assertTrue(viableBottoms.contains(singleWardrobe.getArticle("tester1")));
+//
+//    }
 }

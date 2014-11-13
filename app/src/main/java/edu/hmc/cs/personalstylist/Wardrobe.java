@@ -1,5 +1,6 @@
 package edu.hmc.cs.personalstylist;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -101,6 +102,7 @@ public class Wardrobe {
         return null;
     }
 
+
     /**
      * The clothing class is the essential element of the Wardrobe that represents each article of
      * clothing in the Wardrobe. This is a private that behaves like a C++ struct, without
@@ -108,11 +110,20 @@ public class Wardrobe {
      * than working through getters and setters, a practice recommended by the Sun Java Coding
      * Guidelines.
      */
-    public class Clothing {
+    public static class Clothing {
         public String name = "";
         public ClothingType type = ClothingType.UNKNOWN_TYPE;
         public ClothingColor color = ClothingColor.UNKNOWN_COLOR;
         public ClothingFormality formality = ClothingFormality.UNKNOWN_FORMALITY;
         public ClothingTemperature temperature = ClothingTemperature.UNKNOWN_TEMPERATURE;
+
+        /**
+         * Returns a clothing article's name
+         *
+         * @return
+         */
+        public String toString() {
+            return name;
+        }
     }
 }
