@@ -5,4 +5,16 @@
         android:title="@string/action_settings"
         android:orderInCategory="100"
         android:showAsAction="never" />
+
+    <item android:id="@+id/action_enter_article"
+        android:title="@string/action_enter_item"
+        android:icon="@drawable/ic_action_new"
+        android:showAsAction="always"
+        />
+
+    <item android:id="@+id/action_choose_outfit"
+        android:title="@string/action_choose_outfit"
+        android:icon="@drawable/jersey"
+        android:showAsAction="always"
+        />
 </menu>
