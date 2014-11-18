@@ -45,6 +45,41 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
     public final static String CLOTHING_COLOR = "edu.hmc.cs.personalstylist.clothingColor";
     public final static String CLOTHING_FORMALITY = "edu.hmc.cs.personalstylist.clothingFormality";
     public final static String CLOTHING_TEMPERATURE = "edu.hmc.cs.personalstylist.clothingTemperature";
+
+    public final static String LONG_SLEEVE_SHIRT = "Long-sleeve shirt";
+    public final static String SHORT_SLEEVE_SHIRT = "Short-sleeve shirt";
+    public final static String SLEEVELESS_SHIRT = "Sleeveless shirt";
+    public final static String PANTS = "Pants";
+    public final static String SHORTS = "Shorts";
+    public final static String SKIRT = "Skirt";
+    public final static String DRESS_SHOES = "Dress shoes";
+    public final static String TENNIS_SHOES = "Tennis shoes";
+    public final static String SANDALS = "Sandals";
+    public final static ArrayList<String> TYPES = new ArrayList<String>();
+
+    public final static String RED = "Red";
+    public final static String BLUE = "Blue";
+    public final static String YELLOW = "Yellow";
+    public final static String GREEN = "Green";
+    public final static String PURPLE = "Purple";
+    public final static String ORANGE = "Orange";
+    public final static String BLACK = "Black";
+    public final static String WHITE = "White";
+    public final static String PINK = "Pink";
+    public final static String BROWN = "Brown";
+    public final static ArrayList<String> COLORS = new ArrayList<String>();
+
+    public final static String CASUAL = "Casual";
+    public final static String BUSINESS = "Business";
+    public final static String FORMAL = "Formal";
+    public final static String BEACH = "Beach";
+    public final static ArrayList<String> FORMALITIES = new ArrayList<String>();
+
+    public final static String HOT = "Hot";
+    public final static String COLD = "Cold";
+    public final static String MILD = "Mild";
+    public final static ArrayList<String> TEMPERATURES = new ArrayList<String>();
+
     String articleName;
     String clothingType;
     String clothingColor;
@@ -61,10 +96,39 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
 
         super.onCreate(savedInstanceState);
 
-        Intent intent = getIntent();
-//        String message = intent.getStringExtra(MainActivity.WARDROBE_MESSAGE);
-
         setContentView(R.layout.activity_enter_article);
+
+        // Populate the arrays of parameters
+        TYPES.add(LONG_SLEEVE_SHIRT);
+        TYPES.add(SHORT_SLEEVE_SHIRT);
+        TYPES.add(SLEEVELESS_SHIRT);
+        TYPES.add(PANTS);
+        TYPES.add(SHORTS);
+        TYPES.add(SKIRT);
+        TYPES.add(DRESS_SHOES);
+        TYPES.add(TENNIS_SHOES);
+        TYPES.add(SANDALS);
+
+        COLORS.add(RED);
+        COLORS.add(YELLOW);
+        COLORS.add(BLUE);
+        COLORS.add(GREEN);
+        COLORS.add(ORANGE);
+        COLORS.add(PURPLE);
+        COLORS.add(BLACK);
+        COLORS.add(WHITE);
+        COLORS.add(PINK);
+        COLORS.add(BROWN);
+
+        FORMALITIES.add(CASUAL);
+        FORMALITIES.add(FORMAL);
+        FORMALITIES.add(BUSINESS);
+        FORMALITIES.add(BEACH);
+
+        TEMPERATURES.add(HOT);
+        TEMPERATURES.add(COLD);
+        TEMPERATURES.add(MILD);
+
 
     }
 
@@ -177,14 +241,6 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
             while( (c = fIn.read()) != -1) {
                 temp = temp + Character.toString((char)c);
             }
-//            wardrobe = gson.fromJson(temp, Wardrobe.class);
-//            TextView testRead = (TextView) findViewById(R.id.testRead);
-//            if (wardrobe.wardrobeLength() < 1) {
-//                testRead.setText("worked");
-//            } else {
-//                testRead.setText("did not work");
-//            }
-//            Toast.makeText(getBaseContext(), "wardrobe found", Toast.LENGTH_LONG).show();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -226,13 +282,13 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
     public boolean onMenuItemClick(MenuItem menuItem) {
 
         String clicked = (String) menuItem.getTitle();
-        if (clicked.equals("shirt") || clicked.equals("pants") || clicked.equals("shoes")) {
+        if (TYPES.contains(clicked)) {
             TextView view = (TextView) findViewById(R.id.selected_type);
             view.setText(clicked);
-        } else if (clicked.equals("red") || clicked.equals("white") || clicked.equals("blue")) {
+        } else if (COLORS.contains(clicked)) {
             TextView view = (TextView) findViewById(R.id.selected_color);
             view.setText(clicked);
-        } else if (clicked.equals("wedding") || clicked.equals("day at the office") || clicked.equals("eating ice cream alone")) {
+        } else if (FORMALITIES.contains(clicked)) {
             TextView view = (TextView) findViewById(R.id.selected_formality);
             view.setText(clicked);
         } else {

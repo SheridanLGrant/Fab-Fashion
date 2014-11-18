@@ -35,17 +35,8 @@ limitations under the License.-->
         </activity>
 
         <activity
-            android:name="edu.hmc.cs.personalstylist.DisplayName"
-            android:label="@string/title_activity_display_name"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="edu.hmc.cs.MainActivity" />
-        </activity>
-
-        <activity
             android:name="edu.hmc.cs.personalstylist.viewOutfit"
-            android:label="Your Possible Choices"
+            android:label="@string/title_activity_view_outfits"
             android:parentActivityName=".ChooseOutfit" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -63,7 +54,7 @@ limitations under the License.-->
 
         <activity
             android:name="edu.hmc.cs.personalstylist.ChooseOutfit"
-            android:label="Your Preferences"
+            android:label="@string/title_activity_choose_outfit"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
