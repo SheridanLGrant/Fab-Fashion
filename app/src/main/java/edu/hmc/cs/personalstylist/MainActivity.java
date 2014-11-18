@@ -5,6 +5,7 @@ import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
@@ -468,7 +469,9 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
         initializeOneScrollView(shoeScroller, shoeLayout);
 
         Display mDisplay = getWindowManager().getDefaultDisplay();
-        int width = mDisplay.getWidth();
+        Point size = new Point();
+        mDisplay.getSize(size);
+        int width = size.x;
 
         topLayout.setPadding(width, 0, width, 0);
         bottomLayout.setPadding(width, 0, width, 0);
