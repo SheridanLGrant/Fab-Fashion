@@ -17,6 +17,13 @@
         android:id="@+id/imageView3"
         android:src="@drawable/ic_hanger" />
 
+    <View android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="#ff001656"
+        android:layout_below="@+id/imageView3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
     <TextView
         android:textSize="30sp"
         android:text="Your Outfits"
