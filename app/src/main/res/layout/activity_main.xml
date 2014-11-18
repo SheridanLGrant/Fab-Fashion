@@ -15,11 +15,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <HorizontalScrollView
+    <edu.hmc.cs.personalstylist.MyScrollView
         android:layout_width="match_parent"
         android:layout_height="92dp"
         android:id="@+id/topScroller"
-        android:fillViewport="true">
+        android:fillViewport="true" >
 
         <LinearLayout
             android:id="@+id/topLayout"
@@ -29,9 +29,9 @@
 
 
         </LinearLayout>
-    </HorizontalScrollView>
+    </edu.hmc.cs.personalstylist.MyScrollView>
 
-    <HorizontalScrollView
+    <edu.hmc.cs.personalstylist.MyScrollView
         android:layout_width="match_parent"
         android:layout_height="93dp"
         android:id="@+id/bottomScroller">
@@ -44,9 +44,9 @@
 
 
         </LinearLayout>
-    </HorizontalScrollView>
+    </edu.hmc.cs.personalstylist.MyScrollView>
 
-    <HorizontalScrollView
+    <edu.hmc.cs.personalstylist.MyScrollView
         android:layout_width="match_parent"
         android:layout_height="97dp"
         android:id="@+id/shoeScroller"
@@ -60,7 +60,7 @@
 
 
         </LinearLayout>
-    </HorizontalScrollView>
+    </edu.hmc.cs.personalstylist.MyScrollView>
 
 
     <!--<TextView-->

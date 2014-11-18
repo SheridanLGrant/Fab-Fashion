@@ -7,10 +7,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -60,6 +63,15 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
         setContentView(R.layout.activity_main);
 
 
+        // This block sets the padding, and should be moved later
+        // Based on: http://stackoverflow.com/questions/20438705/xml-get-width-and-set-to-androidheight
+        // - Max, desperately trying to get everything to work
+        Display mDisplay = getWindowManager().getDefaultDisplay();
+        int width = mDisplay.getWidth();
+        LinearLayout shoeLayout = (LinearLayout) findViewById(R.id.shoeLayout);
+        shoeLayout.setPadding(width, 0, width, 0);
+
+
         // Read wardrobe data
         Gson gson = new Gson();
         String temp="";
@@ -104,6 +116,8 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
 
         displayStoredWardrobe();
 
+        initializeScrollViews();
+
     }
 
 
@@ -146,6 +160,43 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
         button.setTag(currentArticle.getName());
 
         return button;
+    }
+
+
+    private void initializeScrollViews() {
+        final MyScrollView shoeScroller = (MyScrollView) findViewById(R.id.shoeScroller);
+        MyScrollView topScroller = (MyScrollView) findViewById(R.id.topScroller);
+        MyScrollView bottomScroller = (MyScrollView) findViewById(R.id.bottomScroller);
+
+        shoeScroller.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    shoeScroller.startScrollerTask();
+                }
+                return false;
+            }
+        });
+        shoeScroller.setOnScrollStoppedListener(new MyScrollView.OnScrollStoppedListener() {
+            @Override
+            public void onScrollStopped() {
+                // From http://stackoverflow.com/questions/12424373/how-to-scroll-to-center-of-child-of-horizontalscrollview
+                //get the center
+                int center = shoeScroller.getScrollX() + shoeScroller.getWidth() / 2;
+                LinearLayout linearLayout = ((LinearLayout)shoeScroller.findViewById(R.id.shoeLayout));
+                int numChildren = linearLayout.getChildCount();
+                for (int i = 0; i < numChildren; i++) {
+                    View v = linearLayout.getChildAt(i);
+                    int viewLeft = v.getLeft();
+                    int viewWidth = v.getWidth();
+                    if (center >= viewLeft && center <= viewLeft + viewWidth) {
+                        Log.d("initializeScrollViews()", "CENTER THIS : " + ((viewLeft + viewWidth / 2) - center));
+                        shoeScroller.scrollBy((viewLeft + viewWidth / 2) - center, 0);
+                        break;
+                    }
+                }
+            }
+        });
     }
 
 
