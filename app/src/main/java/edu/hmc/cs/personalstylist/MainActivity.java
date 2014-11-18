@@ -459,15 +459,16 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
         MyScrollView bottomScroller = (MyScrollView) findViewById(R.id.bottomScroller);
         final MyScrollView shoeScroller = (MyScrollView) findViewById(R.id.shoeScroller);
 
-        initializeOneScrollView(topScroller);
-        initializeOneScrollView(bottomScroller);
-        initializeOneScrollView(shoeScroller);
-
-        Display mDisplay = getWindowManager().getDefaultDisplay();
-        int width = mDisplay.getWidth();
         LinearLayout topLayout = (LinearLayout) findViewById(R.id.topLayout);
         LinearLayout bottomLayout = (LinearLayout) findViewById(R.id.bottomLayout);
         LinearLayout shoeLayout = (LinearLayout) findViewById(R.id.shoeLayout);
+
+        initializeOneScrollView(topScroller, topLayout);
+        initializeOneScrollView(bottomScroller, bottomLayout);
+        initializeOneScrollView(shoeScroller, shoeLayout);
+
+        Display mDisplay = getWindowManager().getDefaultDisplay();
+        int width = mDisplay.getWidth();
 
         topLayout.setPadding(width, 0, width, 0);
         bottomLayout.setPadding(width, 0, width, 0);
@@ -475,7 +476,7 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
     }
 
 
-    public void initializeOneScrollView(final MyScrollView myView) {
+    public void initializeOneScrollView(final MyScrollView myView, final LinearLayout myLayout) {
         myView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -491,10 +492,9 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
                 // From http://stackoverflow.com/questions/12424373/how-to-scroll-to-center-of-child-of-horizontalscrollview
                 //get the center
                 int center = myView.getScrollX() + myView.getWidth() / 2;
-                LinearLayout linearLayout = ((LinearLayout) myView.findViewById(R.id.shoeLayout));
-                int numChildren = linearLayout.getChildCount();
+                int numChildren = myLayout.getChildCount();
                 for (int i = 0; i < numChildren; i++) {
-                    View v = linearLayout.getChildAt(i);
+                    View v = myLayout.getChildAt(i);
                     int viewLeft = v.getLeft();
                     int viewWidth = v.getWidth();
                     if (center >= viewLeft && center <= viewLeft + viewWidth) {
