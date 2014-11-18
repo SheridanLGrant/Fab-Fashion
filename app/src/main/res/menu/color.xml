@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="red"/>
-    <item android:title="white"/>
-    <item android:title="blue"/>
+    <item android:title="@string/red"/>
+    <item android:title="@string/yellow"/>
+    <item android:title="@string/blue"/>
+    <item android:title="@string/green"/>
+    <item android:title="@string/orange"/>
+    <item android:title="@string/purple"/>
+    <item android:title="@string/black"/>
+    <item android:title="@string/white"/>
+    <item android:title="@string/pink"/>
+    <item android:title="@string/brown"/>
 </menu>

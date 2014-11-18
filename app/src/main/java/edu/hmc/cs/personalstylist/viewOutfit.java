@@ -24,15 +24,22 @@ import edu.hmc.cs.personalstylist.Choose;
  * Created by davidconnor on 11/6/14.
  */
 public class viewOutfit extends Activity {
-    public final static String NAME_MESSAGE = "edu.hmc.cs.personalstylist.nameMessage";
-    public final static String WARDROBE_MESSAGE = "edu.hmc.cs.personalstylist.wardrobeMessage";
-    public final static String ARTICLE_MESSAGE = "edu.hmc.cs.personalstylist.articleMessage";
-    public final static String ARTICLE_NAME = "edu.hmc.cs.personalstylist.articleName";
-    public final static String CLOTHING_TYPE = "edu.hmc.cs.personalstylist.clothingType";
-    public final static String CLOTHING_COLOR = "edu.hmc.cs.personalstylist.clothingColor";
     public final static String CLOTHING_FORMALITY = "edu.hmc.cs.personalstylist.clothingFormality";
     public final static String CLOTHING_TEMPERATURE = "edu.hmc.cs.personalstylist.clothingTemperature";
-    //    Wardrobe wardrobe;
+
+    public final static String LONG_SLEEVE_SHIRT = "Long-sleeve shirt";
+    public final static String SHORT_SLEEVE_SHIRT = "Short-sleeve shirt";
+    public final static String SLEEVELESS_SHIRT = "Sleeveless shirt";
+    public final static String PANTS = "Pants";
+    public final static String SHORTS = "Shorts";
+    public final static String SKIRT = "Skirt";
+    public final static String DRESS_SHOES = "Dress shoes";
+    public final static String TENNIS_SHOES = "Tennis shoes";
+    public final static String SANDALS = "Sandals";
+    public final static ArrayList<String> TOPS = new ArrayList<String>();
+    public final static ArrayList<String> BOTTOMS = new ArrayList<String>();
+    public final static ArrayList<String> SHOES = new ArrayList<String>();
+
     ArrayList<Clothing> wardrobe = new ArrayList<Clothing>();
     Context context;
     String file = "wardrobeData";
@@ -40,6 +47,17 @@ public class viewOutfit extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        // Populate ArrayLists
+        TOPS.add(LONG_SLEEVE_SHIRT);
+        TOPS.add(SHORT_SLEEVE_SHIRT);
+        TOPS.add(SLEEVELESS_SHIRT);
+        BOTTOMS.add(PANTS);
+        BOTTOMS.add(SHORTS);
+        BOTTOMS.add(SKIRT);
+        SHOES.add(DRESS_SHOES);
+        SHOES.add(TENNIS_SHOES);
+        SHOES.add(SANDALS);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_outfits);
@@ -52,7 +70,6 @@ public class viewOutfit extends Activity {
         // Read wardrobe data
         Gson gson = new Gson();
         String temp="";
-        TextView testRead = (TextView) findViewById(R.id.testViewOutfit);
         Type clothingList = new TypeToken<ArrayList<Clothing>>() {}.getType();
 
         try {
@@ -61,14 +78,6 @@ public class viewOutfit extends Activity {
             while( (c = fIn.read()) != -1) {
                 temp = temp + Character.toString((char)c);
             }
-//            wardrobe = gson.fromJson(temp, Wardrobe.class);
-//            TextView testRead = (TextView) findViewById(R.id.testRead);
-//            if (wardrobe.wardrobeLength() < 1) {
-//                testRead.setText("worked");
-//            } else {
-//                testRead.setText("did not work");
-//            }
-//            Toast.makeText(getBaseContext(), "wardrobe found", Toast.LENGTH_LONG).show();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -97,38 +106,25 @@ public class viewOutfit extends Activity {
 
         Choose outfitChoice = new Choose(wardrobe);
         ArrayList<Clothing> newWardrobe = outfitChoice.viableClothing(formPref, tempPref);
-        testRead.setText(wardrobe.get(0).getTemperature());
-//        if (newWardrobe.size() == 0) {
-//
-//        }
 
 
         Clothing currentArticle;
         for (int i = 0; i < newWardrobe.size(); i++) {
             currentArticle = newWardrobe.get(i);
             String type = currentArticle.getType();
-            if ("shirt".equals(type)) {
+            if (TOPS.contains(type)) {
                 LinearLayout view = (LinearLayout) findViewById(R.id.chooseTopLayout);
                 Button button = new Button(this);
                 button.setText(currentArticle.getName());
-//                button.setOnClickListener(new View.OnClickListener() {
-//                    public void onClick(View v) {
-//                        PopupMenu popup = new PopupMenu(this, v);
-//                        popup.setOnMenuItemClickListener(this);
-//                        MenuInflater inflater = popup.getMenuInflater();
-//                        inflater.inflate(R.menu.formality, popup.getMenu());
-//                        popup.show();
-//                    }
-//                });
                 view.addView(button);
             }
-            else if ("pants".equals(type)) {
+            else if (BOTTOMS.contains(type)) {
                 LinearLayout view = (LinearLayout) findViewById(R.id.chooseBottomLayout);
                 Button button = new Button(this);
                 button.setText(currentArticle.getName());
                 view.addView(button);
             }
-            else if ("shoes".equals(type)) {
+            else if (SHOES.contains(type)) {
                 LinearLayout view = (LinearLayout) findViewById(R.id.chooseShoeLayout);
                 Button button = new Button(this);
                 button.setText(currentArticle.getName());

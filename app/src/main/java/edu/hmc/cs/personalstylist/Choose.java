@@ -29,18 +29,56 @@ public class Choose {
          */
     public ArrayList<Clothing> viableClothing(String formalityPref, String temperaturePref) {
         ArrayList<Clothing> viableClothing = new ArrayList<Clothing>();
-        for (int i = 0; i < wardrobe.size(); i++) {
-            Clothing clothingArticle = wardrobe.get(i);
-            String f = clothingArticle.getFormality();
-            String t = clothingArticle.getTemperature();
-            if (formalityPref.equals(f) &&
-                    temperaturePref.equals(t)) {
-                viableClothing.add(clothingArticle);
+
+        if ("".equals(formalityPref)) {
+            for (int i = 0; i < wardrobe.size(); i++) {
+                Clothing clothingArticle = wardrobe.get(i);
+                String t = clothingArticle.getTemperature();
+                if (temperaturePref.equals(t)) {
+                    viableClothing.add(clothingArticle);
+                }
+            }
+        } else if ("".equals(temperaturePref)) {
+            for (int i = 0; i < wardrobe.size(); i++) {
+                Clothing clothingArticle = wardrobe.get(i);
+                String f = clothingArticle.getFormality();
+                if (formalityPref.equals(f)) {
+                    viableClothing.add(clothingArticle);
+                }
+            }
+        } else {
+            for (int i = 0; i < wardrobe.size(); i++) {
+                Clothing clothingArticle = wardrobe.get(i);
+                String f = clothingArticle.getFormality();
+                String t = clothingArticle.getTemperature();
+                if (formalityPref.equals(f) &&
+                        temperaturePref.equals(t)) {
+                    viableClothing.add(clothingArticle);
+                }
             }
         }
+
         return viableClothing;
 
     }
+
+
+//    public ArrayList<Clothing> recommendedOutfits(ArrayList<Clothing> wardrobe) {
+//        ArrayList<Clothing> outfits = new ArrayList<Clothing>();
+//
+//    }
+
+
+
+
+
+
+
+
+
+
+
+
 
         /**
          * Eliminates non-viable clothing from list of bottoms, returns remaining list

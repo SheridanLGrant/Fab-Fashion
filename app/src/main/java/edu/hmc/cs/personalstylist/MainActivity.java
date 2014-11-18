@@ -40,13 +40,17 @@ import edu.hmc.cs.personalstylist.Clothing;
 public class MainActivity extends Activity implements OnClickListener, PopupMenu.OnMenuItemClickListener {
     public final static String NAME_MESSAGE = "edu.hmc.cs.personalstylist.nameMessage";
     public final static String WARDROBE_MESSAGE = "edu.hmc.cs.personalstylist.wardrobeMessage";
-    public final static String ARTICLE_MESSAGE = "edu.hmc.cs.personalstylist.articleMessage";
-    public final static String ARTICLE_NAME = "edu.hmc.cs.personalstylist.articleName";
-    public final static String CLOTHING_TYPE = "edu.hmc.cs.personalstylist.clothingType";
-    public final static String CLOTHING_COLOR = "edu.hmc.cs.personalstylist.clothingColor";
-    public final static String CLOTHING_FORMALITY = "edu.hmc.cs.personalstylist.clothingFormality";
-    public final static String CLOTHING_TEMPERATURE = "edu.hmc.cs.personalstylist.clothingTemperature";
-//    Wardrobe wardrobe;
+
+    public final static String LONG_SLEEVE_SHIRT = "Long-sleeve shirt";
+    public final static String SHORT_SLEEVE_SHIRT = "Short-sleeve shirt";
+    public final static String SLEEVELESS_SHIRT = "Sleeveless shirt";
+    public final static String PANTS = "Pants";
+    public final static String SHORTS = "Shorts";
+    public final static String SKIRT = "Skirt";
+    public final static String DRESS_SHOES = "Dress shoes";
+    public final static String TENNIS_SHOES = "Tennis shoes";
+    public final static String SANDALS = "Sandals";
+
     ArrayList<Clothing> wardrobe = new ArrayList<Clothing>();
     String wardrobeString;
     Context context;
@@ -84,14 +88,6 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
                 temp = temp + Character.toString((char)c);
             }
             wardrobeString = temp;
-//            wardrobe = gson.fromJson(temp, Wardrobe.class);
-//            TextView testRead = (TextView) findViewById(R.id.testRead);
-//            if (wardrobe.wardrobeLength() < 1) {
-//                testRead.setText("worked");
-//            } else {
-//                testRead.setText("did not work");
-//            }
-//            Toast.makeText(getBaseContext(), "wardrobe found", Toast.LENGTH_LONG).show();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -134,15 +130,15 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
 
             ImageButton button = createImageButton(currentArticle);
 
-            if ("shirt".equals(type)) {
+            if (LONG_SLEEVE_SHIRT.equals(type) || SHORT_SLEEVE_SHIRT.equals(type) || SLEEVELESS_SHIRT.equals(type)) {
                 LinearLayout view = (LinearLayout) findViewById(R.id.topLayout);
                 view.addView(button);
             }
-            else if ("pants".equals(type)) {
+            else if (PANTS.equals(type) || SHORTS.equals(type) || SKIRT.equals(type)) {
                 LinearLayout view = (LinearLayout) findViewById(R.id.bottomLayout);
                 view.addView(button);
             }
-            else if ("shoes".equals(type)) {
+            else if (DRESS_SHOES.equals(type) || TENNIS_SHOES.equals(type) || SANDALS.equals(type)) {
                 LinearLayout view = (LinearLayout) findViewById(R.id.shoeLayout);
                 view.addView(button);
             }
@@ -151,6 +147,7 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
 
 
 
+    // TODO: change to appropriate icons
     private ImageButton createImageButton(Clothing currentArticle) {
         ImageButton button = new ImageButton(this);
         button.setImageResource(R.drawable.jersey);
@@ -201,40 +198,6 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
 
 
 
-
-//    @Override
-//    public boolean onMenuItemClick(MenuItem menuItem) {
-//
-//        String clicked = (String) menuItem.getTitle();
-//        if (clicked.equals("shirt") || clicked.equals("pants") || clicked.equals("shoes")) {
-//            TextView view = (TextView) findViewById(R.id.selected_type);
-//            view.setText(clicked);
-//        } else if (clicked.equals("red") || clicked.equals("white") || clicked.equals("blue")) {
-//            TextView view = (TextView) findViewById(R.id.selected_color);
-//            view.setText(clicked);
-//        } else if (clicked.equals("wedding") || clicked.equals("day at the office") || clicked.equals("eating ice cream alone")) {
-//            TextView view = (TextView) findViewById(R.id.selected_formality);
-//            view.setText(clicked);
-//        } else {
-//            TextView view = (TextView) findViewById(R.id.selected_temperature);
-//            view.setText(clicked);
-//        }
-//
-//
-//        return true;
-//
-//    }
-
-
-//    public void showPopUp(View v) {
-//        PopupMenu popup = new PopupMenu(this, v);
-//        popup.setOnMenuItemClickListener(this);
-//        MenuInflater inflater = popup.getMenuInflater();
-//        inflater.inflate(R.menu.formality, popup.getMenu());
-//        popup.show();
-//    }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -262,11 +225,9 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
         return super.onOptionsItemSelected(item);
     }
 
-    public void chooseOutfit(View view) {
-    }
 
 
-    // popup.getMenu().add(groupId, itemId, order, title);
+    // TODO: need to get article info in this function to display info properly
     @Override
     public void onClick(View v) {
         ImageButton b = (ImageButton) v;
@@ -289,27 +250,11 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
 
         popup.setOnMenuItemClickListener(this);
         MenuInflater inflater = popup.getMenuInflater();
-//        View parent = (View) v.getParent();
-//        int parentID = parent.getId();
         inflater.inflate(R.menu.article_options, popup.getMenu());
         popup.show();
     }
 
-    public void showPopUpFormality(View v){
-        PopupMenu popup = new PopupMenu(this, v);
-        popup.setOnMenuItemClickListener(this);
-        MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.formality, popup.getMenu());
-        popup.show();
-    }
 
-    public void showPopUpTemperature(View v){
-        PopupMenu popup = new PopupMenu(this, v);
-        popup.setOnMenuItemClickListener(this);
-        MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.temperature, popup.getMenu());
-        popup.show();
-    }
 
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
