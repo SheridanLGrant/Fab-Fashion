@@ -15,7 +15,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Temperature Preference"
+        android:text="@string/temperature_preference"
         android:id="@+id/temp_button"
         android:onClick="showPopUpTemperature"
         android:layout_alignParentTop="true"
@@ -32,7 +32,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Formality Preference"
+        android:text="@string/formality_preference"
         android:id="@+id/form_button"
         android:onClick="showPopUpFormality"
         android:layout_centerVertical="true"
@@ -48,7 +48,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter"
+        android:text="@string/enter_preferences"
         android:id="@+id/enter_preferences"
         android:onClick="moveToOutfitView"
         android:layout_alignParentBottom="true"

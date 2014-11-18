@@ -12,17 +12,10 @@
 
     <TextView
         android:textSize="25sp"
-        android:text="Outfits"
+        android:text="@string/available_clothing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-
-    <TextView
-        android:textSize="30sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/testViewOutfit"
-        android:layout_gravity="center_horizontal" />
 
     <HorizontalScrollView
         android:layout_width="match_parent"

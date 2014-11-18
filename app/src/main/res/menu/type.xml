@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="shirt"/>
-    <item android:title="pants"/>
-    <item android:title="shoes"/>
+    <item android:title="@string/long_sleeve_shirt"/>
+    <item android:title="@string/short_sleeve_shirt"/>
+    <item android:title="@string/sleeveless_shirt"/>
+    <item android:title="@string/pants"/>
+    <item android:title="@string/shorts"/>
+    <item android:title="@string/skirt"/>
+    <item android:title="@string/dress_shoes"/>
+    <item android:title="@string/tennis_shoes"/>
+    <item android:title="@string/sandals"/>
 </menu>

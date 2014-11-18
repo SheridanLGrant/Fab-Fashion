@@ -10,12 +10,26 @@ import android.view.View;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 /**
  * Created by Sheridan on 11/5/2014.
  */
 public class ChooseOutfit extends Activity implements PopupMenu.OnMenuItemClickListener {
     public final static String CLOTHING_FORMALITY = "edu.hmc.cs.personalstylist.clothingFormality";
     public final static String CLOTHING_TEMPERATURE = "edu.hmc.cs.personalstylist.clothingTemperature";
+
+    public final static String CASUAL = "Casual";
+    public final static String BUSINESS = "Business";
+    public final static String FORMAL = "Formal";
+    public final static String BEACH = "Beach";
+    public final static ArrayList<String> FORMALITIES = new ArrayList<String>();
+
+    public final static String HOT = "Hot";
+    public final static String COLD = "Cold";
+    public final static String MILD = "Mild";
+    public final static ArrayList<String> TEMPERATURES = new ArrayList<String>();
+
     String clothingFormality;
     String clothingTemperature;
 
@@ -26,8 +40,15 @@ public class ChooseOutfit extends Activity implements PopupMenu.OnMenuItemClickL
 
         super.onCreate(savedInstanceState);
 
-        Intent intent = getIntent();
-//        String message = intent.getStringExtra(MainActivity.WARDROBE_MESSAGE);
+        // Populate ArrayLists
+        FORMALITIES.add(CASUAL);
+        FORMALITIES.add(FORMAL);
+        FORMALITIES.add(BUSINESS);
+        FORMALITIES.add(BEACH);
+
+        TEMPERATURES.add(HOT);
+        TEMPERATURES.add(COLD);
+        TEMPERATURES.add(MILD);
 
         setContentView(R.layout.activity_choose_outfit);
 
@@ -74,7 +95,7 @@ public class ChooseOutfit extends Activity implements PopupMenu.OnMenuItemClickL
 
         String clicked = (String) menuItem.getTitle();
 
-        if (clicked.equals("wedding") || clicked.equals("day at the office") || clicked.equals("eating ice cream alone")) {
+        if (FORMALITIES.contains(clicked)) {
             TextView view = (TextView) findViewById(R.id.choose_selected_formality);
             view.setText(clicked);
         } else {
