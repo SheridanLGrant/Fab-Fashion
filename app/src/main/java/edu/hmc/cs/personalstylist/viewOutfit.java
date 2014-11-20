@@ -201,38 +201,7 @@ public class viewOutfit extends Activity implements View.OnClickListener {
         myView.setOnScrollStoppedListener(new MyScrollView.OnScrollStoppedListener() {
             @Override
             public void onScrollStopped() {
-                // From http://stackoverflow.com/questions/12424373/how-to-scroll-to-center-of-child-of-horizontalscrollview
-                //get the center
-                int center = myView.getScrollX() + myView.getWidth() / 2;
-                int numChildren = myLayout.getChildCount();
-
-                View firstChild = myLayout.getChildAt(0);
-                int firstLeft = firstChild.getLeft();
-                int firstWidth = firstChild.getWidth();
-
-                View lastChild = myLayout.getChildAt(numChildren-1);
-                int lastLeft = lastChild.getLeft();
-                int lastWidth = lastChild.getWidth();
-
-                if (center < firstLeft) {
-                    myView.scrollBy((firstLeft + (firstWidth / 2)) - center, 0);
-                }
-                else if (center > lastLeft + lastWidth) {
-                    myView.scrollBy((lastLeft + (lastWidth / 2)) - center, 0);
-                }
-                else {
-                    for (int i = 0; i < numChildren; i++) {
-                        View v = myLayout.getChildAt(i);
-                        int viewLeft = v.getLeft();
-                        int viewWidth = v.getWidth();
-
-                        if (center >= viewLeft && center <= viewLeft + viewWidth) {
-                            Log.d("initializeScrollViews()", "CENTER THIS : " + ((viewLeft + viewWidth / 2) - center));
-                            myView.scrollBy((viewLeft + viewWidth / 2) - center, 0);
-                            break;
-                        }
-                    }
-                }
+                myView.center(myLayout);
             }
         });
     }

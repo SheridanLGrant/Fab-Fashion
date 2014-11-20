@@ -464,10 +464,6 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
         LinearLayout bottomLayout = (LinearLayout) findViewById(R.id.bottomLayout);
         LinearLayout shoeLayout = (LinearLayout) findViewById(R.id.shoeLayout);
 
-        initializeOneScrollView(topScroller, topLayout);
-        initializeOneScrollView(bottomScroller, bottomLayout);
-        initializeOneScrollView(shoeScroller, shoeLayout);
-
         Display mDisplay = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         mDisplay.getSize(size);
@@ -476,12 +472,14 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
         topLayout.setPadding(width, 0, width, 0);
         bottomLayout.setPadding(width, 0, width, 0);
         shoeLayout.setPadding(width, 0, width, 0);
+
+        initializeOneScrollView(topScroller, topLayout);
+        initializeOneScrollView(bottomScroller, bottomLayout);
+        initializeOneScrollView(shoeScroller, shoeLayout);
     }
 
 
     public void initializeOneScrollView(final MyScrollView myView, final LinearLayout myLayout) {
-        myView.center(myLayout);
-
         myView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -497,6 +495,7 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
                 myView.center(myLayout);
             }
         });
+        myView.center(myLayout);
     }
 
 

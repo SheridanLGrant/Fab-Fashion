@@ -59,13 +59,13 @@ public class MyScrollView extends HorizontalScrollView {
 
     public void center(LinearLayout myLayout) {
         // From http://stackoverflow.com/questions/12424373/how-to-scroll-to-center-of-child-of-horizontalscrollview
-        //get the center
-        int center = this.getScrollX() + this.getWidth() / 2;
+        // get the center
         int numChildren = myLayout.getChildCount();
-
         if (numChildren == 0) {
             return;
         }
+
+        int center = this.getScrollX() + this.getWidth() / 2;
 
         View firstChild = myLayout.getChildAt(0);
         int firstLeft = firstChild.getLeft();
