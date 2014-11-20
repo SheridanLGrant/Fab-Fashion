@@ -5,12 +5,16 @@ import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -47,6 +51,17 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
     public final static String DRESS_SHOES = "Dress shoes";
     public final static String TENNIS_SHOES = "Tennis shoes";
     public final static String SANDALS = "Sandals";
+
+    public final static String RED = "Red";
+    public final static String BLUE = "Blue";
+    public final static String YELLOW = "Yellow";
+    public final static String GREEN = "Green";
+    public final static String PURPLE = "Purple";
+    public final static String ORANGE = "Orange";
+    public final static String BLACK = "Black";
+    public final static String WHITE = "White";
+    public final static String PINK = "Pink";
+    public final static String BROWN = "Brown";
 
     ArrayList<Clothing> wardrobe = new ArrayList<Clothing>();
     String wardrobeString;
@@ -100,6 +115,7 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
 
         displayStoredWardrobe();
 
+        initializeScrollViews();
 
     }
 
@@ -134,16 +150,382 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
 
 
 
-    // TODO: change to appropriate icons
+    // Behold the mass of conditional code required to sort clothing items into the current 99
+    // possible combinations of type and color
     private ImageButton createImageButton(Clothing currentArticle) {
         ImageButton button = new ImageButton(this);
-        button.setImageResource(R.drawable.jersey);
+        String type = currentArticle.getType();
+        String color = currentArticle.getColor();
+
+        if (LONG_SLEEVE_SHIRT.equals(type)) {
+            if (RED.equals(color)) {
+                button.setImageResource(R.drawable.longsleeveshirt_red);
+            }
+            else if (YELLOW.equals(color)) {
+                button.setImageResource(R.drawable.longsleeveshirt_yellow);
+            }
+            else if (BLUE.equals(color)) {
+                button.setImageResource(R.drawable.longsleeveshirt_blue);
+            }
+            else if (GREEN.equals(color)) {
+                button.setImageResource(R.drawable.longsleeveshirt_green);
+            }
+            else if (ORANGE.equals(color)) {
+                button.setImageResource(R.drawable.longsleeveshirt_orange);
+            }
+            else if (PURPLE.equals(color)) {
+                button.setImageResource(R.drawable.longsleeveshirt_purple);
+            }
+            else if (BLACK.equals(color)) {
+                button.setImageResource(R.drawable.longsleeveshirt_black);
+            }
+            else if (WHITE.equals(color)) {
+                button.setImageResource(R.drawable.longsleeveshirt_white);
+            }
+            else if (PINK.equals(color)) {
+                button.setImageResource(R.drawable.longsleeveshirt_pink);
+            }
+            else { // BROWN
+                button.setImageResource(R.drawable.longsleeveshirt_brown);
+            }
+        }
+        else if (SHORT_SLEEVE_SHIRT.equals(type)) {
+            if (RED.equals(color)) {
+                button.setImageResource(R.drawable.shortsleeveshirt_red);
+            }
+            else if (YELLOW.equals(color)) {
+                button.setImageResource(R.drawable.shortsleeveshirt_yellow);
+            }
+            else if (BLUE.equals(color)) {
+                button.setImageResource(R.drawable.shortsleeveshirt_blue);
+            }
+            else if (GREEN.equals(color)) {
+                button.setImageResource(R.drawable.shortsleeveshirt_green);
+            }
+            else if (ORANGE.equals(color)) {
+                button.setImageResource(R.drawable.shortsleeveshirt_orange);
+            }
+            else if (PURPLE.equals(color)) {
+                button.setImageResource(R.drawable.shortsleeveshirt_purple);
+            }
+            else if (BLACK.equals(color)) {
+                button.setImageResource(R.drawable.shortsleeveshirt_black);
+            }
+            else if (WHITE.equals(color)) {
+                button.setImageResource(R.drawable.shortsleeveshirt_white);
+            }
+            else if (PINK.equals(color)) {
+                button.setImageResource(R.drawable.shortsleeveshirt_pink);
+            }
+            else { // BROWN
+                button.setImageResource(R.drawable.shortsleeveshirt_brown);
+            }
+        }
+        else if (SLEEVELESS_SHIRT.equals(type)) {
+            if (RED.equals(color)) {
+                button.setImageResource(R.drawable.sleevelessshirt_red);
+            }
+            else if (YELLOW.equals(color)) {
+                button.setImageResource(R.drawable.sleevelessshirt_yellow);
+            }
+            else if (BLUE.equals(color)) {
+                button.setImageResource(R.drawable.sleevelessshirt_blue);
+            }
+            else if (GREEN.equals(color)) {
+                button.setImageResource(R.drawable.sleevelessshirt_green);
+            }
+            else if (ORANGE.equals(color)) {
+                button.setImageResource(R.drawable.sleevelessshirt_orange);
+            }
+            else if (PURPLE.equals(color)) {
+                button.setImageResource(R.drawable.sleevelessshirt_purple);
+            }
+            else if (BLACK.equals(color)) {
+                button.setImageResource(R.drawable.sleevelessshirt_black);
+            }
+            else if (WHITE.equals(color)) {
+                button.setImageResource(R.drawable.sleevelessshirt_white);
+            }
+            else if (PINK.equals(color)) {
+                button.setImageResource(R.drawable.sleevelessshirt_pink);
+            }
+            else { // BROWN
+                button.setImageResource(R.drawable.sleevelessshirt_brown);
+            }
+        }
+        else if (PANTS.equals(type)) {
+            if (RED.equals(color)) {
+                button.setImageResource(R.drawable.longpants_red);
+            }
+            else if (YELLOW.equals(color)) {
+                button.setImageResource(R.drawable.longpants_yellow);
+            }
+            else if (BLUE.equals(color)) {
+                button.setImageResource(R.drawable.longpants_blue);
+            }
+            else if (GREEN.equals(color)) {
+                button.setImageResource(R.drawable.longpants_green);
+            }
+            else if (ORANGE.equals(color)) {
+                button.setImageResource(R.drawable.longpants_orange);
+            }
+            else if (PURPLE.equals(color)) {
+                button.setImageResource(R.drawable.longpants_purple);
+            }
+            else if (BLACK.equals(color)) {
+                button.setImageResource(R.drawable.longpants_black);
+            }
+            else if (WHITE.equals(color)) {
+                button.setImageResource(R.drawable.longpants_white);
+            }
+            else if (PINK.equals(color)) {
+                button.setImageResource(R.drawable.longpants_pink);
+            }
+            else { // BROWN
+                button.setImageResource(R.drawable.longpants_brown);
+            }
+        }
+        else if (SHORTS.equals(type)) {
+            if (RED.equals(color)) {
+                button.setImageResource(R.drawable.shortpants_red);
+            }
+            else if (YELLOW.equals(color)) {
+                button.setImageResource(R.drawable.shortpants_yellow);
+            }
+            else if (BLUE.equals(color)) {
+                button.setImageResource(R.drawable.shortpants_blue);
+            }
+            else if (GREEN.equals(color)) {
+                button.setImageResource(R.drawable.shortpants_green);
+            }
+            else if (ORANGE.equals(color)) {
+                button.setImageResource(R.drawable.shortpants_orange);
+            }
+            else if (PURPLE.equals(color)) {
+                button.setImageResource(R.drawable.shortpants_purple);
+            }
+            else if (BLACK.equals(color)) {
+                button.setImageResource(R.drawable.shortpants_black);
+            }
+            else if (WHITE.equals(color)) {
+                button.setImageResource(R.drawable.shortpants_white);
+            }
+            else if (PINK.equals(color)) {
+                button.setImageResource(R.drawable.shortpants_pink);
+            }
+            else { // BROWN
+                button.setImageResource(R.drawable.shortpants_brown);
+            }
+        }
+        else if (SKIRT.equals(type)) {
+            if (RED.equals(color)) {
+                button.setImageResource(R.drawable.skirtpants_red);
+            }
+            else if (YELLOW.equals(color)) {
+                button.setImageResource(R.drawable.skirtpants_yellow);
+            }
+            else if (BLUE.equals(color)) {
+                button.setImageResource(R.drawable.skirtpants_blue);
+            }
+            else if (GREEN.equals(color)) {
+                button.setImageResource(R.drawable.skirtpants_green);
+            }
+            else if (ORANGE.equals(color)) {
+                button.setImageResource(R.drawable.skirtpants_orange);
+            }
+            else if (PURPLE.equals(color)) {
+                button.setImageResource(R.drawable.skirtpants_purple);
+            }
+            else if (BLACK.equals(color)) {
+                button.setImageResource(R.drawable.skirtpants_black);
+            }
+            else if (WHITE.equals(color)) {
+                button.setImageResource(R.drawable.skirtpants_white);
+            }
+            else if (PINK.equals(color)) {
+                button.setImageResource(R.drawable.skirtpants_pink);
+            }
+            else { // BROWN
+                button.setImageResource(R.drawable.skirtpants_brown);
+            }
+        }
+        else if (DRESS_SHOES.equals(type)) {
+            if (RED.equals(color)) {
+                button.setImageResource(R.drawable.dressshoes_red);
+            }
+            else if (YELLOW.equals(color)) {
+                button.setImageResource(R.drawable.dressshoes_yellow);
+            }
+            else if (BLUE.equals(color)) {
+                button.setImageResource(R.drawable.dressshoes_blue);
+            }
+            else if (GREEN.equals(color)) {
+                button.setImageResource(R.drawable.dressshoes_green);
+            }
+            else if (ORANGE.equals(color)) {
+                button.setImageResource(R.drawable.dressshoes_orange);
+            }
+            else if (PURPLE.equals(color)) {
+                button.setImageResource(R.drawable.dressshoes_purple);
+            }
+            else if (BLACK.equals(color)) {
+                button.setImageResource(R.drawable.dressshoes_black);
+            }
+            else if (WHITE.equals(color)) {
+                button.setImageResource(R.drawable.dressshoes_white);
+            }
+            else if (PINK.equals(color)) {
+                button.setImageResource(R.drawable.dressshoes_pink);
+            }
+            else { // BROWN
+                button.setImageResource(R.drawable.dressshoes_brown);
+            }
+        }
+        else if (TENNIS_SHOES.equals(type)) {
+            if (RED.equals(color)) {
+                button.setImageResource(R.drawable.tennisshoes_red);
+            }
+            else if (YELLOW.equals(color)) {
+                button.setImageResource(R.drawable.tennisshoes_yellow);
+            }
+            else if (BLUE.equals(color)) {
+                button.setImageResource(R.drawable.tennisshoes_blue);
+            }
+            else if (GREEN.equals(color)) {
+                button.setImageResource(R.drawable.tennisshoes_green);
+            }
+            else if (ORANGE.equals(color)) {
+                button.setImageResource(R.drawable.tennisshoes_orange);
+            }
+            else if (PURPLE.equals(color)) {
+                button.setImageResource(R.drawable.tennisshoes_purple);
+            }
+            else if (BLACK.equals(color)) {
+                button.setImageResource(R.drawable.tennisshoes_black);
+            }
+            else if (WHITE.equals(color)) {
+                button.setImageResource(R.drawable.tennisshoes_white);
+            }
+            else if (PINK.equals(color)) {
+                button.setImageResource(R.drawable.tennisshoes_pink);
+            }
+            else { // BROWN
+                button.setImageResource(R.drawable.tennisshoes_brown);
+            }
+        }
+        else { // SANDALS
+            if (RED.equals(color)) {
+                button.setImageResource(R.drawable.sandalshoes_red);
+            }
+            else if (YELLOW.equals(color)) {
+                button.setImageResource(R.drawable.sandalshoes_yellow);
+            }
+            else if (BLUE.equals(color)) {
+                button.setImageResource(R.drawable.sandalshoes_blue);
+            }
+            else if (GREEN.equals(color)) {
+                button.setImageResource(R.drawable.sandalshoes_green);
+            }
+            else if (ORANGE.equals(color)) {
+                button.setImageResource(R.drawable.sandalshoes_orange);
+            }
+            else if (PURPLE.equals(color)) {
+                button.setImageResource(R.drawable.sandalshoes_purple);
+            }
+            else if (BLACK.equals(color)) {
+                button.setImageResource(R.drawable.sandalshoes_black);
+            }
+            else if (WHITE.equals(color)) {
+                button.setImageResource(R.drawable.sandalshoes_white);
+            }
+            else if (PINK.equals(color)) {
+                button.setImageResource(R.drawable.sandalshoes_pink);
+            }
+            else { // BROWN
+                button.setImageResource(R.drawable.sandalshoes_brown);
+            }
+        }
+
         button.setLayoutParams(params);
         button.setOnClickListener(this);
         button.setBackgroundColor(Color.TRANSPARENT);
         button.setTag(currentArticle.getName());
 
         return button;
+    }
+
+
+    private void initializeScrollViews() {
+        MyScrollView topScroller = (MyScrollView) findViewById(R.id.topScroller);
+        MyScrollView bottomScroller = (MyScrollView) findViewById(R.id.bottomScroller);
+        final MyScrollView shoeScroller = (MyScrollView) findViewById(R.id.shoeScroller);
+
+        LinearLayout topLayout = (LinearLayout) findViewById(R.id.topLayout);
+        LinearLayout bottomLayout = (LinearLayout) findViewById(R.id.bottomLayout);
+        LinearLayout shoeLayout = (LinearLayout) findViewById(R.id.shoeLayout);
+
+        initializeOneScrollView(topScroller, topLayout);
+        initializeOneScrollView(bottomScroller, bottomLayout);
+        initializeOneScrollView(shoeScroller, shoeLayout);
+
+        Display mDisplay = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        mDisplay.getSize(size);
+        int width = size.x;
+
+        topLayout.setPadding(width, 0, width, 0);
+        bottomLayout.setPadding(width, 0, width, 0);
+        shoeLayout.setPadding(width, 0, width, 0);
+    }
+
+
+    public void initializeOneScrollView(final MyScrollView myView, final LinearLayout myLayout) {
+        myView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    myView.startScrollerTask();
+                }
+                return false;
+            }
+        });
+        myView.setOnScrollStoppedListener(new MyScrollView.OnScrollStoppedListener() {
+            @Override
+            public void onScrollStopped() {
+                // From http://stackoverflow.com/questions/12424373/how-to-scroll-to-center-of-child-of-horizontalscrollview
+                //get the center
+                int center = myView.getScrollX() + myView.getWidth() / 2;
+                int numChildren = myLayout.getChildCount();
+
+                View firstChild = myLayout.getChildAt(0);
+                int firstLeft = firstChild.getLeft();
+                int firstWidth = firstChild.getWidth();
+
+                View lastChild = myLayout.getChildAt(numChildren-1);
+                int lastLeft = lastChild.getLeft();
+                int lastWidth = lastChild.getWidth();
+
+                if (center < firstLeft) {
+                    myView.scrollBy((firstLeft + (firstWidth / 2)) - center, 0);
+                }
+                else if (center > lastLeft + lastWidth) {
+                    myView.scrollBy((lastLeft + (lastWidth / 2)) - center, 0);
+                }
+                else {
+                    for (int i = 0; i < numChildren; i++) {
+                        View v = myLayout.getChildAt(i);
+                        int viewLeft = v.getLeft();
+                        int viewWidth = v.getWidth();
+
+                        if (center >= viewLeft && center <= viewLeft + viewWidth) {
+                            Log.d("initializeScrollViews()", "CENTER THIS : " + ((viewLeft + viewWidth / 2) - center));
+                            myView.scrollBy((viewLeft + viewWidth / 2) - center, 0);
+                            break;
+                        }
+                    }
+                }
+            }
+        });
     }
 
 
