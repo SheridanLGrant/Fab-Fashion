@@ -46,6 +46,11 @@ public class Clothing {
          this.temperature = givenTemperature;
     }
 
+    public Clothing(String givenType) {
+        this.type = givenType;
+        this.name = "test";
+    }
+
     public String getType() {
         return this.type;
     }

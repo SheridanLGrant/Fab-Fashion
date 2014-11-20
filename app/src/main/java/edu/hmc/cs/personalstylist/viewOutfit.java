@@ -3,9 +3,17 @@ package edu.hmc.cs.personalstylist;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -23,7 +31,7 @@ import edu.hmc.cs.personalstylist.Choose;
 /**
  * Created by davidconnor on 11/6/14.
  */
-public class viewOutfit extends Activity {
+public class viewOutfit extends Activity implements View.OnClickListener {
     public final static String CLOTHING_FORMALITY = "edu.hmc.cs.personalstylist.clothingFormality";
     public final static String CLOTHING_TEMPERATURE = "edu.hmc.cs.personalstylist.clothingTemperature";
 
@@ -43,6 +51,9 @@ public class viewOutfit extends Activity {
     ArrayList<Clothing> wardrobe = new ArrayList<Clothing>();
     Context context;
     String file = "wardrobeData";
+
+    // For image buttons
+    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 
 
     @Override
@@ -107,6 +118,11 @@ public class viewOutfit extends Activity {
         Choose outfitChoice = new Choose(wardrobe);
         ArrayList<Clothing> newWardrobe = outfitChoice.viableClothing(formPref, tempPref);
 
+        TextView test = (TextView) findViewById(R.id.view_outfits_greeting);
+        if (newWardrobe.size() == 5) {
+            test.setText("five!");
+        }
+
 
         Clothing currentArticle;
         for (int i = 0; i < newWardrobe.size(); i++) {
@@ -132,6 +148,58 @@ public class viewOutfit extends Activity {
             }
         }
 
+
+        DisplaySuggestion(outfitChoice.RecommendedOutfits(newWardrobe, formPref, tempPref));
+
     }
 
+
+
+    // TODO: change to appropriate icons
+    private ImageButton createImageButton(Clothing currentArticle) {
+        ImageButton button = new ImageButton(this);
+        button.setImageResource(R.drawable.jersey);
+        button.setLayoutParams(params);
+        button.setBackgroundColor(Color.TRANSPARENT);
+        button.setTag(currentArticle.getName());
+
+        return button;
+    }
+
+    private void DisplaySuggestion(ArrayList<Clothing> suggestion) {
+        ImageButton topSuggestion = (ImageButton) findViewById(R.id.topSuggestion);
+        ImageButton bottomSuggestion = (ImageButton) findViewById(R.id.bottomSuggestion);
+        ImageButton shoeSuggestion = (ImageButton) findViewById(R.id.shoeSuggestion);
+
+
+        topSuggestion.setImageResource(R.drawable.jersey);
+        topSuggestion.setOnClickListener(this);
+//        topSuggestion.setLayoutParams(params);
+        topSuggestion.setBackgroundColor(Color.TRANSPARENT);
+        topSuggestion.setTag(suggestion.get(0).getName());
+
+        bottomSuggestion.setImageResource(R.drawable.jersey);
+        bottomSuggestion.setOnClickListener(this);
+//        bottomSuggestion.setLayoutParams(params);
+        bottomSuggestion.setBackgroundColor(Color.TRANSPARENT);
+        bottomSuggestion.setTag(suggestion.get(1).getName());
+
+        shoeSuggestion.setImageResource(R.drawable.jersey);
+        shoeSuggestion.setOnClickListener(this);
+//        shoeSuggestion.setLayoutParams(params);
+        shoeSuggestion.setBackgroundColor(Color.TRANSPARENT);
+        shoeSuggestion.setTag(suggestion.get(2).getName());
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        ImageButton b = (ImageButton) v;
+        PopupMenu popup = new PopupMenu(this, b);
+        popup.getMenu().add("Name: " + b.getTag());
+
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.article_options, popup.getMenu());
+        popup.show();
+    }
 }

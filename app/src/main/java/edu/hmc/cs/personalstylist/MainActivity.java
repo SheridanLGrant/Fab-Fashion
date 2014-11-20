@@ -217,6 +217,7 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
         }
         else {
             for (int i = 0; i < wardrobe.size(); i++) {
+                // we need delete to have the name for this to work smoothly
                 if (clicked.equals(("Delete: " + wardrobe.get(i).getName()))) {
                     deletion = i;
                     removeFlag = true;

@@ -24,11 +24,11 @@
 
     <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="92dp"
+        android:layout_height="100dp"
         android:id="@+id/topScroller"
         android:fillViewport="true"
+        android:layout_below="@+id/welcome_message"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/bottomScroller"
         android:layout_alignParentLeft="true">
 
         <LinearLayout
@@ -43,10 +43,10 @@
 
     <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="93dp"
+        android:layout_height="100dp"
         android:id="@+id/bottomScroller"
+        android:layout_below="@+id/topScroller"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/shoeScroller"
         android:layout_alignParentLeft="true">
 
         <LinearLayout
@@ -61,12 +61,13 @@
 
     <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="97dp"
+        android:layout_height="100dp"
         android:id="@+id/shoeScroller"
-        android:fillViewport="false"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="39dp">
+        android:fillViewport="true"
+        android:layout_below="@+id/bottomScroller"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
 
         <LinearLayout
             android:id="@+id/shoeLayout"
