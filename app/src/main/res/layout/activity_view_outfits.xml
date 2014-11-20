@@ -9,7 +9,7 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:weightSum="1"
     android:id="@+id/view_outfits"
-    android:background="#ffe4fff4">//need to set up ID
+    android:background="#ffe4fff4">
 
 
     <ImageView
@@ -51,7 +51,7 @@
         android:id="@+id/view_outfits_greeting" />
 
 
-    <HorizontalScrollView
+    <edu.hmc.cs.personalstylist.MyScrollView
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:id="@+id/topScrollerChoose"
@@ -68,9 +68,9 @@
 
 
         </LinearLayout>
-    </HorizontalScrollView>
+    </edu.hmc.cs.personalstylist.MyScrollView>
 
-    <HorizontalScrollView
+    <edu.hmc.cs.personalstylist.MyScrollView
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:id="@+id/bottomScrollerChoose"
@@ -86,9 +86,9 @@
 
 
         </LinearLayout>
-    </HorizontalScrollView>
+    </edu.hmc.cs.personalstylist.MyScrollView>
 
-    <HorizontalScrollView
+    <edu.hmc.cs.personalstylist.MyScrollView
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:id="@+id/shoeScrollerChoose"
@@ -105,28 +105,35 @@
 
 
         </LinearLayout>
-    </HorizontalScrollView>
+    </edu.hmc.cs.personalstylist.MyScrollView>
 
-    <ImageButton
+    <LinearLayout
+        android:id="@+id/suggestions"
+        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/topSuggestion"
-        android:layout_below="@+id/shoeScrollerChoose"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/shoeScrollerChoose"></LinearLayout>
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/bottomSuggestion"
-        android:layout_below="@+id/topSuggestion"
-        android:layout_centerHorizontal="true" />
+    <!--<ImageButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/topSuggestion"-->
+        <!--android:layout_below="@+id/shoeScrollerChoose"-->
+        <!--android:layout_centerHorizontal="true" />-->
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/shoeSuggestion"
-        android:layout_below="@+id/bottomSuggestion"
-        android:layout_centerHorizontal="true" />
+    <!--<ImageButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/bottomSuggestion"-->
+        <!--android:layout_below="@+id/topSuggestion"-->
+        <!--android:layout_centerHorizontal="true" />-->
+
+    <!--<ImageButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/shoeSuggestion"-->
+        <!--android:layout_below="@+id/bottomSuggestion"-->
+        <!--android:layout_centerHorizontal="true" />-->
 
 
 </RelativeLayout>
