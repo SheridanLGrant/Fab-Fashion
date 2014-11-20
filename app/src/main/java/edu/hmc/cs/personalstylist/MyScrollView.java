@@ -2,7 +2,10 @@ package edu.hmc.cs.personalstylist;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.View;
 import android.widget.HorizontalScrollView;
+import android.widget.LinearLayout;
 
 /**
  * Created by Max on 11/17/2014.
@@ -52,5 +55,43 @@ public class MyScrollView extends HorizontalScrollView {
 
         initialPosition = getScrollX();
         MyScrollView.this.postDelayed(scrollerTask, newCheck);
+    }
+
+    public void center(LinearLayout myLayout) {
+        // From http://stackoverflow.com/questions/12424373/how-to-scroll-to-center-of-child-of-horizontalscrollview
+        //get the center
+        int center = this.getScrollX() + this.getWidth() / 2;
+        int numChildren = myLayout.getChildCount();
+
+        if (numChildren == 0) {
+            return;
+        }
+
+        View firstChild = myLayout.getChildAt(0);
+        int firstLeft = firstChild.getLeft();
+        int firstWidth = firstChild.getWidth();
+
+        View lastChild = myLayout.getChildAt(numChildren-1);
+        int lastLeft = lastChild.getLeft();
+        int lastWidth = lastChild.getWidth();
+
+        if (center < firstLeft) {
+            this.scrollBy((firstLeft + (firstWidth / 2)) - center, 0);
+        }
+        else if (center > lastLeft + lastWidth) {
+            this.scrollBy((lastLeft + (lastWidth / 2)) - center, 0);
+        }
+        else {
+            for (int i = 0; i < numChildren; i++) {
+                View v = myLayout.getChildAt(i);
+                int viewLeft = v.getLeft();
+                int viewWidth = v.getWidth();
+
+                if (center >= viewLeft && center <= viewLeft + viewWidth) {
+                    this.scrollBy((viewLeft + viewWidth / 2) - center, 0);
+                    break;
+                }
+            }
+        }
     }
 }
