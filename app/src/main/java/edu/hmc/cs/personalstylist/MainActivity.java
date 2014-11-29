@@ -458,7 +458,7 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
     private void initializeScrollViews() {
         MyScrollView topScroller = (MyScrollView) findViewById(R.id.topScroller);
         MyScrollView bottomScroller = (MyScrollView) findViewById(R.id.bottomScroller);
-        final MyScrollView shoeScroller = (MyScrollView) findViewById(R.id.shoeScroller);
+        final MyScrollView shoeScroller = (MyScrollView) findViewById(R.id.shoeScroller); // TODO: WHY IS THIS FINAL?
 
         LinearLayout topLayout = (LinearLayout) findViewById(R.id.topLayout);
         LinearLayout bottomLayout = (LinearLayout) findViewById(R.id.bottomLayout);
@@ -513,11 +513,8 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
-        else if (id == R.id.action_enter_article) {
+        if (id == R.id.action_enter_article) {
             Intent enterArticle = new Intent(this, EnterArticle.class);
             startActivity(enterArticle);
         } else if (id == R.id.action_choose_outfit) {
@@ -529,7 +526,7 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
 
 
 
-    // TODO: need to get article info in this function to display info properly
+    // TODO: need to get article info in this function to display info properly and not need name to delete
     @Override
     public void onClick(View v) {
         ImageButton b = (ImageButton) v;

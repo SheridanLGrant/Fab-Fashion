@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".viewOutfit" >
+
+    <item android:id="@+id/action_return_to_wardrobe"
+        android:title="@string/return_to_wardrobe"
+        android:icon="@drawable/ic_action_back"
+        android:showAsAction="always"
+        />
+</menu>

@@ -135,9 +135,6 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -192,7 +189,7 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
         clothingTemperature = (String) temperature.getText();
 
         // Check that the user entered valid data
-        if (articleName == "" || clothingType == "") {
+        if ("".equals(articleName) || "".equals(clothingTemperature)) {
             quitWithoutSaving();
         }
 
@@ -208,6 +205,12 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
 
         Clothing article = new Clothing(articleName, clothingType, clothingColor, clothingFormality, clothingTemperature);
 
+//        for (int i = 0; i < wardrobe.size(); i++) {
+//            if (wardrobe.get(i).getName().equals(articleName)) {
+//                sameName();
+//            }
+//        }
+
         wardrobe.add(article);
         String wardrobeName = gson.toJson(wardrobe, clothingList);
 
@@ -215,12 +218,27 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
         storeWardrobeData(wardrobeName);
 
         startActivity(returnToMain);
+        this.finish();
     }
 
     // Called if the user does not enter a valid name or clothing type
     private void quitWithoutSaving() {
         Context context = getApplicationContext();
         CharSequence message = "Article not saved: please enter a valid name and clothing type";
+        int duration = Toast.LENGTH_LONG;
+
+        Toast toast = Toast.makeText(context, message, duration);
+        toast.show();
+
+        Intent retryEntry = new Intent(this, EnterArticle.class);
+        startActivity(retryEntry);
+    }
+
+
+    // Called if the user enters an article name that is already present
+    private void sameName() {
+        Context context = getApplicationContext();
+        CharSequence message = "Article name already in wardrobe";
         int duration = Toast.LENGTH_LONG;
 
         Toast toast = Toast.makeText(context, message, duration);

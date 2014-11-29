@@ -57,9 +57,6 @@ public class ChooseOutfit extends Activity implements PopupMenu.OnMenuItemClickL
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -88,6 +85,7 @@ public class ChooseOutfit extends Activity implements PopupMenu.OnMenuItemClickL
         outfitChoose.putExtra(CLOTHING_FORMALITY, formPref);
         outfitChoose.putExtra(CLOTHING_TEMPERATURE, tempPref);
         startActivity(outfitChoose);
+        this.finish();
     }
 
     @Override

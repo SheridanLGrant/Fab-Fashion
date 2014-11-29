@@ -9,6 +9,7 @@ import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -243,8 +244,10 @@ public class viewOutfit extends Activity implements View.OnClickListener {
             else if (PINK.equals(color)) {
                 button.setImageResource(R.drawable.longsleeveshirt_pink);
             }
-            else { // BROWN
+            else if (BROWN.equals(color)) {
                 button.setImageResource(R.drawable.longsleeveshirt_brown);
+            } else {
+                button.setImageResource(R.drawable.ic_action_help);
             }
         }
         else if (SHORT_SLEEVE_SHIRT.equals(type)) {
@@ -275,8 +278,10 @@ public class viewOutfit extends Activity implements View.OnClickListener {
             else if (PINK.equals(color)) {
                 button.setImageResource(R.drawable.shortsleeveshirt_pink);
             }
-            else { // BROWN
+            else if (BROWN.equals(color)) {
                 button.setImageResource(R.drawable.shortsleeveshirt_brown);
+            } else {
+                button.setImageResource(R.drawable.ic_action_help);
             }
         }
         else if (SLEEVELESS_SHIRT.equals(type)) {
@@ -307,8 +312,10 @@ public class viewOutfit extends Activity implements View.OnClickListener {
             else if (PINK.equals(color)) {
                 button.setImageResource(R.drawable.sleevelessshirt_pink);
             }
-            else { // BROWN
+            else if (BROWN.equals(color)) {
                 button.setImageResource(R.drawable.sleevelessshirt_brown);
+            } else {
+                button.setImageResource(R.drawable.ic_action_help);
             }
         }
         else if (PANTS.equals(type)) {
@@ -339,8 +346,10 @@ public class viewOutfit extends Activity implements View.OnClickListener {
             else if (PINK.equals(color)) {
                 button.setImageResource(R.drawable.longpants_pink);
             }
-            else { // BROWN
+            else if (BROWN.equals(color)) {
                 button.setImageResource(R.drawable.longpants_brown);
+            } else {
+                button.setImageResource(R.drawable.ic_action_help);
             }
         }
         else if (SHORTS.equals(type)) {
@@ -371,8 +380,10 @@ public class viewOutfit extends Activity implements View.OnClickListener {
             else if (PINK.equals(color)) {
                 button.setImageResource(R.drawable.shortpants_pink);
             }
-            else { // BROWN
+            else if (BROWN.equals(color)) {
                 button.setImageResource(R.drawable.shortpants_brown);
+            } else {
+                button.setImageResource(R.drawable.ic_action_help);
             }
         }
         else if (SKIRT.equals(type)) {
@@ -403,8 +414,10 @@ public class viewOutfit extends Activity implements View.OnClickListener {
             else if (PINK.equals(color)) {
                 button.setImageResource(R.drawable.skirtpants_pink);
             }
-            else { // BROWN
+            else if (BROWN.equals(color)) {
                 button.setImageResource(R.drawable.skirtpants_brown);
+            } else {
+                button.setImageResource(R.drawable.ic_action_help);
             }
         }
         else if (DRESS_SHOES.equals(type)) {
@@ -435,8 +448,10 @@ public class viewOutfit extends Activity implements View.OnClickListener {
             else if (PINK.equals(color)) {
                 button.setImageResource(R.drawable.dressshoes_pink);
             }
-            else { // BROWN
+            else if (BROWN.equals(color)) {
                 button.setImageResource(R.drawable.dressshoes_brown);
+            } else {
+                button.setImageResource(R.drawable.ic_action_help);
             }
         }
         else if (TENNIS_SHOES.equals(type)) {
@@ -467,8 +482,10 @@ public class viewOutfit extends Activity implements View.OnClickListener {
             else if (PINK.equals(color)) {
                 button.setImageResource(R.drawable.tennisshoes_pink);
             }
-            else { // BROWN
+            else if (BROWN.equals(color)) {
                 button.setImageResource(R.drawable.tennisshoes_brown);
+            } else {
+                button.setImageResource(R.drawable.ic_action_help);
             }
         }
         else { // SANDALS
@@ -499,8 +516,10 @@ public class viewOutfit extends Activity implements View.OnClickListener {
             else if (PINK.equals(color)) {
                 button.setImageResource(R.drawable.sandalshoes_pink);
             }
-            else { // BROWN
+            else if (BROWN.equals(color)) {
                 button.setImageResource(R.drawable.sandalshoes_brown);
+            } else {
+                button.setImageResource(R.drawable.ic_action_help);
             }
         }
 
@@ -511,6 +530,31 @@ public class viewOutfit extends Activity implements View.OnClickListener {
 
         return button;
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.view_outfit, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        if (id == R.id.action_return_to_wardrobe) {
+            Intent backToWardrobe = new Intent(this, MainActivity.class);
+            startActivity(backToWardrobe);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     private void DisplaySuggestion(ArrayList<Clothing> suggestion) {
 
