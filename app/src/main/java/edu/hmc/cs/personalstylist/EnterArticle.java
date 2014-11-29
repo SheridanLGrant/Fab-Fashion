@@ -191,6 +191,7 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
         // Check that the user entered valid data
         if ("".equals(articleName) || "".equals(clothingTemperature)) {
             quitWithoutSaving();
+            return;
         }
 
         Intent returnToMain = new Intent(this, MainActivity.class);
@@ -205,11 +206,12 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
 
         Clothing article = new Clothing(articleName, clothingType, clothingColor, clothingFormality, clothingTemperature);
 
-//        for (int i = 0; i < wardrobe.size(); i++) {
-//            if (wardrobe.get(i).getName().equals(articleName)) {
-//                sameName();
-//            }
-//        }
+        for (int i = 0; i < wardrobe.size(); i++) {
+            if (wardrobe.get(i).getName().equals(articleName)) {
+                sameName();
+                return;
+            }
+        }
 
         wardrobe.add(article);
         String wardrobeName = gson.toJson(wardrobe, clothingList);
@@ -232,6 +234,7 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
 
         Intent retryEntry = new Intent(this, EnterArticle.class);
         startActivity(retryEntry);
+        this.finish();
     }
 
 
@@ -246,6 +249,7 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
 
         Intent retryEntry = new Intent(this, EnterArticle.class);
         startActivity(retryEntry);
+        this.finish();
     }
 
 

@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -76,12 +77,34 @@ public class ChooseOutfit extends Activity implements PopupMenu.OnMenuItemClickL
         popup.show();
     }
 
+
+    // Called if the user does not enter a valid name or clothing type
+    private void noInput() {
+        Context context = getApplicationContext();
+        CharSequence message = "No preferences entered";
+        int duration = Toast.LENGTH_LONG;
+
+        Toast toast = Toast.makeText(context, message, duration);
+        toast.show();
+
+        Intent retry = new Intent(this, ChooseOutfit.class);
+        startActivity(retry);
+        this.finish();
+    }
+
+
     public void moveToOutfitView(View v){
         Intent outfitChoose = new Intent(this, viewOutfit.class);
         TextView tempText = (TextView) findViewById(R.id.choose_selected_temperature);
         String tempPref = (String) tempText.getText();
         TextView formText = (TextView) findViewById(R.id.choose_selected_formality);
         String formPref = (String) formText.getText();
+
+        if ("".equals(formPref) && "".equals(tempPref)) {
+            noInput();
+            return;
+        }
+
         outfitChoose.putExtra(CLOTHING_FORMALITY, formPref);
         outfitChoose.putExtra(CLOTHING_TEMPERATURE, tempPref);
         startActivity(outfitChoose);

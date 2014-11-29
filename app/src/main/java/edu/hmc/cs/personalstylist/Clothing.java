@@ -48,7 +48,7 @@ public class Clothing {
 
     public Clothing(String givenType) {
         this.type = givenType;
-        this.name = "test";
+        this.name = "No recommended clothing";
     }
 
     public String getType() {
