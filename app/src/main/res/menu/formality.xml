@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="@string/recreational"/>
     <item android:title="@string/casual"/>
     <item android:title="@string/formal"/>
-    <item android:title="@string/business"/>
-    <item android:title="@string/beach"/>
 </menu>

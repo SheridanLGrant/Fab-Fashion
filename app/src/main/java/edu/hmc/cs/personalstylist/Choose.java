@@ -48,9 +48,8 @@ public class Choose {
     public final static ArrayList<String> COLORS = new ArrayList<String>();
 
     public final static String CASUAL = "Casual";
-    public final static String BUSINESS = "Business";
+    public final static String RECREATIONAL = "Recreational";
     public final static String FORMAL = "Formal";
-    public final static String BEACH = "Beach";
     public final static ArrayList<String> FORMALITIES = new ArrayList<String>();
 
     public final static String HOT = "Hot";
@@ -110,8 +109,60 @@ public class Choose {
     }
 
 
-    public ArrayList<Clothing> RecommendedOutfits(ArrayList<Clothing> newWardrobe, String formPref, String tempPref) {
+    public ArrayList<String> badColors() {
+        ArrayList<String> badColors = new ArrayList<String>();
 
+        badColors.add(RED + RED);
+        badColors.add(YELLOW + YELLOW);
+        badColors.add(GREEN + GREEN);
+        badColors.add(PURPLE + PURPLE);
+        badColors.add(ORANGE + ORANGE);
+        badColors.add(WHITE + WHITE);
+        badColors.add(PINK + PINK);
+        badColors.add(BROWN + BROWN);
+
+        badColors.add(RED + ORANGE);
+        badColors.add(RED + YELLOW);
+        badColors.add(RED + GREEN);
+        badColors.add(RED + PINK);
+        badColors.add(RED + BROWN);
+        badColors.add(ORANGE + RED);
+        badColors.add(YELLOW + RED);
+        badColors.add(GREEN + RED);
+        badColors.add(PINK + RED);
+        badColors.add(BROWN + RED);
+
+        badColors.add(YELLOW + ORANGE);
+        badColors.add(YELLOW + WHITE);
+        badColors.add(YELLOW + BROWN);
+        badColors.add(ORANGE + YELLOW);
+        badColors.add(WHITE + YELLOW);
+        badColors.add(BROWN + YELLOW);
+
+        badColors.add(GREEN + ORANGE);
+        badColors.add(ORANGE + GREEN);
+
+        badColors.add(PURPLE + ORANGE);
+        badColors.add(PURPLE + PINK);
+        badColors.add(PURPLE + BROWN);
+        badColors.add(ORANGE + PURPLE);
+        badColors.add(PINK + PURPLE);
+        badColors.add(BROWN + PURPLE);
+
+        badColors.add(ORANGE + PINK);
+        badColors.add(PINK + ORANGE);
+
+        badColors.add(BLACK + BROWN);
+        badColors.add(BROWN + BLACK);
+
+        badColors.add(PINK + BROWN);
+        badColors.add(BROWN + PINK);
+
+        return badColors;
+    }
+
+    // TODO: public and private methods
+    public void parameterArrays() {
         // Build paramter arrays
         TOPS.add(LONG_SLEEVE_SHIRT);
         TOPS.add(SHORT_SLEEVE_SHIRT);
@@ -146,12 +197,67 @@ public class Choose {
 
         FORMALITIES.add(CASUAL);
         FORMALITIES.add(FORMAL);
-        FORMALITIES.add(BUSINESS);
-        FORMALITIES.add(BEACH);
+        FORMALITIES.add(RECREATIONAL);
 
         TEMPERATURES.add(HOT);
         TEMPERATURES.add(COLD);
         TEMPERATURES.add(MILD);
+    }
+
+
+    public  ArrayList<Clothing> pickOutfit(ArrayList<Clothing> suggestedTops,
+                                           ArrayList<Clothing> suggestedBottoms,
+                                           ArrayList<Clothing> suggestedShoes) {
+
+        ArrayList<Clothing> outfit = new ArrayList<Clothing>();
+        Clothing shoe = new Clothing(UNKNOWN_SHOE);
+        Clothing bottom = new Clothing(UNKNOWN_BOTTOM);
+        Clothing top = new Clothing(UNKNOWN_TOP);
+
+        if (suggestedShoes.size() > 0) {
+            Random random = new Random();
+            int randomNumber = random.nextInt(suggestedShoes.size());
+            shoe = suggestedShoes.get(randomNumber);
+        }
+
+
+        for (int i = 0; i < suggestedTops.size(); i++) {
+            for (int j =0; j < suggestedBottoms.size(); j++) {
+                String colorCombo = suggestedTops.get(i).getColor() +
+                        suggestedBottoms.get(j).getColor();
+
+                boolean goodFlag = true;
+                ArrayList<String> badColors = badColors();
+                for (int k = 0; k < badColors.size(); k++) {
+                    if (badColors.get(k).equals(colorCombo)) {
+                        goodFlag = false;
+                        break;
+                    }
+                }
+
+                if (goodFlag) {
+                    top = suggestedTops.get(i);
+                    bottom = suggestedBottoms.get(j);
+
+                    outfit.add(top);
+                    outfit.add(bottom);
+                    outfit.add(shoe);
+
+                    return outfit;
+                }
+
+            }
+        }
+        outfit.add(top);
+        outfit.add(bottom);
+        outfit.add(shoe);
+        return outfit;
+    }
+
+
+    public ArrayList<Clothing> RecommendedOutfits(ArrayList<Clothing> newWardrobe, String formPref, String tempPref) {
+
+        parameterArrays();
 
         ArrayList<Clothing> outfit = new ArrayList<Clothing>();
 
@@ -159,10 +265,11 @@ public class Choose {
         ArrayList<Clothing> bottomsPossible = new ArrayList<Clothing>();
         ArrayList<Clothing> shoesPossible = new ArrayList<Clothing>();
 
-        Clothing top = new Clothing(UNKNOWN_TOP);
-        Clothing bottom = new Clothing(UNKNOWN_BOTTOM);
-        Clothing shoe = new Clothing(UNKNOWN_SHOE);
+        Clothing blankTop = new Clothing(UNKNOWN_TOP);
+        Clothing blankBottom = new Clothing(UNKNOWN_BOTTOM);
+        Clothing blankShoe = new Clothing(UNKNOWN_SHOE);
 
+        // divide clothes into tops, bottoms, shoes
         for (int i = 0; i < newWardrobe.size(); i++) {
             if (TOPS.contains(newWardrobe.get(i).getType())) {
                 topsPossible.add(newWardrobe.get(i));
@@ -173,82 +280,328 @@ public class Choose {
             }
         }
 
+        ArrayList<Clothing> suggestedTops = new ArrayList<Clothing>();
+        ArrayList<Clothing> suggestedBottoms = new ArrayList<Clothing>();
+        ArrayList<Clothing> suggestedShoes = new ArrayList<Clothing>();
 
-        if (CASUAL.equals(formPref) && HOT.equals(tempPref)) {
-
-            for (int i1 = 0; i1 < topsPossible.size(); i1++) {
-                if (SLEEVELESS_SHIRT.equals(topsPossible.get(i1).getType())) {
-                    top = topsPossible.get(i1);
-                    break;
-                }
-            }
-
-            for (int i2 = 0; i2 < bottomsPossible.size(); i2++) {
-                if (SHORTS.equals(bottomsPossible.get(i2).getType())) {
-                    bottom = bottomsPossible.get(i2);
-                    break;
-                }
-            }
-
-            for (int i3 = 0; i3 < shoesPossible.size(); i3++) {
-                if (SANDALS.equals(shoesPossible.get(i3).getType())) {
-                    shoe = shoesPossible.get(i3);
-                    break;
-                }
-            }
-        } else if (CASUAL.equals(formPref) && MILD.equals(tempPref)) {
-
+        if (RECREATIONAL.equals(formPref) && HOT.equals(tempPref)) {
             for (int i = 0; i < topsPossible.size(); i++) {
-                if (SHORT_SLEEVE_SHIRT.equals(topsPossible.get(i).getType())) {
-                    top = topsPossible.get(i);
-                    break;
+                if (SLEEVELESS_SHIRT.equals(topsPossible.get(i).getType()) ||
+                        SHORT_SLEEVE_SHIRT.equals(topsPossible.get(i).getType())) {
+                    suggestedTops.add(topsPossible.get(i));
                 }
             }
 
             for (int i = 0; i < bottomsPossible.size(); i++) {
-                if (SHORTS.equals(bottomsPossible.get(i).getType())) {
-                    bottom = bottomsPossible.get(i);
-                    break;
+                if (SHORTS.equals(bottomsPossible.get(i).getType()) ||
+                        SKIRT.equals(bottomsPossible.get(i).getType())) {
+                    suggestedBottoms.add(bottomsPossible.get(i));
+                }
+            }
+
+            for (int i = 0; i < shoesPossible.size(); i++) {
+                if (SANDALS.equals(shoesPossible.get(i).getType()) ||
+                        TENNIS_SHOES.equals(shoesPossible.get(i).getType())) {
+                    suggestedShoes.add(shoesPossible.get(i));
+                }
+            }
+
+            outfit = pickOutfit(suggestedTops, suggestedBottoms, suggestedShoes);
+
+        } else if (RECREATIONAL.equals(formPref) && MILD.equals(tempPref)) {
+
+            for (int i = 0; i < topsPossible.size(); i++) {
+                if (SHORT_SLEEVE_SHIRT.equals(topsPossible.get(i).getType())) {
+                    suggestedTops.add(topsPossible.get(i));
+                }
+            }
+
+            for (int i = 0; i < bottomsPossible.size(); i++) {
+                if (SHORTS.equals(bottomsPossible.get(i).getType())||
+                        SKIRT.equals(bottomsPossible.get(i).getType())) {
+                    suggestedBottoms.add(bottomsPossible.get(i));
                 }
             }
 
             for (int i = 0; i < shoesPossible.size(); i++) {
                 if (TENNIS_SHOES.equals(shoesPossible.get(i).getType())) {
-                    shoe = shoesPossible.get(i);
-                    break;
+                    suggestedShoes.add(shoesPossible.get(i));
                 }
             }
-        } else if (BUSINESS.equals(formPref) || FORMAL.equals(formPref)) {
+
+            outfit = pickOutfit(suggestedTops, suggestedBottoms, suggestedShoes);
+
+        } else if (RECREATIONAL.equals(formPref) && COLD.equals(tempPref)) {
 
             for (int i = 0; i < topsPossible.size(); i++) {
                 if (LONG_SLEEVE_SHIRT.equals(topsPossible.get(i).getType())) {
-                    top = topsPossible.get(i);
-                    break;
+                    suggestedTops.add(topsPossible.get(i));
                 }
             }
 
             for (int i = 0; i < bottomsPossible.size(); i++) {
                 if (PANTS.equals(bottomsPossible.get(i).getType())) {
-                    bottom = bottomsPossible.get(i);
-                    break;
+                    suggestedBottoms.add(bottomsPossible.get(i));
+                }
+            }
+
+            for (int i = 0; i < shoesPossible.size(); i++) {
+                if (TENNIS_SHOES.equals(shoesPossible.get(i).getType())) {
+                    suggestedShoes.add(shoesPossible.get(i));
+                }
+            }
+
+            outfit = pickOutfit(suggestedTops, suggestedBottoms, suggestedShoes);
+
+        } else if (CASUAL.equals(formPref) && HOT.equals(tempPref)) {
+
+            for (int i = 0; i < topsPossible.size(); i++) {
+                if (SHORT_SLEEVE_SHIRT.equals(topsPossible.get(i).getType())) {
+                    suggestedTops.add(topsPossible.get(i));
+                }
+            }
+
+            for (int i = 0; i < bottomsPossible.size(); i++) {
+                if (SHORTS.equals(bottomsPossible.get(i).getType())) {
+                    suggestedBottoms.add(bottomsPossible.get(i));
+                }
+            }
+
+            for (int i = 0; i < shoesPossible.size(); i++) {
+                if (TENNIS_SHOES.equals(shoesPossible.get(i).getType())) {
+                    suggestedShoes.add(shoesPossible.get(i));
+                }
+            }
+
+            outfit = pickOutfit(suggestedTops, suggestedBottoms, suggestedShoes);
+
+        } else if (CASUAL.equals(formPref) && MILD.equals(tempPref)) {
+
+            for (int i = 0; i < topsPossible.size(); i++) {
+                if (SHORT_SLEEVE_SHIRT.equals(topsPossible.get(i).getType()) ||
+                        LONG_SLEEVE_SHIRT.equals(topsPossible.get(i).getType())) {
+                    suggestedTops.add(topsPossible.get(i));
+                }
+            }
+
+            for (int i = 0; i < bottomsPossible.size(); i++) {
+                if (SHORTS.equals(bottomsPossible.get(i).getType()) ||
+                        PANTS.equals(bottomsPossible.get(i).getType())) {
+                    suggestedBottoms.add(bottomsPossible.get(i));
+                }
+            }
+
+            for (int i = 0; i < shoesPossible.size(); i++) {
+                if (TENNIS_SHOES.equals(shoesPossible.get(i).getType())) {
+                    suggestedShoes.add(shoesPossible.get(i));
+                }
+            }
+
+            outfit = pickOutfit(suggestedTops, suggestedBottoms, suggestedShoes);
+
+        } else if (CASUAL.equals(formPref) && COLD.equals(tempPref)) {
+
+            for (int i = 0; i < topsPossible.size(); i++) {
+                if (LONG_SLEEVE_SHIRT.equals(topsPossible.get(i).getType())) {
+                    suggestedTops.add(topsPossible.get(i));
+                }
+            }
+
+            for (int i = 0; i < bottomsPossible.size(); i++) {
+                if (PANTS.equals(bottomsPossible.get(i).getType())) {
+                    suggestedBottoms.add(bottomsPossible.get(i));
+                }
+            }
+
+            for (int i = 0; i < shoesPossible.size(); i++) {
+                if (TENNIS_SHOES.equals(shoesPossible.get(i).getType()) ||
+                        DRESS_SHOES.equals(shoesPossible.get(i).getType())) {
+                    suggestedShoes.add(shoesPossible.get(i));
+                }
+            }
+
+            outfit = pickOutfit(suggestedTops, suggestedBottoms, suggestedShoes);
+
+        } else if (FORMAL.equals(formPref)) {
+
+            for (int i = 0; i < topsPossible.size(); i++) {
+                if (LONG_SLEEVE_SHIRT.equals(topsPossible.get(i).getType())) {
+                    suggestedTops.add(topsPossible.get(i));
+                }
+            }
+
+            for (int i = 0; i < bottomsPossible.size(); i++) {
+                if (PANTS.equals(bottomsPossible.get(i).getType())) {
+                    suggestedBottoms.add(bottomsPossible.get(i));
                 }
             }
 
             for (int i = 0; i < shoesPossible.size(); i++) {
                 if (DRESS_SHOES.equals(shoesPossible.get(i).getType())) {
-                    shoe = shoesPossible.get(i);
-                    break;
+                    suggestedShoes.add(shoesPossible.get(i));
                 }
             }
+
+            outfit = pickOutfit(suggestedTops, suggestedBottoms, suggestedShoes);
+
+        } else if (RECREATIONAL.equals(formPref)) {
+
+            for (int i = 0; i < topsPossible.size(); i++) {
+                suggestedTops.add(topsPossible.get(i));
+            }
+
+            for (int i = 0; i < bottomsPossible.size(); i++) {
+                suggestedBottoms.add(bottomsPossible.get(i));
+            }
+
+            for (int i = 0; i < shoesPossible.size(); i++) {
+                if (TENNIS_SHOES.equals(shoesPossible.get(i).getType())) {
+                    suggestedShoes.add(shoesPossible.get(i));
+                }
+            }
+
+            outfit = pickOutfit(suggestedTops, suggestedBottoms, suggestedShoes);
+
+        } else if (CASUAL.equals(formPref)) {
+
+            for (int i = 0; i < topsPossible.size(); i++) {
+                if (LONG_SLEEVE_SHIRT.equals(topsPossible.get(i).getType()) ||
+                        SHORT_SLEEVE_SHIRT.equals(topsPossible.get(i).getType())) {
+                    suggestedTops.add(topsPossible.get(i));
+                }
+            }
+
+            for (int i = 0; i < bottomsPossible.size(); i++) {
+                if (PANTS.equals(bottomsPossible.get(i).getType()) ||
+                        SHORTS.equals(bottomsPossible.get(i).getType())) {
+                    suggestedBottoms.add(bottomsPossible.get(i));
+                }
+            }
+
+            for (int i = 0; i < shoesPossible.size(); i++) {
+                if (DRESS_SHOES.equals(shoesPossible.get(i).getType()) ||
+                        TENNIS_SHOES.equals(shoesPossible.get(i).getType())) {
+                    suggestedShoes.add(shoesPossible.get(i));
+                }
+            }
+
+            outfit = pickOutfit(suggestedTops, suggestedBottoms, suggestedShoes);
+
+        } else if (HOT.equals(tempPref)) {
+
+            for (int i = 0; i < topsPossible.size(); i++) {
+                if ((SLEEVELESS_SHIRT.equals(topsPossible.get(i).getType()) ||
+                        SHORT_SLEEVE_SHIRT.equals(topsPossible.get(i).getType())) &&
+                        (RECREATIONAL.equals(topsPossible.get(i).getFormality()) ||
+                                CASUAL.equals(topsPossible.get(i).getFormality()))) {
+                    suggestedTops.add(topsPossible.get(i));
+                }
+            }
+
+            for (int i = 0; i < bottomsPossible.size(); i++) {
+                if (RECREATIONAL.equals(bottomsPossible.get(i).getFormality()) ||
+                                CASUAL.equals(bottomsPossible.get(i).getFormality())) {
+                    suggestedBottoms.add(bottomsPossible.get(i));
+                }
+            }
+
+            for (int i = 0; i < shoesPossible.size(); i++) {
+                if ((SANDALS.equals(shoesPossible.get(i).getType()) ||
+                        TENNIS_SHOES.equals(shoesPossible.get(i).getType())) &&
+                        (RECREATIONAL.equals(topsPossible.get(i).getFormality()) ||
+                                CASUAL.equals(topsPossible.get(i).getFormality()))) {
+                    suggestedShoes.add(shoesPossible.get(i));
+                }
+            }
+
+            outfit = pickOutfit(suggestedTops, suggestedBottoms, suggestedShoes);
+
+        } else if (MILD.equals(tempPref)) {
+
+            for (int i = 0; i < topsPossible.size(); i++) {
+                if ((LONG_SLEEVE_SHIRT.equals(topsPossible.get(i).getType()) ||
+                        SHORT_SLEEVE_SHIRT.equals(topsPossible.get(i).getType())) &&
+                        (RECREATIONAL.equals(topsPossible.get(i).getFormality()) ||
+                                CASUAL.equals(topsPossible.get(i).getFormality()))) {
+                    suggestedTops.add(topsPossible.get(i));
+                }
+            }
+
+            for (int i = 0; i < bottomsPossible.size(); i++) {
+                if (RECREATIONAL.equals(bottomsPossible.get(i).getFormality()) ||
+                        CASUAL.equals(bottomsPossible.get(i).getFormality())) {
+                    suggestedBottoms.add(bottomsPossible.get(i));
+                }
+            }
+
+            for (int i = 0; i < shoesPossible.size(); i++) {
+                if (TENNIS_SHOES.equals(shoesPossible.get(i).getType()) &&
+                        (RECREATIONAL.equals(topsPossible.get(i).getFormality()) ||
+                                CASUAL.equals(topsPossible.get(i).getFormality()))) {
+                    suggestedShoes.add(shoesPossible.get(i));
+                }
+            }
+
+            outfit = pickOutfit(suggestedTops, suggestedBottoms, suggestedShoes);
+
+        } else if (COLD.equals(tempPref)) {
+
+            for (int i = 0; i < topsPossible.size(); i++) {
+                if (LONG_SLEEVE_SHIRT.equals(topsPossible.get(i).getType()) &&
+                        (RECREATIONAL.equals(topsPossible.get(i).getFormality()) ||
+                                CASUAL.equals(topsPossible.get(i).getFormality()))) {
+                    suggestedTops.add(topsPossible.get(i));
+                }
+            }
+
+            for (int i = 0; i < bottomsPossible.size(); i++) {
+                if (PANTS.equals(topsPossible.get(i).getType()) &&
+                        (RECREATIONAL.equals(bottomsPossible.get(i).getFormality()) ||
+                        CASUAL.equals(bottomsPossible.get(i).getFormality()))) {
+                    suggestedBottoms.add(bottomsPossible.get(i));
+                }
+            }
+
+            for (int i = 0; i < shoesPossible.size(); i++) {
+                if (TENNIS_SHOES.equals(shoesPossible.get(i).getType()) &&
+                        (RECREATIONAL.equals(topsPossible.get(i).getFormality()) ||
+                                CASUAL.equals(topsPossible.get(i).getFormality()))) {
+                    suggestedShoes.add(shoesPossible.get(i));
+                }
+            }
+
+            outfit = pickOutfit(suggestedTops, suggestedBottoms, suggestedShoes);
+
         }
 
-        outfit.add(top);
-        outfit.add(bottom);
-        outfit.add(shoe);
 
 
 
         return outfit;
+    }
+
+
+
+    public int judgeOutfit(ArrayList<Clothing> outfit) {
+        Clothing top = outfit.get(0);
+        Clothing bottom = outfit.get(1);
+        Clothing shoe = outfit.get(2);
+
+        String topType = top.getType();
+        String bottomType = bottom.getType();
+        String shoeType = shoe.getType();
+
+        if ((shoeType.equals(SANDALS) && bottomType.equals(PANTS)) ||
+                (topType.equals(SLEEVELESS_SHIRT) && bottomType.equals(PANTS)) ||
+                (shoeType.equals(DRESS_SHOES) && bottomType.equals(SHORTS)) ||
+                (shoeType.equals(TENNIS_SHOES) && bottomType.equals(SKIRT)) ||
+                (shoeType.equals(DRESS_SHOES) && topType.equals(SLEEVELESS_SHIRT)) ||
+                (shoeType.equals(DRESS_SHOES) && topType.equals(SHORT_SLEEVE_SHIRT)) ||
+                (bottomType.equals(PANTS) && topType.equals(SLEEVELESS_SHIRT))) {
+
+            return 0;
+        }
+        return 1;
     }
 
 
@@ -260,29 +613,6 @@ public class Choose {
 
 
 
-
-
-
-        /**
-         * Eliminates non-viable clothing from list of bottoms, returns remaining list
-         *
-         * @param  articleList, formalityPref, weatherPref
-         * @return ArrayList of viableBottoms
-         */
-
-
-//    public static ArrayList removeBottomsItems(ArrayList articleList, Wardrobe.ClothingFormality formalityPref, Wardrobe.ClothingTemperature weatherPref) {
-//        ArrayList viableBottoms = null;
-//        for (int i = 0; i < articleList.size(); ++i) {
-//            Wardrobe.Clothing clothingArticle = (Wardrobe.Clothing) articleList.get(i);
-//            if (clothingArticle.type == Wardrobe.ClothingType.PANTS && clothingArticle.formality == formalityPref &&
-//                    clothingArticle.temperature == weatherPref) {
-//                viableBottoms.add(clothingArticle);
-//            }
-//        }
-//            return viableBottoms;
-//
-//    }
 
 
         /**

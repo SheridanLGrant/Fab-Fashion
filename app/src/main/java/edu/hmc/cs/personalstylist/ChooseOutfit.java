@@ -21,9 +21,8 @@ public class ChooseOutfit extends Activity implements PopupMenu.OnMenuItemClickL
     public final static String CLOTHING_TEMPERATURE = "edu.hmc.cs.personalstylist.clothingTemperature";
 
     public final static String CASUAL = "Casual";
-    public final static String BUSINESS = "Business";
     public final static String FORMAL = "Formal";
-    public final static String BEACH = "Beach";
+    public final static String RECREATIONAL = "Recreational";
     public final static ArrayList<String> FORMALITIES = new ArrayList<String>();
 
     public final static String HOT = "Hot";
@@ -31,11 +30,6 @@ public class ChooseOutfit extends Activity implements PopupMenu.OnMenuItemClickL
     public final static String MILD = "Mild";
     public final static ArrayList<String> TEMPERATURES = new ArrayList<String>();
 
-    String clothingFormality;
-    String clothingTemperature;
-
-    Context context;
-    String file;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -44,8 +38,7 @@ public class ChooseOutfit extends Activity implements PopupMenu.OnMenuItemClickL
         // Populate ArrayLists
         FORMALITIES.add(CASUAL);
         FORMALITIES.add(FORMAL);
-        FORMALITIES.add(BUSINESS);
-        FORMALITIES.add(BEACH);
+        FORMALITIES.add(RECREATIONAL);
 
         TEMPERATURES.add(HOT);
         TEMPERATURES.add(COLD);
@@ -57,7 +50,6 @@ public class ChooseOutfit extends Activity implements PopupMenu.OnMenuItemClickL
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
         return super.onOptionsItemSelected(item);
     }
 

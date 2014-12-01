@@ -5,30 +5,17 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import android.app.Activity;
-import android.os.Bundle;
 import android.view.View;
-import android.widget.BaseExpandableListAdapter;
 import android.widget.EditText;
-import android.widget.ExpandableListAdapter;
-import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnChildClickListener;
-import android.widget.ExpandableListView.OnGroupClickListener;
-import android.widget.ExpandableListView.OnGroupCollapseListener;
-import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,8 +30,6 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
     public final static String ARTICLE_NAME = "edu.hmc.cs.personalstylist.articleName";
     public final static String CLOTHING_TYPE = "edu.hmc.cs.personalstylist.clothingType";
     public final static String CLOTHING_COLOR = "edu.hmc.cs.personalstylist.clothingColor";
-    public final static String CLOTHING_FORMALITY = "edu.hmc.cs.personalstylist.clothingFormality";
-    public final static String CLOTHING_TEMPERATURE = "edu.hmc.cs.personalstylist.clothingTemperature";
 
     public final static String LONG_SLEEVE_SHIRT = "Long-sleeve shirt";
     public final static String SHORT_SLEEVE_SHIRT = "Short-sleeve shirt";
@@ -70,9 +55,8 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
     public final static ArrayList<String> COLORS = new ArrayList<String>();
 
     public final static String CASUAL = "Casual";
-    public final static String BUSINESS = "Business";
     public final static String FORMAL = "Formal";
-    public final static String BEACH = "Beach";
+    public final static String RECREATIONAL = "Recreational";
     public final static ArrayList<String> FORMALITIES = new ArrayList<String>();
 
     public final static String HOT = "Hot";
@@ -122,19 +106,16 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
 
         FORMALITIES.add(CASUAL);
         FORMALITIES.add(FORMAL);
-        FORMALITIES.add(BUSINESS);
-        FORMALITIES.add(BEACH);
+        FORMALITIES.add(RECREATIONAL);
 
         TEMPERATURES.add(HOT);
         TEMPERATURES.add(COLD);
         TEMPERATURES.add(MILD);
 
-
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
         return super.onOptionsItemSelected(item);
     }
 
