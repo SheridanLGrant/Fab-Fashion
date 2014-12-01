@@ -115,7 +115,6 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
         displayStoredWardrobe();
 
         initializeScrollViews();
-
     }
 
 
@@ -495,7 +494,6 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
                 myView.center(myLayout);
             }
         });
-        myView.center(myLayout);
     }
 
 
