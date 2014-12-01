@@ -1,5 +1,6 @@
 package edu.hmc.cs.personalstylist;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.Context;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
@@ -67,9 +69,6 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
     String wardrobeString;
     Context context;
     String file = "wardrobeData";
-
-    // For image buttons
-    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 
 
     @Override
@@ -154,6 +153,7 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
     // possible combinations of type and color
     private ImageButton createImageButton(Clothing currentArticle) {
         ImageButton button = new ImageButton(this);
+
         String type = currentArticle.getType();
         String color = currentArticle.getColor();
 
@@ -446,7 +446,7 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
             }
         }
 
-        button.setLayoutParams(params);
+        button.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
         button.setOnClickListener(this);
         button.setBackgroundColor(Color.TRANSPARENT);
         button.setTag(currentArticle.getName());
@@ -458,7 +458,7 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
     private void initializeScrollViews() {
         MyScrollView topScroller = (MyScrollView) findViewById(R.id.topScroller);
         MyScrollView bottomScroller = (MyScrollView) findViewById(R.id.bottomScroller);
-        final MyScrollView shoeScroller = (MyScrollView) findViewById(R.id.shoeScroller); // TODO: WHY IS THIS FINAL?
+        MyScrollView shoeScroller = (MyScrollView) findViewById(R.id.shoeScroller);
 
         LinearLayout topLayout = (LinearLayout) findViewById(R.id.topLayout);
         LinearLayout bottomLayout = (LinearLayout) findViewById(R.id.bottomLayout);
