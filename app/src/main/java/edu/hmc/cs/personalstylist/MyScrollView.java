@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 /**
@@ -93,5 +94,46 @@ public class MyScrollView extends HorizontalScrollView {
                 }
             }
         }
+    }
+
+    /// Helper function for Sheridan.
+    /// Will center the layout if necessary. Returns null if there are no clothes in the layout.
+    public ImageButton getCenterItem(LinearLayout myLayout) {
+        center(myLayout);
+
+        int numChildren = myLayout.getChildCount();
+
+        if (numChildren == 0) {
+            return null;
+        }
+
+        int center = this.getScrollX() + this.getWidth() / 2;
+
+        View firstChild = myLayout.getChildAt(0);
+        int firstLeft = firstChild.getLeft();
+
+        View lastChild = myLayout.getChildAt(numChildren-1);
+        int lastLeft = lastChild.getLeft();
+        int lastWidth = lastChild.getWidth();
+
+        if (center < firstLeft) {
+            return (ImageButton) myLayout.getChildAt(0);
+        }
+        else if (center > lastLeft + lastWidth) {
+            return (ImageButton) myLayout.getChildAt(numChildren-1);
+        }
+        else {
+            for (int i = 0; i < numChildren; i++) {
+                View v = myLayout.getChildAt(i);
+                int viewLeft = v.getLeft();
+                int viewWidth = v.getWidth();
+
+                if (center >= viewLeft && center <= viewLeft + viewWidth) {
+                    return (ImageButton) myLayout.getChildAt(i);
+                }
+            }
+        }
+
+        return null;
     }
 }
