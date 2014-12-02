@@ -446,6 +446,7 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
         }
 
         button.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
+        button.setScaleType(ImageButton.ScaleType.FIT_CENTER);
         button.setOnClickListener(this);
         button.setBackgroundColor(Color.TRANSPARENT);
         button.setTag(currentArticle.getName());
@@ -584,6 +585,7 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
                     e.printStackTrace();
                 }
                 Intent intent = new Intent(this, MainActivity.class);
+                finish();
                 startActivity(intent);
             }
         }

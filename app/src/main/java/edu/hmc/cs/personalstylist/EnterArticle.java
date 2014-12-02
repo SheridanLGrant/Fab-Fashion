@@ -176,10 +176,10 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
         }
 
         Intent returnToMain = new Intent(this, MainActivity.class);
+        returnToMain.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         returnToMain.putExtra(ARTICLE_NAME, articleName);
         returnToMain.putExtra(CLOTHING_TYPE, clothingType);
         returnToMain.putExtra(CLOTHING_COLOR, clothingColor);
-
 
         // Read wardrobe data
         Gson gson = new Gson();
