@@ -185,6 +185,10 @@ public class viewOutfit extends Activity implements View.OnClickListener {
         topLayout.setPadding(width, 0, width, 0);
         bottomLayout.setPadding(width, 0, width, 0);
         shoeLayout.setPadding(width, 0, width, 0);
+
+        initialCenter(topScroller, topLayout);
+        initialCenter(bottomScroller, bottomLayout);
+        initialCenter(shoeScroller, shoeLayout);
     }
 
 
@@ -201,6 +205,14 @@ public class viewOutfit extends Activity implements View.OnClickListener {
         myView.setOnScrollStoppedListener(new MyScrollView.OnScrollStoppedListener() {
             @Override
             public void onScrollStopped() {
+                myView.center(myLayout);
+            }
+        });
+    }
+
+    public void initialCenter(final MyScrollView myView, final LinearLayout myLayout) {
+        myView.post(new Runnable() {
+            public void run() {
                 myView.center(myLayout);
             }
         });
