@@ -94,9 +94,6 @@ public class viewOutfit extends Activity implements View.OnClickListener {
 
         Intent outfitChoose = getIntent();
 
-
-
-
         // Read wardrobe data
         Gson gson = new Gson();
         String temp="";
@@ -553,6 +550,7 @@ public class viewOutfit extends Activity implements View.OnClickListener {
 
         if (id == R.id.action_return_to_wardrobe) {
             Intent backToWardrobe = new Intent(this, MainActivity.class);
+            backToWardrobe.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Makes sure the back button works
             startActivity(backToWardrobe);
         }
 
