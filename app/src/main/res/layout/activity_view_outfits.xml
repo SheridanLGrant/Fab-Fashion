@@ -114,11 +114,20 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/shoeScrollerChoose"></LinearLayout>
 
-    <ImageView
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/judge"
+        android:id="@+id/judgementButton"
+        android:onClick="judge"
+        android:layout_below="@+id/shoeScrollerChoose"
+        android:layout_centerHorizontal="true" />
+
+    <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/checkX"
-        android:layout_below="@+id/suggestions"
+        android:layout_below="@+id/judgementButton"
         android:layout_centerHorizontal="true" />
 
 

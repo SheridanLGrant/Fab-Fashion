@@ -15,7 +15,9 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
@@ -213,6 +215,8 @@ public class viewOutfit extends Activity implements View.OnClickListener {
     // possible combinations of type and color
     private ImageButton createImageButton(Clothing currentArticle) {
         ImageButton button = new ImageButton(this);
+        button.setTag(currentArticle);
+
         String type = currentArticle.getType();
         String color = currentArticle.getColor();
 
@@ -577,5 +581,31 @@ public class viewOutfit extends Activity implements View.OnClickListener {
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.article_options, popup.getMenu());
         popup.show();
+    }
+
+    public void judge(View v) {
+        MyScrollView topScroll = (MyScrollView) findViewById(R.id.topScrollerChoose);
+        MyScrollView bottomScroll = (MyScrollView) findViewById(R.id.bottomScrollerChoose);
+        MyScrollView shoeScroll = (MyScrollView) findViewById(R.id.shoeScrollerChoose);
+
+        LinearLayout topLayout = (LinearLayout) findViewById(R.id.chooseTopLayout);
+        LinearLayout bottomLayout = (LinearLayout) findViewById(R.id.chooseBottomLayout);
+        LinearLayout shoeLayout = (LinearLayout) findViewById(R.id.chooseShoeLayout);
+
+        Clothing top = topScroll.getCenterItem(topLayout);
+
+//        Clothing top = topScroll.getCenterItem(topLayout);
+//        Clothing bottom = bottomScroll.getCenterItem(bottomLayout);
+//        Clothing shoe = shoeScroll.getCenterItem(shoeLayout);
+//
+//        CheckBox checkX = (CheckBox) findViewById(R.id.checkX);
+//
+//        Choose choose = new Choose(wardrobe); // TODO: THIS IS UNNECESSARY
+
+//        if (choose.judgeOutfit(top, bottom, shoe) == 0) {
+//            checkX.setChecked(false);
+//        } else {
+//            checkX.setChecked(true);
+//        }
     }
 }

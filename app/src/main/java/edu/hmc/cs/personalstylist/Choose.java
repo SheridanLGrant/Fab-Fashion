@@ -582,10 +582,7 @@ public class Choose {
 
 
 
-    public int judgeOutfit(ArrayList<Clothing> outfit) {
-        Clothing top = outfit.get(0);
-        Clothing bottom = outfit.get(1);
-        Clothing shoe = outfit.get(2);
+    public int judgeOutfit(Clothing top, Clothing bottom, Clothing shoe) {
 
         String topType = top.getType();
         String bottomType = bottom.getType();

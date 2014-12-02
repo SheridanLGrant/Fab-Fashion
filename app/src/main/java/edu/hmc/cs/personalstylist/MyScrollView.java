@@ -98,7 +98,7 @@ public class MyScrollView extends HorizontalScrollView {
 
     /// Helper function for Sheridan.
     /// Will center the layout if necessary. Returns null if there are no clothes in the layout.
-    public ImageButton getCenterItem(LinearLayout myLayout) {
+    public Clothing getCenterItem(LinearLayout myLayout) {
         center(myLayout);
 
         int numChildren = myLayout.getChildCount();
@@ -117,10 +117,10 @@ public class MyScrollView extends HorizontalScrollView {
         int lastWidth = lastChild.getWidth();
 
         if (center < firstLeft) {
-            return (ImageButton) myLayout.getChildAt(0);
+            return (Clothing) myLayout.getChildAt(0).getTag();
         }
         else if (center > lastLeft + lastWidth) {
-            return (ImageButton) myLayout.getChildAt(numChildren-1);
+            return (Clothing) myLayout.getChildAt(numChildren-1).getTag();
         }
         else {
             for (int i = 0; i < numChildren; i++) {
@@ -129,7 +129,7 @@ public class MyScrollView extends HorizontalScrollView {
                 int viewWidth = v.getWidth();
 
                 if (center >= viewLeft && center <= viewLeft + viewWidth) {
-                    return (ImageButton) myLayout.getChildAt(i);
+                    return (Clothing) myLayout.getChildAt(i).getTag();
                 }
             }
         }
