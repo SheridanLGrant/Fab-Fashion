@@ -30,7 +30,7 @@
         <LinearLayout
             android:id="@+id/topLayout"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:padding="0dp"
             android:orientation="horizontal" >
 
@@ -47,7 +47,7 @@
         <LinearLayout
             android:id="@+id/bottomLayout"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
 
@@ -63,7 +63,7 @@
         <LinearLayout
             android:id="@+id/shoeLayout"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
 
