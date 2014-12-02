@@ -591,8 +591,13 @@ public class Choose {
         String bottomType = bottom.getType();
         String shoeType = shoe.getType();
 
+        String topColor = top.getColor();
+        String bottomColor = bottom.getColor();
+        String shoeColor = shoe.getColor();
+
         if ((shoeType.equals(SANDALS) && bottomType.equals(PANTS)) ||
                 (topType.equals(SLEEVELESS_SHIRT) && bottomType.equals(PANTS)) ||
+                (topType.equals(LONG_SLEEVE_SHIRT) && shoeType.equals(SANDALS)) ||
                 (shoeType.equals(DRESS_SHOES) && bottomType.equals(SHORTS)) ||
                 (shoeType.equals(TENNIS_SHOES) && bottomType.equals(SKIRT)) ||
                 (shoeType.equals(DRESS_SHOES) && topType.equals(SLEEVELESS_SHIRT)) ||
@@ -601,6 +606,18 @@ public class Choose {
 
             return 0;
         }
+
+        String colorCombo = topColor + bottomColor;
+        ArrayList<String> badColors = badColors();
+
+        for (int i = 0; i < badColors.size(); i++) {
+            if (badColors.get(i).equals(colorCombo)) {
+                return 0;
+            }
+        }
+
+
+
         return 1;
     }
 
