@@ -476,6 +476,10 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
         initializeOneScrollView(topScroller, topLayout);
         initializeOneScrollView(bottomScroller, bottomLayout);
         initializeOneScrollView(shoeScroller, shoeLayout);
+
+        initialCenter(topScroller, topLayout);
+        initialCenter(bottomScroller, bottomLayout);
+        initialCenter(shoeScroller, shoeLayout);
     }
 
 
@@ -492,6 +496,15 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
         myView.setOnScrollStoppedListener(new MyScrollView.OnScrollStoppedListener() {
             @Override
             public void onScrollStopped() {
+                myView.center(myLayout);
+            }
+        });
+    }
+
+
+    public void initialCenter(final MyScrollView myView, final LinearLayout myLayout) {
+        myView.post(new Runnable() {
+            public void run() {
                 myView.center(myLayout);
             }
         });
