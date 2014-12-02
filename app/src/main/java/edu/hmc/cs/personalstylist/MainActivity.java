@@ -152,6 +152,7 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
     // possible combinations of type and color
     private ImageButton createImageButton(Clothing currentArticle) {
         ImageButton button = new ImageButton(this);
+        button.setTag(currentArticle);
 
         String type = currentArticle.getType();
         String color = currentArticle.getColor();
@@ -448,7 +449,6 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
         button.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
         button.setOnClickListener(this);
         button.setBackgroundColor(Color.TRANSPARENT);
-        button.setTag(currentArticle.getName());
 
         return button;
     }
@@ -528,21 +528,22 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
     @Override
     public void onClick(View v) {
         ImageButton b = (ImageButton) v;
+        Clothing article = (Clothing) b.getTag();
+
         PopupMenu popup = new PopupMenu(this, b);
-        popup.getMenu().add("Name: " + b.getTag());
+        popup.getMenu().add("Name: " + article.getName());
 
         // get data
-        CharSequence type = "Type: ";
-        View parent = (View) b.getParent();
-        if (parent == findViewById(R.id.topLayout)) {
-            popup.getMenu().add(type + "top");
-        } else if (parent == findViewById(R.id.bottomLayout)) {
-            popup.getMenu().add(type + "bottom");
-        } else if (parent == findViewById(R.id.shoeLayout)) {
-            popup.getMenu().add(type + "shoes");
-        }
+        CharSequence type = "Type: " + article.getType();
+        popup.getMenu().add(type);
 
-        popup.getMenu().add("Delete: " + b.getTag());
+        CharSequence formality = "Formality: " + article.getFormality();
+        popup.getMenu().add(formality);
+
+        CharSequence temperature = "Temperature: " + article.getTemperature();
+        popup.getMenu().add(temperature);
+
+        popup.getMenu().add("Delete " + b.getTag());
 
 
         popup.setOnMenuItemClickListener(this);
@@ -565,7 +566,7 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
         else {
             for (int i = 0; i < wardrobe.size(); i++) {
                 // we need delete to have the name for this to work smoothly
-                if (clicked.equals(("Delete: " + wardrobe.get(i).getName()))) {
+                if (clicked.equals(("Delete " + wardrobe.get(i).getName()))) {
                     deletion = i;
                     removeFlag = true;
                 }

@@ -530,7 +530,6 @@ public class viewOutfit extends Activity implements View.OnClickListener {
         button.setLayoutParams(params);
         button.setOnClickListener(this);
         button.setBackgroundColor(Color.TRANSPARENT);
-        button.setTag(currentArticle.getName());
 
         return button;
     }
@@ -575,8 +574,9 @@ public class viewOutfit extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         ImageButton b = (ImageButton) v;
+        Clothing article = (Clothing) b.getTag();
+
         PopupMenu popup = new PopupMenu(this, b);
-        popup.getMenu().add("Name: " + b.getTag());
 
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.article_options, popup.getMenu());
@@ -592,20 +592,19 @@ public class viewOutfit extends Activity implements View.OnClickListener {
         LinearLayout bottomLayout = (LinearLayout) findViewById(R.id.chooseBottomLayout);
         LinearLayout shoeLayout = (LinearLayout) findViewById(R.id.chooseShoeLayout);
 
+
         Clothing top = topScroll.getCenterItem(topLayout);
+        Clothing bottom = bottomScroll.getCenterItem(bottomLayout);
+        Clothing shoe = shoeScroll.getCenterItem(shoeLayout);
 
-//        Clothing top = topScroll.getCenterItem(topLayout);
-//        Clothing bottom = bottomScroll.getCenterItem(bottomLayout);
-//        Clothing shoe = shoeScroll.getCenterItem(shoeLayout);
-//
-//        CheckBox checkX = (CheckBox) findViewById(R.id.checkX);
-//
-//        Choose choose = new Choose(wardrobe); // TODO: THIS IS UNNECESSARY
+        CheckBox checkX = (CheckBox) findViewById(R.id.checkX);
 
-//        if (choose.judgeOutfit(top, bottom, shoe) == 0) {
-//            checkX.setChecked(false);
-//        } else {
-//            checkX.setChecked(true);
-//        }
+        Choose choose = new Choose(wardrobe); // TODO: THIS IS UNNECESSARY
+
+        if (choose.judgeOutfit(top, bottom, shoe) == 0) {
+            checkX.setChecked(false);
+        } else {
+            checkX.setChecked(true);
+        }
     }
 }
