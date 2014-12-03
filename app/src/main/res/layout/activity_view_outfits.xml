@@ -109,10 +109,13 @@
 
     <LinearLayout
         android:id="@+id/suggestions"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/shoeScrollerChoose"></LinearLayout>
+        android:layout_toEndOf="@+id/your_outfits_message"
+        android:layout_below="@+id/checkX"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"></LinearLayout>
 
     <Button
         android:layout_width="wrap_content"
