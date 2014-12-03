@@ -534,9 +534,6 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
         popup.getMenu().add("Name: " + article.getName());
 
         // get data
-        CharSequence type = "Type: " + article.getType();
-        popup.getMenu().add(type);
-
         CharSequence formality = "Formality: " + article.getFormality();
         popup.getMenu().add(formality);
 

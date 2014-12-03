@@ -144,10 +144,8 @@ public class Choose {
 
         badColors.add(PURPLE + ORANGE);
         badColors.add(PURPLE + PINK);
-        badColors.add(PURPLE + BROWN);
         badColors.add(ORANGE + PURPLE);
         badColors.add(PINK + PURPLE);
-        badColors.add(BROWN + PURPLE);
 
         badColors.add(ORANGE + PINK);
         badColors.add(PINK + ORANGE);
@@ -431,7 +429,8 @@ public class Choose {
             }
 
             for (int i = 0; i < bottomsPossible.size(); i++) {
-                if (PANTS.equals(bottomsPossible.get(i).getType())) {
+                if (PANTS.equals(bottomsPossible.get(i).getType()) ||
+                        SKIRT.equals(bottomsPossible.get(i).getType())) {
                     suggestedBottoms.add(bottomsPossible.get(i));
                 }
             }
@@ -555,7 +554,7 @@ public class Choose {
             }
 
             for (int i = 0; i < bottomsPossible.size(); i++) {
-                if (PANTS.equals(topsPossible.get(i).getType()) &&
+                if (PANTS.equals(bottomsPossible.get(i).getType()) &&
                         (RECREATIONAL.equals(bottomsPossible.get(i).getFormality()) ||
                         CASUAL.equals(bottomsPossible.get(i).getFormality()))) {
                     suggestedBottoms.add(bottomsPossible.get(i));
@@ -564,8 +563,8 @@ public class Choose {
 
             for (int i = 0; i < shoesPossible.size(); i++) {
                 if (TENNIS_SHOES.equals(shoesPossible.get(i).getType()) &&
-                        (RECREATIONAL.equals(topsPossible.get(i).getFormality()) ||
-                                CASUAL.equals(topsPossible.get(i).getFormality()))) {
+                        (RECREATIONAL.equals(shoesPossible.get(i).getFormality()) ||
+                                CASUAL.equals(shoesPossible.get(i).getFormality()))) {
                     suggestedShoes.add(shoesPossible.get(i));
                 }
             }

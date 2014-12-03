@@ -578,6 +578,15 @@ public class viewOutfit extends Activity implements View.OnClickListener {
 
         PopupMenu popup = new PopupMenu(this, b);
 
+        popup.getMenu().add("Name: " + article.getName());
+
+        // get data
+        CharSequence formality = "Formality: " + article.getFormality();
+        popup.getMenu().add(formality);
+
+        CharSequence temperature = "Temperature: " + article.getTemperature();
+        popup.getMenu().add(temperature);
+
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.article_options, popup.getMenu());
         popup.show();
