@@ -541,7 +541,6 @@ public class viewOutfit extends Activity implements View.OnClickListener {
         button.setPadding(padding, 0, padding, 0);
 
         button.setOnClickListener(this);
-        button.setTag(currentArticle.getName());
 
         return button;
     }

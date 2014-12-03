@@ -454,7 +454,6 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
         button.setPadding(padding, 0, padding, 0);
 
         button.setOnClickListener(this);
-        button.setTag(currentArticle.getName());
 
         return button;
     }
