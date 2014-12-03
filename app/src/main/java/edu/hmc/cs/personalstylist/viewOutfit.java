@@ -94,9 +94,6 @@ public class viewOutfit extends Activity implements View.OnClickListener {
 
         Intent outfitChoose = getIntent();
 
-
-
-
         // Read wardrobe data
         Gson gson = new Gson();
         String temp="";
@@ -188,6 +185,10 @@ public class viewOutfit extends Activity implements View.OnClickListener {
         topLayout.setPadding(width, 0, width, 0);
         bottomLayout.setPadding(width, 0, width, 0);
         shoeLayout.setPadding(width, 0, width, 0);
+
+        initialCenter(topScroller, topLayout);
+        initialCenter(bottomScroller, bottomLayout);
+        initialCenter(shoeScroller, shoeLayout);
     }
 
 
@@ -204,6 +205,14 @@ public class viewOutfit extends Activity implements View.OnClickListener {
         myView.setOnScrollStoppedListener(new MyScrollView.OnScrollStoppedListener() {
             @Override
             public void onScrollStopped() {
+                myView.center(myLayout);
+            }
+        });
+    }
+
+    public void initialCenter(final MyScrollView myView, final LinearLayout myLayout) {
+        myView.post(new Runnable() {
+            public void run() {
                 myView.center(myLayout);
             }
         });
@@ -552,6 +561,7 @@ public class viewOutfit extends Activity implements View.OnClickListener {
 
         if (id == R.id.action_return_to_wardrobe) {
             Intent backToWardrobe = new Intent(this, MainActivity.class);
+            backToWardrobe.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Makes sure the back button works
             startActivity(backToWardrobe);
         }
 
