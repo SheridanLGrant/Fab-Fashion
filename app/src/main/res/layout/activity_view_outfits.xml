@@ -113,7 +113,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/your_outfits_message"
-        android:layout_below="@+id/checkX"
+        android:layout_below="@+id/suggestedOutfit"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"></LinearLayout>
 
@@ -127,11 +127,19 @@
         android:layout_centerHorizontal="true" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/checkX_size"
+        android:layout_height="@dimen/checkX_size"
         android:id="@+id/checkX"
         android:layout_below="@+id/judgementButton"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_below="@+id/checkX"
+        android:layout_centerHorizontal="true"
+        android:text="@string/suggested_outfit"
+        android:id="@+id/suggestedOutfit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 
 </RelativeLayout>

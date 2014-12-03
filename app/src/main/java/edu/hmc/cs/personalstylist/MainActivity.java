@@ -451,7 +451,7 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
         button.setScaleType(ImageButton.ScaleType.FIT_CENTER);
         button.setBackgroundColor(Color.TRANSPARENT);
 
-        int padding = (int) 3 * button.getPaddingLeft();
+        int padding = (int) 2.5 * button.getPaddingLeft();
         button.setPadding(padding, 0, padding, 0);
 
         button.setOnClickListener(this);
