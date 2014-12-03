@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
@@ -629,14 +630,14 @@ public class viewOutfit extends Activity implements View.OnClickListener {
         Clothing bottom = bottomScroll.getCenterItem(bottomLayout);
         Clothing shoe = shoeScroll.getCenterItem(shoeLayout);
 
-        CheckBox checkX = (CheckBox) findViewById(R.id.checkX);
+        ImageView checkX = (ImageView) findViewById(R.id.checkX);
 
         Choose choose = new Choose(wardrobe); // TODO: THIS IS UNNECESSARY
 
         if (choose.judgeOutfit(top, bottom, shoe)) {
-            checkX.setChecked(true);
+            checkX.setImageResource(R.drawable.checkmark_48);
         } else {
-            checkX.setChecked(false);
+            checkX.setImageResource(R.drawable.facepalm_50);
         }
     }
 }
