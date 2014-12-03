@@ -71,9 +71,6 @@ public class viewOutfit extends Activity implements View.OnClickListener {
     Context context;
     String file = "wardrobeData";
 
-    // For image buttons
-    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -536,9 +533,15 @@ public class viewOutfit extends Activity implements View.OnClickListener {
             }
         }
 
-        button.setLayoutParams(params);
-        button.setOnClickListener(this);
+        button.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
+        button.setScaleType(ImageButton.ScaleType.FIT_CENTER);
         button.setBackgroundColor(Color.TRANSPARENT);
+
+        int padding = (int) 3 * button.getPaddingLeft();
+        button.setPadding(padding, 0, padding, 0);
+
+        button.setOnClickListener(this);
+        button.setTag(currentArticle.getName());
 
         return button;
     }

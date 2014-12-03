@@ -448,8 +448,13 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
 
         button.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
         button.setScaleType(ImageButton.ScaleType.FIT_CENTER);
-        button.setOnClickListener(this);
         button.setBackgroundColor(Color.TRANSPARENT);
+
+        int padding = (int) 3 * button.getPaddingLeft();
+        button.setPadding(padding, 0, padding, 0);
+
+        button.setOnClickListener(this);
+        button.setTag(currentArticle.getName());
 
         return button;
     }
