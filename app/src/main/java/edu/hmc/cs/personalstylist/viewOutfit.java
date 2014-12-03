@@ -543,6 +543,7 @@ public class viewOutfit extends Activity implements View.OnClickListener {
         button.setScaleType(ImageButton.ScaleType.FIT_CENTER);
         button.setBackgroundColor(Color.TRANSPARENT);
 
+
         int padding = (int) 2.5 * button.getPaddingLeft();
         button.setPadding(padding, 0, padding, 0);
 

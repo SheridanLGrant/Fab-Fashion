@@ -567,7 +567,7 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
         CharSequence temperature = "Temperature: " + article.getTemperature();
         popup.getMenu().add(temperature);
 
-        popup.getMenu().add("Delete " + b.getTag());
+        popup.getMenu().add("Delete " +  ((Clothing) b.getTag()).getName());
 
         // create and inflate the menu...
         popup.setOnMenuItemClickListener(this);
