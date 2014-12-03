@@ -1,33 +1,23 @@
 package edu.hmc.cs.personalstylist;
 
-import android.app.ActionBar;
 import android.app.Activity;
-import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 import android.view.View.OnClickListener;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -38,12 +28,13 @@ import java.util.ArrayList;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import edu.hmc.cs.personalstylist.Clothing;
 
 public class MainActivity extends Activity implements OnClickListener, PopupMenu.OnMenuItemClickListener {
+    // TODO: probably delete these
     public final static String NAME_MESSAGE = "edu.hmc.cs.personalstylist.nameMessage";
     public final static String WARDROBE_MESSAGE = "edu.hmc.cs.personalstylist.wardrobeMessage";
 
+    // Clothing Types
     public final static String LONG_SLEEVE_SHIRT = "Long-sleeve shirt";
     public final static String SHORT_SLEEVE_SHIRT = "Short-sleeve shirt";
     public final static String SLEEVELESS_SHIRT = "Sleeveless shirt";
@@ -54,6 +45,7 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
     public final static String TENNIS_SHOES = "Tennis shoes";
     public final static String SANDALS = "Sandals";
 
+    // Clothing Colors
     public final static String RED = "Red";
     public final static String BLUE = "Blue";
     public final static String YELLOW = "Yellow";
@@ -65,15 +57,19 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
     public final static String PINK = "Pink";
     public final static String BROWN = "Brown";
 
+    // For data storage
     ArrayList<Clothing> wardrobe = new ArrayList<Clothing>();
     String wardrobeString;
     Context context;
     String file = "wardrobeData";
 
 
+    // On activity start, do this!
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+
+        // Standard Activity start
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -96,6 +92,7 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
             e.printStackTrace();
         }
 
+        // If the wardrobe is empty
         if ("".equals(temp) || "[]".equals(temp)) {
             wardrobeString = gson.toJson(wardrobe, clothingList);
             try {
@@ -108,6 +105,7 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
                 e.printStackTrace();
             }
         }
+        // If not, read it in
         else {
             wardrobe = gson.fromJson(wardrobeString, clothingList);
         }
@@ -118,19 +116,18 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
     }
 
 
-
+    // Displays the clothing in the wardrobe read from memory
     private void displayStoredWardrobe() {
+
         Clothing currentArticle;
+
         for (int i = 0; i < wardrobe.size(); i++) {
             currentArticle = wardrobe.get(i);
-            String name = currentArticle.getName();
             String type = currentArticle.getType();
-            String color = currentArticle.getColor();
-            String formality = currentArticle.getFormality();
-            String temperature = currentArticle.getTemperature();
 
             ImageButton button = createImageButton(currentArticle);
 
+            // Put the ImageButton in the layout corresponding to its type
             if (LONG_SLEEVE_SHIRT.equals(type) || SHORT_SLEEVE_SHIRT.equals(type) || SLEEVELESS_SHIRT.equals(type)) {
                 LinearLayout view = (LinearLayout) findViewById(R.id.topLayout);
                 view.addView(button);
@@ -151,7 +148,10 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
     // Behold the mass of conditional code required to sort clothing items into the current 99
     // possible combinations of type and color
     private ImageButton createImageButton(Clothing currentArticle) {
+
         ImageButton button = new ImageButton(this);
+
+        // Associate the Clothing object with the ImageButton, will be useful in other areas
         button.setTag(currentArticle);
 
         String type = currentArticle.getType();
@@ -446,6 +446,7 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
             }
         }
 
+        // Make the button look nice
         button.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
         button.setScaleType(ImageButton.ScaleType.FIT_CENTER);
         button.setBackgroundColor(Color.TRANSPARENT);
@@ -459,7 +460,9 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
     }
 
 
+    // Sets up the three wardrobe scrollers with ImageButtons in them
     private void initializeScrollViews() {
+
         MyScrollView topScroller = (MyScrollView) findViewById(R.id.topScroller);
         MyScrollView bottomScroller = (MyScrollView) findViewById(R.id.bottomScroller);
         MyScrollView shoeScroller = (MyScrollView) findViewById(R.id.shoeScroller);
@@ -487,6 +490,7 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
     }
 
 
+    // Helper function for initializeScrollViews
     public void initializeOneScrollView(final MyScrollView myView, final LinearLayout myLayout) {
         myView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -506,6 +510,7 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
     }
 
 
+    // TODO: What is this thing?
     public void initialCenter(final MyScrollView myView, final LinearLayout myLayout) {
         myView.post(new Runnable() {
             public void run() {
@@ -516,6 +521,7 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
 
 
 
+    // Necessary as the class extends Activity.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -523,6 +529,8 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
         return true;
     }
 
+    // Provides functionality for our 2 action bar buttons that lead the user into the rest of the
+    // app.
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -542,7 +550,8 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
 
 
 
-    // TODO: need to get article info in this function to display info properly and not need name to delete
+    // When an ImageButton is pressed, this shows the dropdown list with clothing details and the
+    // delete option.
     @Override
     public void onClick(View v) {
         ImageButton b = (ImageButton) v;
@@ -560,7 +569,7 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
 
         popup.getMenu().add("Delete " + b.getTag());
 
-
+        // create and inflate the menu...
         popup.setOnMenuItemClickListener(this);
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.article_options, popup.getMenu());
@@ -569,6 +578,7 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
 
 
 
+    // Handles deletion if that is what the user selects
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
         String clicked = (String) menuItem.getTitle();
@@ -580,12 +590,13 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
         }
         else {
             for (int i = 0; i < wardrobe.size(); i++) {
-                // we need delete to have the name for this to work smoothly
+                // we need delete to be followed by the name for this to work smoothly
                 if (clicked.equals(("Delete " + wardrobe.get(i).getName()))) {
                     deletion = i;
                     removeFlag = true;
                 }
             }
+            // Delete from memory
             if (removeFlag) {
                 wardrobe.remove(deletion);
                 Gson gson = new Gson();

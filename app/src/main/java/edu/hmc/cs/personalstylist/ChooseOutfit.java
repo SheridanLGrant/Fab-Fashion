@@ -17,19 +17,24 @@ import java.util.ArrayList;
  * Created by Sheridan on 11/5/2014.
  */
 public class ChooseOutfit extends Activity implements PopupMenu.OnMenuItemClickListener {
+
+    // Variables to pass to the next activity
     public final static String CLOTHING_FORMALITY = "edu.hmc.cs.personalstylist.clothingFormality";
     public final static String CLOTHING_TEMPERATURE = "edu.hmc.cs.personalstylist.clothingTemperature";
 
+    // Clothing Formalities
     public final static String CASUAL = "Casual";
     public final static String FORMAL = "Formal";
     public final static String RECREATIONAL = "Recreational";
     public final static ArrayList<String> FORMALITIES = new ArrayList<String>();
 
+    // Temperature Formalities
     public final static String HOT = "Hot";
     public final static String COLD = "Cold";
     public final static String MILD = "Mild";
     public final static ArrayList<String> TEMPERATURES = new ArrayList<String>();
 
+    // On Activity start, do this
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -48,11 +53,13 @@ public class ChooseOutfit extends Activity implements PopupMenu.OnMenuItemClickL
 
     }
 
+    // No activity bar options, does nothing, needed as class extends activity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
 
+    // Creates Formality popup menu
     public void showPopUpFormality(View v){
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
@@ -61,6 +68,7 @@ public class ChooseOutfit extends Activity implements PopupMenu.OnMenuItemClickL
         popup.show();
     }
 
+    // Creates Temperature popup menu
     public void showPopUpTemperature(View v){
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
@@ -85,6 +93,8 @@ public class ChooseOutfit extends Activity implements PopupMenu.OnMenuItemClickL
     }
 
 
+    // When the user presses the enter preferences button, send the next activity their preferences
+    // and ensure they have selected something
     public void moveToOutfitView(View v){
         Intent outfitChoose = new Intent(this, viewOutfit.class);
         TextView tempText = (TextView) findViewById(R.id.choose_selected_temperature);
@@ -92,6 +102,7 @@ public class ChooseOutfit extends Activity implements PopupMenu.OnMenuItemClickL
         TextView formText = (TextView) findViewById(R.id.choose_selected_formality);
         String formPref = (String) formText.getText();
 
+        // Ensure the user has selected something
         if ("".equals(formPref) && "".equals(tempPref)) {
             noInput();
             return;
@@ -103,6 +114,7 @@ public class ChooseOutfit extends Activity implements PopupMenu.OnMenuItemClickL
         this.finish();
     }
 
+    // Handles drop-down menu clicks straightforwardly
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
 

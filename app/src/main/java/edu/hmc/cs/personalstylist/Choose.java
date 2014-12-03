@@ -67,15 +67,17 @@ public class Choose {
     }
 
 
-        /**
-         * Eliminates non-viable clothing from list of bottoms, returns the remaining list
-         *
-         * @param formalityPref, weatherPref
-         * @return ArrayList of viableBottoms
-         */
+   /**
+    * Eliminates non-viable clothing from list of bottoms, returns the remaining list
+    *
+    * @param formalityPref, weatherPref
+    * @return ArrayList of viableBottoms
+    */
     public ArrayList<Clothing> viableClothing(String formalityPref, String temperaturePref) {
+
         ArrayList<Clothing> viableClothing = new ArrayList<Clothing>();
 
+        // Only temperature preference, clothing need only match temperature
         if ("".equals(formalityPref)) {
             for (int i = 0; i < wardrobe.size(); i++) {
                 Clothing clothingArticle = wardrobe.get(i);
@@ -84,7 +86,9 @@ public class Choose {
                     viableClothing.add(clothingArticle);
                 }
             }
-        } else if ("".equals(temperaturePref)) {
+        }
+        // Only formality preference, clothing need only match formality
+        else if ("".equals(temperaturePref)) {
             for (int i = 0; i < wardrobe.size(); i++) {
                 Clothing clothingArticle = wardrobe.get(i);
                 String f = clothingArticle.getFormality();
@@ -92,7 +96,9 @@ public class Choose {
                     viableClothing.add(clothingArticle);
                 }
             }
-        } else {
+        }
+        // Both temperature and formality preference, clothing must match both
+        else {
             for (int i = 0; i < wardrobe.size(); i++) {
                 Clothing clothingArticle = wardrobe.get(i);
                 String f = clothingArticle.getFormality();
@@ -108,7 +114,7 @@ public class Choose {
 
     }
 
-
+    // Returns the dictionary of bad color combinations
     public ArrayList<String> badColors() {
         ArrayList<String> badColors = new ArrayList<String>();
 
@@ -160,6 +166,7 @@ public class Choose {
     }
 
     // TODO: public and private methods
+    // Populates the arrays of parameter types
     public void parameterArrays() {
         // Build paramter arrays
         TOPS.add(LONG_SLEEVE_SHIRT);
@@ -203,15 +210,19 @@ public class Choose {
     }
 
 
+    // Suggests a good-looking outfit from the available clothes
     public  ArrayList<Clothing> pickOutfit(ArrayList<Clothing> suggestedTops,
                                            ArrayList<Clothing> suggestedBottoms,
                                            ArrayList<Clothing> suggestedShoes) {
 
         ArrayList<Clothing> outfit = new ArrayList<Clothing>();
+
+        // Initialize clothes as unknown.
         Clothing shoe = new Clothing(UNKNOWN_SHOE);
         Clothing bottom = new Clothing(UNKNOWN_BOTTOM);
         Clothing top = new Clothing(UNKNOWN_TOP);
 
+        // Pick a random shoe, matching shoes is too complicated and could lead to worse outfits...
         if (suggestedShoes.size() > 0) {
             Random random = new Random();
             int randomNumber = random.nextInt(suggestedShoes.size());
@@ -219,6 +230,7 @@ public class Choose {
         }
 
 
+        // Ensure the top and bottom aren't a bad color combination
         for (int i = 0; i < suggestedTops.size(); i++) {
             for (int j =0; j < suggestedBottoms.size(); j++) {
                 String colorCombo = suggestedTops.get(i).getColor() +
@@ -253,8 +265,11 @@ public class Choose {
     }
 
 
+    // Finds a good outfit based on temperature and formality preference, then based on clothing
+    // type. Passes to pickOutfit to check for color-coordination and final return.
     public ArrayList<Clothing> RecommendedOutfits(ArrayList<Clothing> newWardrobe, String formPref, String tempPref) {
 
+        // Build parameter arrays
         parameterArrays();
 
         ArrayList<Clothing> outfit = new ArrayList<Clothing>();
@@ -262,10 +277,6 @@ public class Choose {
         ArrayList<Clothing> topsPossible = new ArrayList<Clothing>();
         ArrayList<Clothing> bottomsPossible = new ArrayList<Clothing>();
         ArrayList<Clothing> shoesPossible = new ArrayList<Clothing>();
-
-        Clothing blankTop = new Clothing(UNKNOWN_TOP);
-        Clothing blankBottom = new Clothing(UNKNOWN_BOTTOM);
-        Clothing blankShoe = new Clothing(UNKNOWN_SHOE);
 
         // divide clothes into tops, bottoms, shoes
         for (int i = 0; i < newWardrobe.size(); i++) {
@@ -282,6 +293,8 @@ public class Choose {
         ArrayList<Clothing> suggestedBottoms = new ArrayList<Clothing>();
         ArrayList<Clothing> suggestedShoes = new ArrayList<Clothing>();
 
+
+        // Based on user preferences, remove inappropriate clothing types
         if (RECREATIONAL.equals(formPref) && HOT.equals(tempPref)) {
             for (int i = 0; i < topsPossible.size(); i++) {
                 if (SLEEVELESS_SHIRT.equals(topsPossible.get(i).getType()) ||
@@ -573,15 +586,14 @@ public class Choose {
 
         }
 
-
-
-
         return outfit;
     }
 
 
 
-    public int judgeOutfit(Clothing top, Clothing bottom, Clothing shoe) {
+    // Called by judge in viewOutfit, checks the current center outfit for color and type
+    // coordination.
+    public boolean judgeOutfit(Clothing top, Clothing bottom, Clothing shoe) {
 
         String topType = top.getType();
         String bottomType = bottom.getType();
@@ -591,6 +603,7 @@ public class Choose {
         String bottomColor = bottom.getColor();
         String shoeColor = shoe.getColor();
 
+        // Checks for bad type combinations
         if ((shoeType.equals(SANDALS) && bottomType.equals(PANTS)) ||
                 (topType.equals(SLEEVELESS_SHIRT) && bottomType.equals(PANTS)) ||
                 (topType.equals(LONG_SLEEVE_SHIRT) && shoeType.equals(SANDALS)) ||
@@ -600,21 +613,20 @@ public class Choose {
                 (shoeType.equals(DRESS_SHOES) && topType.equals(SHORT_SLEEVE_SHIRT)) ||
                 (bottomType.equals(PANTS) && topType.equals(SLEEVELESS_SHIRT))) {
 
-            return 0;
+            return false;
         }
 
         String colorCombo = topColor + bottomColor;
         ArrayList<String> badColors = badColors();
 
+        // Checks for bad color combinations
         for (int i = 0; i < badColors.size(); i++) {
             if (badColors.get(i).equals(colorCombo)) {
-                return 0;
+                return false;
             }
         }
 
-
-
-        return 1;
+        return true;
     }
 
 

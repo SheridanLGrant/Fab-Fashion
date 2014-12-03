@@ -5,23 +5,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -33,15 +28,17 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-import edu.hmc.cs.personalstylist.Choose;
 
 /**
  * Created by davidconnor on 11/6/14.
  */
 public class viewOutfit extends Activity implements View.OnClickListener {
+
+    // Parameters received from ChooseOutfit
     public final static String CLOTHING_FORMALITY = "edu.hmc.cs.personalstylist.clothingFormality";
     public final static String CLOTHING_TEMPERATURE = "edu.hmc.cs.personalstylist.clothingTemperature";
 
+    // Clothing Types
     public final static String LONG_SLEEVE_SHIRT = "Long-sleeve shirt";
     public final static String SHORT_SLEEVE_SHIRT = "Short-sleeve shirt";
     public final static String SLEEVELESS_SHIRT = "Sleeveless shirt";
@@ -55,7 +52,7 @@ public class viewOutfit extends Activity implements View.OnClickListener {
     public final static ArrayList<String> BOTTOMS = new ArrayList<String>();
     public final static ArrayList<String> SHOES = new ArrayList<String>();
 
-
+    // Clothing Colors
     public final static String RED = "Red";
     public final static String BLUE = "Blue";
     public final static String YELLOW = "Yellow";
@@ -67,11 +64,13 @@ public class viewOutfit extends Activity implements View.OnClickListener {
     public final static String PINK = "Pink";
     public final static String BROWN = "Brown";
 
+    // Data retrieval variables
     ArrayList<Clothing> wardrobe = new ArrayList<Clothing>();
     Context context;
     String file = "wardrobeData";
 
 
+    // On Activity start...
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -108,7 +107,7 @@ public class viewOutfit extends Activity implements View.OnClickListener {
             e.printStackTrace();
         }
 
-
+        // Checks for empty wardrobe
         if ("".equals(temp) || "[]".equals(temp)) {
             String wardrobeName = gson.toJson(wardrobe, clothingList);
             try {
@@ -124,15 +123,15 @@ public class viewOutfit extends Activity implements View.OnClickListener {
             wardrobe = gson.fromJson(temp, clothingList);
         }
 
-
+        // User-selected parameters
         String formPref = outfitChoose.getStringExtra(CLOTHING_FORMALITY);
         String tempPref = outfitChoose.getStringExtra(CLOTHING_TEMPERATURE);
 
+        // Reduce displayed wardrobe to viable options based on parameters
         Choose outfitChoice = new Choose(wardrobe);
         ArrayList<Clothing> newWardrobe = outfitChoice.viableClothing(formPref, tempPref);
 
-
-
+        // Populate scrollers with wardrobe
         Clothing currentArticle;
         for (int i = 0; i < newWardrobe.size(); i++) {
             currentArticle = newWardrobe.get(i);
@@ -154,13 +153,14 @@ public class viewOutfit extends Activity implements View.OnClickListener {
             }
         }
 
-
+        // Display algorithm-suggested outfit
         DisplaySuggestion(outfitChoice.RecommendedOutfits(newWardrobe, formPref, tempPref));
 
         initializeScrollViews();
 
     }
 
+    // Populate scroll views, set them up correctly
     private void initializeScrollViews() {
         MyScrollView topScroller = (MyScrollView) findViewById(R.id.topScrollerChoose);
         MyScrollView bottomScroller = (MyScrollView) findViewById(R.id.bottomScrollerChoose);
@@ -188,7 +188,7 @@ public class viewOutfit extends Activity implements View.OnClickListener {
         initialCenter(shoeScroller, shoeLayout);
     }
 
-
+    // TODO: What does this do?
     public void initializeOneScrollView(final MyScrollView myView, final LinearLayout myLayout) {
         myView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -207,6 +207,7 @@ public class viewOutfit extends Activity implements View.OnClickListener {
         });
     }
 
+    // TODO: What does this do?
     public void initialCenter(final MyScrollView myView, final LinearLayout myLayout) {
         myView.post(new Runnable() {
             public void run() {
@@ -220,7 +221,10 @@ public class viewOutfit extends Activity implements View.OnClickListener {
     // Behold the mass of conditional code required to sort clothing items into the current 99
     // possible combinations of type and color
     private ImageButton createImageButton(Clothing currentArticle) {
+
         ImageButton button = new ImageButton(this);
+
+        // Associate the clothing with the ImageButton
         button.setTag(currentArticle);
 
         String type = currentArticle.getType();
@@ -533,6 +537,7 @@ public class viewOutfit extends Activity implements View.OnClickListener {
             }
         }
 
+        // Set up the ImageButton to look nice
         button.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
         button.setScaleType(ImageButton.ScaleType.FIT_CENTER);
         button.setBackgroundColor(Color.TRANSPARENT);
@@ -546,6 +551,7 @@ public class viewOutfit extends Activity implements View.OnClickListener {
     }
 
 
+    // Create menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -554,6 +560,7 @@ public class viewOutfit extends Activity implements View.OnClickListener {
     }
 
 
+    // Gives the user an obvious return-to-wardrobe option
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -571,6 +578,7 @@ public class viewOutfit extends Activity implements View.OnClickListener {
     }
 
 
+    // Displays an algorithm-suggested outfit
     private void DisplaySuggestion(ArrayList<Clothing> suggestion) {
 
         ImageButton topButton = createImageButton(suggestion.get(0));
@@ -583,6 +591,7 @@ public class viewOutfit extends Activity implements View.OnClickListener {
         view.addView(shoeButton);
     }
 
+    // When an ImageButton is selected, show drop-down list
     @Override
     public void onClick(View v) {
         ImageButton b = (ImageButton) v;
@@ -604,6 +613,8 @@ public class viewOutfit extends Activity implements View.OnClickListener {
         popup.show();
     }
 
+    // Judges the currently-centered outfit (upon button press) for appropriateness in style and
+    // color. Displays a check for good, X for bad.
     public void judge(View v) {
         MyScrollView topScroll = (MyScrollView) findViewById(R.id.topScrollerChoose);
         MyScrollView bottomScroll = (MyScrollView) findViewById(R.id.bottomScrollerChoose);
@@ -622,10 +633,10 @@ public class viewOutfit extends Activity implements View.OnClickListener {
 
         Choose choose = new Choose(wardrobe); // TODO: THIS IS UNNECESSARY
 
-        if (choose.judgeOutfit(top, bottom, shoe) == 0) {
-            checkX.setChecked(false);
-        } else {
+        if (choose.judgeOutfit(top, bottom, shoe)) {
             checkX.setChecked(true);
+        } else {
+            checkX.setChecked(false);
         }
     }
 }

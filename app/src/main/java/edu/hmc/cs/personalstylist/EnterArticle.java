@@ -27,10 +27,8 @@ import com.google.gson.reflect.TypeToken;
  * Created by Sheridan on 10/12/2014.
  */
 public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickListener {
-    public final static String ARTICLE_NAME = "edu.hmc.cs.personalstylist.articleName";
-    public final static String CLOTHING_TYPE = "edu.hmc.cs.personalstylist.clothingType";
-    public final static String CLOTHING_COLOR = "edu.hmc.cs.personalstylist.clothingColor";
 
+    // Clothing Types
     public final static String LONG_SLEEVE_SHIRT = "Long-sleeve shirt";
     public final static String SHORT_SLEEVE_SHIRT = "Short-sleeve shirt";
     public final static String SLEEVELESS_SHIRT = "Sleeveless shirt";
@@ -42,6 +40,7 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
     public final static String SANDALS = "Sandals";
     public final static ArrayList<String> TYPES = new ArrayList<String>();
 
+    // Clothing Colors
     public final static String RED = "Red";
     public final static String BLUE = "Blue";
     public final static String YELLOW = "Yellow";
@@ -54,16 +53,19 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
     public final static String BROWN = "Brown";
     public final static ArrayList<String> COLORS = new ArrayList<String>();
 
+    // Clothing Formalities
     public final static String CASUAL = "Casual";
     public final static String FORMAL = "Formal";
     public final static String RECREATIONAL = "Recreational";
     public final static ArrayList<String> FORMALITIES = new ArrayList<String>();
 
+    // Clothing Temperatures
     public final static String HOT = "Hot";
     public final static String COLD = "Cold";
     public final static String MILD = "Mild";
     public final static ArrayList<String> TEMPERATURES = new ArrayList<String>();
 
+    // Clothing data members
     String articleName;
     String clothingType;
     String clothingColor;
@@ -114,11 +116,13 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
 
     }
 
+    // Necessary for an Activity object
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
 
+    // Inflate the Type drop-down menu
     public void showPopUpType(View v){
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
@@ -127,6 +131,7 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
         popup.show();
     }
 
+    // Inflate the Color drop-down menu
     public void showPopUpColor(View v){
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
@@ -135,6 +140,7 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
         popup.show();
     }
 
+    // Inflate the Formality drop-down menu
     public void showPopUpFormality(View v){
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
@@ -143,6 +149,7 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
         popup.show();
     }
 
+    // Inflate the Temperature drop-down menu
     public void showPopUpTemperature(View v){
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
@@ -151,6 +158,7 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
         popup.show();
     }
 
+    // Adds the article of clothing to the wardrobe and memory
     public void enterItem(View view) throws IOException {
 
         EditText clothingName = (EditText) findViewById(R.id.clothingName);
@@ -177,9 +185,6 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
 
         Intent returnToMain = new Intent(this, MainActivity.class);
         returnToMain.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        returnToMain.putExtra(ARTICLE_NAME, articleName);
-        returnToMain.putExtra(CLOTHING_TYPE, clothingType);
-        returnToMain.putExtra(CLOTHING_COLOR, clothingColor);
 
         // Read wardrobe data
         Gson gson = new Gson();
@@ -187,6 +192,7 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
 
         Clothing article = new Clothing(articleName, clothingType, clothingColor, clothingFormality, clothingTemperature);
 
+        // Ensure that the clothing name hasn't already been used
         for (int i = 0; i < wardrobe.size(); i++) {
             if (wardrobe.get(i).getName().equals(articleName)) {
                 sameName();
@@ -234,6 +240,7 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
     }
 
 
+    // Reads in the wardrobe data, just like in main activity
     private void readWardrobeData(Gson gson) {
         file = "wardrobeData";
         String temp="";
@@ -267,6 +274,7 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
     }
 
 
+    // Stores the wardrobe in memory
     private void storeWardrobeData(String wardrobeName) {
         file = "wardrobeData";
         try {
@@ -281,6 +289,7 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
     }
 
 
+    // Shows selected parameter next to buttons
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
 

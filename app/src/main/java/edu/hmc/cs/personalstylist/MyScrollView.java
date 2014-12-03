@@ -8,6 +8,8 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+
+// TODO: Max, comment this class por favorrrr.
 /**
  * Created by Max on 11/17/2014.
  *
