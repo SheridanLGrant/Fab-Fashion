@@ -38,7 +38,9 @@
         android:onClick="showPopUpTemperature"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp" />
+        android:layout_marginTop="100dp"
+        android:background="#ffffcbb9"
+        android:textColor="#ff001656" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -54,7 +56,9 @@
         android:id="@+id/form_button"
         android:onClick="showPopUpFormality"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="#ffffcbb9"
+        android:textColor="#ff001656" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -70,7 +74,9 @@
         android:id="@+id/enter_preferences"
         android:onClick="moveToOutfitView"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="#ff001656"
+        android:textColor="#ffffcbb9" />
 
 
 </RelativeLayout>
