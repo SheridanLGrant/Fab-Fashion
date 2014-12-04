@@ -33,10 +33,10 @@
     <View android:layout_width="fill_parent"
         android:layout_height="1dip"
         android:background="#ff001656"
-        android:layout_below="@+id/your_outfits_message"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/view" />
+        android:id="@+id/view"
+        android:layout_above="@+id/topScrollerChoose"
+        android:layout_alignRight="@+id/imageView"
+        android:layout_alignEnd="@+id/imageView" />
 
 
     <TextView
@@ -118,28 +118,34 @@
         android:layout_alignParentStart="true"></LinearLayout>
 
     <Button
+        android:background="@drawable/text_buttons"
+        style="@style/button_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/judge"
         android:id="@+id/judgementButton"
         android:onClick="judge"
         android:layout_below="@+id/shoeScrollerChoose"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"/>
 
     <ImageView
         android:layout_width="@dimen/checkX_size"
         android:layout_height="@dimen/checkX_size"
+        android:padding="10dp"
         android:id="@+id/checkX"
-        android:layout_below="@+id/judgementButton"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignTop="@+id/judgementButton"
+        android:layout_toRightOf="@+id/judgementButton"
+        android:layout_toEndOf="@+id/judgementButton" />
 
     <TextView
-        android:layout_below="@+id/checkX"
-        android:layout_centerHorizontal="true"
         android:text="@string/suggested_outfit"
         android:id="@+id/suggestedOutfit"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        style="@style/text_only"
+        android:layout_below="@+id/checkX"
+        android:layout_alignLeft="@+id/view_outfits_greeting"
+        android:layout_alignStart="@+id/view_outfits_greeting" />
 
 
 </RelativeLayout>

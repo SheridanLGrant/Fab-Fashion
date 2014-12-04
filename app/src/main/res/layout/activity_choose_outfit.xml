@@ -31,16 +31,15 @@
         android:id="@+id/view" />
 
     <Button
+        android:background="@drawable/text_buttons"
+        style="@style/button_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/temperature_preference"
         android:id="@+id/temp_button"
         android:onClick="showPopUpTemperature"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:background="#ffffcbb9"
-        android:textColor="#ff001656" />
+        android:layout_below="@+id/view"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -50,15 +49,15 @@
         android:layout_centerHorizontal="true" />
 
     <Button
+        android:background="@drawable/text_buttons"
+        style="@style/button_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/formality_preference"
         android:id="@+id/form_button"
         android:onClick="showPopUpFormality"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:background="#ffffcbb9"
-        android:textColor="#ff001656" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -68,15 +67,15 @@
         android:layout_centerHorizontal="true" />
 
     <Button
+        android:background="@drawable/text_buttons"
+        style="@style/button_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/enter_preferences"
         android:id="@+id/enter_preferences"
         android:onClick="moveToOutfitView"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:background="#ff001656"
-        android:textColor="#ffffcbb9" />
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
