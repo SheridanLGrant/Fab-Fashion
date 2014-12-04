@@ -610,6 +610,8 @@ public class viewOutfit extends Activity implements View.OnClickListener {
         CharSequence temperature = "Temperature: " + article.getTemperature();
         popup.getMenu().add(temperature);
 
+
+
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.article_options, popup.getMenu());
         popup.show();
