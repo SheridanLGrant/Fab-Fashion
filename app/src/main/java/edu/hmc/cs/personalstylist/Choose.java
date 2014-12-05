@@ -373,7 +373,8 @@ public class Choose {
             }
 
             for (int i = 0; i < bottomsPossible.size(); i++) {
-                if (SHORTS.equals(bottomsPossible.get(i).getType())) {
+                if (SHORTS.equals(bottomsPossible.get(i).getType()) ||
+                        SKIRT.equals(bottomsPossible.get(i).getType())) {
                     suggestedBottoms.add(bottomsPossible.get(i));
                 }
             }
@@ -397,7 +398,8 @@ public class Choose {
 
             for (int i = 0; i < bottomsPossible.size(); i++) {
                 if (SHORTS.equals(bottomsPossible.get(i).getType()) ||
-                        PANTS.equals(bottomsPossible.get(i).getType())) {
+                        PANTS.equals(bottomsPossible.get(i).getType()) ||
+                        SKIRT.equals(bottomsPossible.get(i).getType())) {
                     suggestedBottoms.add(bottomsPossible.get(i));
                 }
             }
@@ -601,14 +603,13 @@ public class Choose {
 
         String topColor = top.getColor();
         String bottomColor = bottom.getColor();
-        String shoeColor = shoe.getColor();
+        String shoeColor = shoe.getColor(); // not used, here for symmetry/ease of reading
 
         // Checks for bad type combinations
         if ((shoeType.equals(SANDALS) && bottomType.equals(PANTS)) ||
                 (topType.equals(SLEEVELESS_SHIRT) && bottomType.equals(PANTS)) ||
                 (topType.equals(LONG_SLEEVE_SHIRT) && shoeType.equals(SANDALS)) ||
                 (shoeType.equals(DRESS_SHOES) && bottomType.equals(SHORTS)) ||
-                (shoeType.equals(TENNIS_SHOES) && bottomType.equals(SKIRT)) ||
                 (shoeType.equals(DRESS_SHOES) && topType.equals(SLEEVELESS_SHIRT)) ||
                 (shoeType.equals(DRESS_SHOES) && topType.equals(SHORT_SLEEVE_SHIRT)) ||
                 (bottomType.equals(PANTS) && topType.equals(SLEEVELESS_SHIRT))) {
@@ -629,61 +630,4 @@ public class Choose {
         return true;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-        /**
-         * Returns ArrayList of Items in Top Choice Outfit (1 top, 1 bottom)
-         *
-         * @param viableClothes
-         * @return ArrayList outfit
-         */
-
-    public ArrayList<Clothing> topOutfit(ArrayList<Clothing> viableClothes) {
-        ArrayList<Clothing> outfit = new ArrayList<Clothing>();
-//        Random generator = new Random();
-//
-//        int i = generator.nextInt(viableTops.size());
-//        Wardrobe.Clothing topTop;
-//        topTop = (Wardrobe.Clothing) viableTops.get(i);
-//        outfit.add(topTop);
-//
-//        int j = generator.nextInt(viableBottoms.size());
-//        Wardrobe.Clothing topBottom;
-//        topBottom = (Wardrobe.Clothing) viableBottoms.get(i);
-//        outfit.add(topBottom);
-//
-//        return outfit;
-
-
-        boolean topFlag = true;
-        boolean bottomFlag = true;
-        boolean shoesFlag = true;
-
-        for (int i = 0; i < viableClothes.size(); i++) {
-            if (viableClothes.get(i).getType() == "shirt" && topFlag) {
-                outfit.add(viableClothes.get(i));
-                topFlag = false;
-            }
-            else if (viableClothes.get(i).getType() == "pants" && bottomFlag) {
-                outfit.add(viableClothes.get(i));
-                bottomFlag = false;
-            }
-            if (viableClothes.get(i).getType() == "shoes" && shoesFlag) {
-                outfit.add(viableClothes.get(i));
-                shoesFlag = false;
-            }
-        }
-        return outfit;
-
-
-    }
 }
