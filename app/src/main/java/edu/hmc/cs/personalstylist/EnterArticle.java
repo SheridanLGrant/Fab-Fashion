@@ -29,41 +29,41 @@ import com.google.gson.reflect.TypeToken;
 public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickListener {
 
     // Clothing Types
-    public final static String LONG_SLEEVE_SHIRT = "Long-sleeve shirt";
-    public final static String SHORT_SLEEVE_SHIRT = "Short-sleeve shirt";
-    public final static String SLEEVELESS_SHIRT = "Sleeveless shirt";
-    public final static String PANTS = "Pants";
-    public final static String SHORTS = "Shorts";
-    public final static String SKIRT = "Skirt";
-    public final static String DRESS_SHOES = "Dress shoes";
-    public final static String TENNIS_SHOES = "Tennis shoes";
-    public final static String SANDALS = "Sandals";
-    public final static ArrayList<String> TYPES = new ArrayList<String>();
+    private final static String LONG_SLEEVE_SHIRT = "Long-sleeve shirt";
+    private final static String SHORT_SLEEVE_SHIRT = "Short-sleeve shirt";
+    private final static String SLEEVELESS_SHIRT = "Sleeveless shirt";
+    private final static String PANTS = "Pants";
+    private final static String SHORTS = "Shorts";
+    private final static String SKIRT = "Skirt";
+    private final static String DRESS_SHOES = "Dress shoes";
+    private final static String TENNIS_SHOES = "Tennis shoes";
+    private final static String SANDALS = "Sandals";
+    private final static ArrayList<String> TYPES = new ArrayList<String>();
 
     // Clothing Colors
-    public final static String RED = "Red";
-    public final static String BLUE = "Blue";
-    public final static String YELLOW = "Yellow";
-    public final static String GREEN = "Green";
-    public final static String PURPLE = "Purple";
-    public final static String ORANGE = "Orange";
-    public final static String BLACK = "Black";
-    public final static String WHITE = "White";
-    public final static String PINK = "Pink";
-    public final static String BROWN = "Brown";
-    public final static ArrayList<String> COLORS = new ArrayList<String>();
+    private final static String RED = "Red";
+    private final static String BLUE = "Blue";
+    private final static String YELLOW = "Yellow";
+    private final static String GREEN = "Green";
+    private final static String PURPLE = "Purple";
+    private final static String ORANGE = "Orange";
+    private final static String BLACK = "Black";
+    private final static String WHITE = "White";
+    private final static String PINK = "Pink";
+    private final static String BROWN = "Brown";
+    private final static ArrayList<String> COLORS = new ArrayList<String>();
 
     // Clothing Formalities
-    public final static String CASUAL = "Casual";
-    public final static String FORMAL = "Formal";
-    public final static String RECREATIONAL = "Recreational";
-    public final static ArrayList<String> FORMALITIES = new ArrayList<String>();
+    private final static String CASUAL = "Casual";
+    private final static String FORMAL = "Formal";
+    private final static String RECREATIONAL = "Recreational";
+    private final static ArrayList<String> FORMALITIES = new ArrayList<String>();
 
     // Clothing Temperatures
-    public final static String HOT = "Hot";
-    public final static String COLD = "Cold";
-    public final static String MILD = "Mild";
-    public final static ArrayList<String> TEMPERATURES = new ArrayList<String>();
+    private final static String HOT = "Hot";
+    private final static String COLD = "Cold";
+    private final static String MILD = "Mild";
+    private final static ArrayList<String> TEMPERATURES = new ArrayList<String>();
 
     // Clothing data members
     String articleName;

@@ -30,32 +30,27 @@ import com.google.gson.reflect.TypeToken;
 
 
 public class MainActivity extends Activity implements OnClickListener, PopupMenu.OnMenuItemClickListener {
-    // TODO: probably delete these
-    public final static String NAME_MESSAGE = "edu.hmc.cs.personalstylist.nameMessage";
-    public final static String WARDROBE_MESSAGE = "edu.hmc.cs.personalstylist.wardrobeMessage";
-
     // Clothing Types
-    public final static String LONG_SLEEVE_SHIRT = "Long-sleeve shirt";
-    public final static String SHORT_SLEEVE_SHIRT = "Short-sleeve shirt";
-    public final static String SLEEVELESS_SHIRT = "Sleeveless shirt";
-    public final static String PANTS = "Pants";
-    public final static String SHORTS = "Shorts";
-    public final static String SKIRT = "Skirt";
-    public final static String DRESS_SHOES = "Dress shoes";
-    public final static String TENNIS_SHOES = "Tennis shoes";
-    public final static String SANDALS = "Sandals";
+    private final static String LONG_SLEEVE_SHIRT = "Long-sleeve shirt";
+    private final static String SHORT_SLEEVE_SHIRT = "Short-sleeve shirt";
+    private final static String SLEEVELESS_SHIRT = "Sleeveless shirt";
+    private final static String PANTS = "Pants";
+    private final static String SHORTS = "Shorts";
+    private final static String SKIRT = "Skirt";
+    private final static String DRESS_SHOES = "Dress shoes";
+    private final static String TENNIS_SHOES = "Tennis shoes";
+    private final static String SANDALS = "Sandals";
 
     // Clothing Colors
-    public final static String RED = "Red";
-    public final static String BLUE = "Blue";
-    public final static String YELLOW = "Yellow";
-    public final static String GREEN = "Green";
-    public final static String PURPLE = "Purple";
-    public final static String ORANGE = "Orange";
-    public final static String BLACK = "Black";
-    public final static String WHITE = "White";
-    public final static String PINK = "Pink";
-    public final static String BROWN = "Brown";
+    private final static String RED = "Red";
+    private final static String BLUE = "Blue";
+    private final static String YELLOW = "Yellow";
+    private final static String GREEN = "Green";
+    private final static String PURPLE = "Purple";
+    private final static String ORANGE = "Orange";
+    private final static String BLACK = "Black";
+    private final static String WHITE = "White";
+    private final static String PINK = "Pink";
 
     // For data storage
     ArrayList<Clothing> wardrobe = new ArrayList<Clothing>();
@@ -491,7 +486,7 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
 
 
     // Helper function for initializeScrollViews
-    public void initializeOneScrollView(final MyScrollView myView, final LinearLayout myLayout) {
+    private void initializeOneScrollView(final MyScrollView myView, final LinearLayout myLayout) {
         myView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -511,7 +506,7 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
 
 
     // TODO: What is this thing?
-    public void initialCenter(final MyScrollView myView, final LinearLayout myLayout) {
+    private void initialCenter(final MyScrollView myView, final LinearLayout myLayout) {
         myView.post(new Runnable() {
             public void run() {
                 myView.center(myLayout);

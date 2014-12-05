@@ -35,7 +35,7 @@ limitations under the License.-->
         </activity>
 
         <activity
-            android:name="edu.hmc.cs.personalstylist.viewOutfit"
+            android:name=".ViewOutfit"
             android:label="@string/title_activity_view_outfits"
             android:parentActivityName=".ChooseOutfit" >
             <meta-data

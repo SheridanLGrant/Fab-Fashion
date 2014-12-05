@@ -20,7 +20,6 @@ public class MyScrollView extends HorizontalScrollView {
     private int initialPosition;
 
     private int newCheck = 100;
-    private static final String TAG = "MyScrollView";
 
     public interface OnScrollStoppedListener{
         void onScrollStopped();

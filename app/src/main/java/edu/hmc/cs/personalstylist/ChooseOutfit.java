@@ -19,20 +19,20 @@ import java.util.ArrayList;
 public class ChooseOutfit extends Activity implements PopupMenu.OnMenuItemClickListener {
 
     // Variables to pass to the next activity
-    public final static String CLOTHING_FORMALITY = "edu.hmc.cs.personalstylist.clothingFormality";
-    public final static String CLOTHING_TEMPERATURE = "edu.hmc.cs.personalstylist.clothingTemperature";
+    private final static String CLOTHING_FORMALITY = "edu.hmc.cs.personalstylist.clothingFormality";
+    private final static String CLOTHING_TEMPERATURE = "edu.hmc.cs.personalstylist.clothingTemperature";
 
     // Clothing Formalities
-    public final static String CASUAL = "Casual";
-    public final static String FORMAL = "Formal";
-    public final static String RECREATIONAL = "Recreational";
-    public final static ArrayList<String> FORMALITIES = new ArrayList<String>();
+    private final static String CASUAL = "Casual";
+    private final static String FORMAL = "Formal";
+    private final static String RECREATIONAL = "Recreational";
+    private final static ArrayList<String> FORMALITIES = new ArrayList<String>();
 
     // Temperature Formalities
-    public final static String HOT = "Hot";
-    public final static String COLD = "Cold";
-    public final static String MILD = "Mild";
-    public final static ArrayList<String> TEMPERATURES = new ArrayList<String>();
+    private final static String HOT = "Hot";
+    private final static String COLD = "Cold";
+    private final static String MILD = "Mild";
+    private final static ArrayList<String> TEMPERATURES = new ArrayList<String>();
 
     // On Activity start, do this
     @Override
@@ -96,7 +96,7 @@ public class ChooseOutfit extends Activity implements PopupMenu.OnMenuItemClickL
     // When the user presses the enter preferences button, send the next activity their preferences
     // and ensure they have selected something
     public void moveToOutfitView(View v){
-        Intent outfitChoose = new Intent(this, viewOutfit.class);
+        Intent outfitChoose = new Intent(this, ViewOutfit.class);
         TextView tempText = (TextView) findViewById(R.id.choose_selected_temperature);
         String tempPref = (String) tempText.getText();
         TextView formText = (TextView) findViewById(R.id.choose_selected_formality);

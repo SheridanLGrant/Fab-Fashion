@@ -33,37 +33,37 @@ import java.util.ArrayList;
 /**
  * Created by davidconnor on 11/6/14.
  */
-public class viewOutfit extends Activity implements View.OnClickListener {
+public class ViewOutfit extends Activity implements View.OnClickListener {
 
     // Parameters received from ChooseOutfit
-    public final static String CLOTHING_FORMALITY = "edu.hmc.cs.personalstylist.clothingFormality";
-    public final static String CLOTHING_TEMPERATURE = "edu.hmc.cs.personalstylist.clothingTemperature";
+    private final static String CLOTHING_FORMALITY = "edu.hmc.cs.personalstylist.clothingFormality";
+    private final static String CLOTHING_TEMPERATURE = "edu.hmc.cs.personalstylist.clothingTemperature";
 
     // Clothing Types
-    public final static String LONG_SLEEVE_SHIRT = "Long-sleeve shirt";
-    public final static String SHORT_SLEEVE_SHIRT = "Short-sleeve shirt";
-    public final static String SLEEVELESS_SHIRT = "Sleeveless shirt";
-    public final static String PANTS = "Pants";
-    public final static String SHORTS = "Shorts";
-    public final static String SKIRT = "Skirt";
-    public final static String DRESS_SHOES = "Dress shoes";
-    public final static String TENNIS_SHOES = "Tennis shoes";
-    public final static String SANDALS = "Sandals";
-    public final static ArrayList<String> TOPS = new ArrayList<String>();
-    public final static ArrayList<String> BOTTOMS = new ArrayList<String>();
-    public final static ArrayList<String> SHOES = new ArrayList<String>();
+    private final static String LONG_SLEEVE_SHIRT = "Long-sleeve shirt";
+    private final static String SHORT_SLEEVE_SHIRT = "Short-sleeve shirt";
+    private final static String SLEEVELESS_SHIRT = "Sleeveless shirt";
+    private final static String PANTS = "Pants";
+    private final static String SHORTS = "Shorts";
+    private final static String SKIRT = "Skirt";
+    private final static String DRESS_SHOES = "Dress shoes";
+    private final static String TENNIS_SHOES = "Tennis shoes";
+    private final static String SANDALS = "Sandals";
+    private final static ArrayList<String> TOPS = new ArrayList<String>();
+    private final static ArrayList<String> BOTTOMS = new ArrayList<String>();
+    private final static ArrayList<String> SHOES = new ArrayList<String>();
 
     // Clothing Colors
-    public final static String RED = "Red";
-    public final static String BLUE = "Blue";
-    public final static String YELLOW = "Yellow";
-    public final static String GREEN = "Green";
-    public final static String PURPLE = "Purple";
-    public final static String ORANGE = "Orange";
-    public final static String BLACK = "Black";
-    public final static String WHITE = "White";
-    public final static String PINK = "Pink";
-    public final static String BROWN = "Brown";
+    private final static String RED = "Red";
+    private final static String BLUE = "Blue";
+    private final static String YELLOW = "Yellow";
+    private final static String GREEN = "Green";
+    private final static String PURPLE = "Purple";
+    private final static String ORANGE = "Orange";
+    private final static String BLACK = "Black";
+    private final static String WHITE = "White";
+    private final static String PINK = "Pink";
+    private final static String BROWN = "Brown";
 
     // Data retrieval variables
     ArrayList<Clothing> wardrobe = new ArrayList<Clothing>();
@@ -189,8 +189,8 @@ public class viewOutfit extends Activity implements View.OnClickListener {
         initialCenter(shoeScroller, shoeLayout);
     }
 
-    // TODO: What does this do?
-    public void initializeOneScrollView(final MyScrollView myView, final LinearLayout myLayout) {
+    // Sets a MyScrollView object to automatically center itself after scrolling
+    private void initializeOneScrollView(final MyScrollView myView, final LinearLayout myLayout) {
         myView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -208,8 +208,8 @@ public class viewOutfit extends Activity implements View.OnClickListener {
         });
     }
 
-    // TODO: What does this do?
-    public void initialCenter(final MyScrollView myView, final LinearLayout myLayout) {
+    // Initializes a MyScrollView object to start with an item centered
+    private void initialCenter(final MyScrollView myView, final LinearLayout myLayout) {
         myView.post(new Runnable() {
             public void run() {
                 myView.center(myLayout);
