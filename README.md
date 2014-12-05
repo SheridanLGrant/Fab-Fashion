@@ -21,5 +21,14 @@ Sheridan Grant.
 A third party library that we use is GSon, a Java library.
 
 
-Directory Structure: put here...
+Directory Structure:
+
+    app/src/main/java/edu.hmc.cs.personalstylist
+        - all java classes used in the application
+
+    app/src/main/res
+        - all xml files used in the application
+
+    app/src/androidTest/edu.hmc.cs.personalstylist
+        - ApplicationTest contains tests for the Clothing and Choose java classes
 

@@ -15,7 +15,7 @@
     <TextView
         android:textSize="26sp"
         android:text="@string/wardrobe"
-        android:layout_width="352dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#ff001656"
         android:gravity="center"
