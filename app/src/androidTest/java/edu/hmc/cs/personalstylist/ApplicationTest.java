@@ -13,14 +13,6 @@ import java.util.ArrayList;
  */
 public class ApplicationTest extends InstrumentationTestCase {
 
-    /// We created this test to make sure that the tests were running.
-    public void test() throws Exception {
-        Log.d("WardrobeTests", "yo");
-        final int expected = 1;
-        final int reality = 1;
-        assertEquals(expected, reality);
-    }
-
     /// This test ensures that we can create an empty wardrobe, and it knows it is empty.
     public void test_emptyWardrobe() throws Exception {
         Wardrobe emptyWardrobe = new Wardrobe();
