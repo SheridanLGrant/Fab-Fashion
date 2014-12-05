@@ -628,26 +628,19 @@ public class viewOutfit extends Activity implements View.OnClickListener {
         LinearLayout bottomLayout = (LinearLayout) findViewById(R.id.chooseBottomLayout);
         LinearLayout shoeLayout = (LinearLayout) findViewById(R.id.chooseShoeLayout);
 
-        boolean nonemptyTop = (topLayout.getChildCount() > 0);
-        boolean nonemptyBottom = (bottomLayout.getChildCount() > 0);
-        boolean nonemptyShoe = (shoeLayout.getChildCount() > 0);
+
+        Clothing top = topScroll.getCenterItem(topLayout);
+        Clothing bottom = bottomScroll.getCenterItem(bottomLayout);
+        Clothing shoe = shoeScroll.getCenterItem(shoeLayout);
 
         ImageView checkX = (ImageView) findViewById(R.id.checkX);
 
-        if (nonemptyBottom & nonemptyTop & nonemptyShoe) {
-            Clothing top = topScroll.getCenterItem(topLayout);
-            Clothing bottom = bottomScroll.getCenterItem(bottomLayout);
-            Clothing shoe = shoeScroll.getCenterItem(shoeLayout);
+        Choose choose = new Choose(wardrobe); // TODO: THIS IS UNNECESSARY
 
-            Choose choose = new Choose(wardrobe); // TODO: THIS IS UNNECESSARY
-
-            if (choose.judgeOutfit(top, bottom, shoe)) {
-                checkX.setImageResource(R.drawable.checkmark_48);
-            } else {
-                checkX.setImageResource(R.drawable.facepalm_50);
-            }
+        if (choose.judgeOutfit(top, bottom, shoe)) {
+            checkX.setImageResource(R.drawable.checkmark_48);
         } else {
-            checkX.setImageResource(R.drawable.ic_action_help);
+            checkX.setImageResource(R.drawable.facepalm_50);
         }
     }
 }
