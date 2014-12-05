@@ -262,7 +262,7 @@ public class viewOutfit extends Activity implements View.OnClickListener {
             else if (BROWN.equals(color)) {
                 button.setImageResource(R.drawable.longsleeveshirt_brown);
             } else {
-                button.setImageResource(R.drawable.ic_action_help);
+                button.setImageResource(R.drawable.question);
             }
         }
         else if (SHORT_SLEEVE_SHIRT.equals(type)) {
@@ -296,7 +296,7 @@ public class viewOutfit extends Activity implements View.OnClickListener {
             else if (BROWN.equals(color)) {
                 button.setImageResource(R.drawable.shortsleeveshirt_brown);
             } else {
-                button.setImageResource(R.drawable.ic_action_help);
+                button.setImageResource(R.drawable.question);
             }
         }
         else if (SLEEVELESS_SHIRT.equals(type)) {
@@ -330,7 +330,7 @@ public class viewOutfit extends Activity implements View.OnClickListener {
             else if (BROWN.equals(color)) {
                 button.setImageResource(R.drawable.sleevelessshirt_brown);
             } else {
-                button.setImageResource(R.drawable.ic_action_help);
+                button.setImageResource(R.drawable.question);
             }
         }
         else if (PANTS.equals(type)) {
@@ -364,7 +364,7 @@ public class viewOutfit extends Activity implements View.OnClickListener {
             else if (BROWN.equals(color)) {
                 button.setImageResource(R.drawable.longpants_brown);
             } else {
-                button.setImageResource(R.drawable.ic_action_help);
+                button.setImageResource(R.drawable.question);
             }
         }
         else if (SHORTS.equals(type)) {
@@ -398,7 +398,7 @@ public class viewOutfit extends Activity implements View.OnClickListener {
             else if (BROWN.equals(color)) {
                 button.setImageResource(R.drawable.shortpants_brown);
             } else {
-                button.setImageResource(R.drawable.ic_action_help);
+                button.setImageResource(R.drawable.question);
             }
         }
         else if (SKIRT.equals(type)) {
@@ -432,7 +432,7 @@ public class viewOutfit extends Activity implements View.OnClickListener {
             else if (BROWN.equals(color)) {
                 button.setImageResource(R.drawable.skirtpants_brown);
             } else {
-                button.setImageResource(R.drawable.ic_action_help);
+                button.setImageResource(R.drawable.question);
             }
         }
         else if (DRESS_SHOES.equals(type)) {
@@ -466,7 +466,7 @@ public class viewOutfit extends Activity implements View.OnClickListener {
             else if (BROWN.equals(color)) {
                 button.setImageResource(R.drawable.dressshoes_brown);
             } else {
-                button.setImageResource(R.drawable.ic_action_help);
+                button.setImageResource(R.drawable.question);
             }
         }
         else if (TENNIS_SHOES.equals(type)) {
@@ -500,7 +500,7 @@ public class viewOutfit extends Activity implements View.OnClickListener {
             else if (BROWN.equals(color)) {
                 button.setImageResource(R.drawable.tennisshoes_brown);
             } else {
-                button.setImageResource(R.drawable.ic_action_help);
+                button.setImageResource(R.drawable.question);
             }
         }
         else { // SANDALS
@@ -534,7 +534,7 @@ public class viewOutfit extends Activity implements View.OnClickListener {
             else if (BROWN.equals(color)) {
                 button.setImageResource(R.drawable.sandalshoes_brown);
             } else {
-                button.setImageResource(R.drawable.ic_action_help);
+                button.setImageResource(R.drawable.question);
             }
         }
 
