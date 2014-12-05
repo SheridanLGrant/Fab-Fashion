@@ -18,6 +18,7 @@ public class Clothing {
     public String formality = "";
     public String temperature = "";
 
+    // Constructor used to construct valid clothing articles
     public Clothing(String givenName, String givenType, String givenColor,
                     String givenFormality, String givenTemperature) {
 

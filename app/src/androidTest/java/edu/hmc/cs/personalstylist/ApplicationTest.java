@@ -13,133 +13,61 @@ import java.util.ArrayList;
  */
 public class ApplicationTest extends InstrumentationTestCase {
 
-    /// This test ensures that we can create an empty wardrobe, and it knows it is empty.
-    public void test_emptyWardrobe() throws Exception {
-        Wardrobe emptyWardrobe = new Wardrobe();
-        int len = emptyWardrobe.wardrobeLength();
-        assertEquals(len, 0);
+    // CLOTHING CLASS TESTS
+
+    // Tests construction of an Unknown clothing object of type shoe
+    public void test_unknownClothing() throws Exception {
+        Clothing unknown = new Clothing("shoe");
+        String message = "No recommended clothing";
+        assertEquals(message, unknown.getName());
     }
 
-    /// Test that we can add an item to the wardrobe, and find it again.
-    public void test_singleWardrobe() throws Exception {
-        Wardrobe singleWardrobe = new Wardrobe();
-        singleWardrobe.addArticle("tester", Wardrobe.ClothingType.HAT,
-                Wardrobe.ClothingColor.RED, Wardrobe.ClothingFormality.FORMAL,
-                Wardrobe.ClothingTemperature.COLD);
-
-        int len = singleWardrobe.wardrobeLength();
-        assertEquals(len, 1);
-        Wardrobe.Clothing testcloth = singleWardrobe.getArticle("tester");
-        assertTrue(testcloth != null);
+    // Tests construction of a clothing object with all five inputs. Here, the strings are
+    // arbitrary, but they cannot be so in the application.
+    public void test_standardClothing() throws Exception {
+        Clothing article = new Clothing("a", "b", "c", "d", "e");
+        assertEquals("a", article.getName());
+        assertEquals("b", article.getType());
+        assertEquals("c", article.getColor());
+        assertEquals("d", article.getFormality());
+        assertEquals("e", article.getTemperature());
     }
 
-    /// Test the remove function that takes a Clothing object. We want to ensure that it
-    /// works when we try to remove something that is not there.
-    public void test_removeByClothing() throws Exception {
-        Wardrobe wardrobe = new Wardrobe();
-
-        wardrobe.addArticle("testhat", Wardrobe.ClothingType.HAT,
-                Wardrobe.ClothingColor.RED, Wardrobe.ClothingFormality.FORMAL,
-                Wardrobe.ClothingTemperature.COLD);
-        wardrobe.addArticle("testshirt", Wardrobe.ClothingType.SHIRT,
-                Wardrobe.ClothingColor.BLUE, Wardrobe.ClothingFormality.CASUAL,
-                Wardrobe.ClothingTemperature.HOT);
-
-        assertEquals(wardrobe.wardrobeLength(), 2);
-        Wardrobe.Clothing testhat = wardrobe.getArticle("testhat");
-        assertTrue(wardrobe.removeArticle(testhat));
-
-        // Try to remove testhat a second time, should do nothing and return false.
-        assertEquals(wardrobe.wardrobeLength(), 1);
-        assertFalse(wardrobe.removeArticle(testhat));
-        assertEquals(wardrobe.wardrobeLength(), 1);
-
-        assertTrue(wardrobe.removeArticle(wardrobe.getArticle("testshirt")));
-        assertEquals(wardrobe.wardrobeLength(), 0);
+    // Tests addition of a clothing article into an empty ArrayList of Clothing
+    // and its subsequent removal
+    public void test_emptyAddition() throws Exception {
+        ArrayList<Clothing> wardrobe = new ArrayList<Clothing>();
+        Clothing article = new Clothing("a", "b", "c", "d", "e");
+        wardrobe.add(article);
+        assertEquals(article, wardrobe.remove(0));
+        ArrayList<Clothing> empty = new ArrayList<Clothing>();
+        assertEquals(wardrobe, empty);
     }
 
-    /// Test the remove function that takes a string naming the clothing object. This test
-    /// checks that it works when we try to remove something that isn't there.
-    public void test_removeByString() throws Exception {
-        Wardrobe wardrobe = new Wardrobe();
-
-        wardrobe.addArticle("testhat", Wardrobe.ClothingType.HAT,
-                Wardrobe.ClothingColor.RED, Wardrobe.ClothingFormality.FORMAL,
-                Wardrobe.ClothingTemperature.COLD);
-        wardrobe.addArticle("testshirt", Wardrobe.ClothingType.SHIRT,
-                Wardrobe.ClothingColor.BLUE, Wardrobe.ClothingFormality.CASUAL,
-                Wardrobe.ClothingTemperature.HOT);
-
-        assertEquals(wardrobe.wardrobeLength(), 2);
-        assertTrue(wardrobe.removeArticle("testhat"));
-
-        // We have already removed "testhat", so removeArticle should do nothing and return
-        // false.
-        assertEquals(wardrobe.wardrobeLength(), 1);
-        assertFalse(wardrobe.removeArticle("testhat"));
-        assertEquals(wardrobe.wardrobeLength(), 1);
-
-        assertTrue(wardrobe.removeArticle("testshirt"));
-        assertEquals(wardrobe.wardrobeLength(), 0);
+    // Tests addition of a clothing article into a nonempty ArrayList of Clothing
+    // and its subsequent removal
+    public void test_nonemptyAdditionRemoval() throws Exception {
+        ArrayList<Clothing> wardrobe = new ArrayList<Clothing>();
+        Clothing article = new Clothing("a", "b", "c", "d", "e");
+        Clothing article2 = new Clothing("z", "y", "x", "w", "v");
+        wardrobe.add(article);
+        wardrobe.add(article2);
+        assertEquals(article, wardrobe.remove(0));
+        assertEquals(article2,wardrobe.remove(0));
+        ArrayList<Clothing> empty = new ArrayList<Clothing>();
+        assertEquals(wardrobe, empty);
     }
 
-//    /// Test to choose formal tops.
-//    public void test_formalTops() throws Exception {
-//        Wardrobe singleWardrobe = new Wardrobe();
-//        singleWardrobe.addArticle("tester", Wardrobe.ClothingType.SHIRT,
-//                Wardrobe.ClothingColor.RED, Wardrobe.ClothingFormality.FORMAL,
-//                Wardrobe.ClothingTemperature.COLD);
-//
-//        singleWardrobe.addArticle("tester1", Wardrobe.ClothingType.SHIRT,
-//                Wardrobe.ClothingColor.BLUE, Wardrobe.ClothingFormality.FORMAL,
-//                Wardrobe.ClothingTemperature.COLD);
-//
-//        singleWardrobe.addArticle("tester2", Wardrobe.ClothingType.SHIRT,
-//                Wardrobe.ClothingColor.RED, Wardrobe.ClothingFormality.CASUAL,
-//                Wardrobe.ClothingTemperature.COLD);
-//
-//        singleWardrobe.addArticle("tester3", Wardrobe.ClothingType.SHOES,
-//                Wardrobe.ClothingColor.RED, Wardrobe.ClothingFormality.FORMAL,
-//                Wardrobe.ClothingTemperature.COLD);
-//
-//        ArrayList viableTops;
-//        viableTops = Choose.removeTopsItems(singleWardrobe.articleList, Wardrobe.ClothingFormality.FORMAL, Wardrobe.ClothingTemperature.COLD);
-//
-//        int len = viableTops.size();
-//        assertEquals(len, 2); //Removes casual shirt and formal shoe
-//        assertEquals(singleWardrobe.wardrobeLength(), 4);
-//        assertTrue(viableTops.contains(singleWardrobe.getArticle("tester")));
-//        assertTrue(viableTops.contains(singleWardrobe.getArticle("tester1")));
-//
-//    }
-//
-//    /// Test to choose formal bottoms.
-//    public void test_formalBottoms() throws Exception {
-//        Wardrobe singleWardrobe = new Wardrobe();
-//        singleWardrobe.addArticle("tester", Wardrobe.ClothingType.PANTS,
-//                Wardrobe.ClothingColor.RED, Wardrobe.ClothingFormality.FORMAL,
-//                Wardrobe.ClothingTemperature.COLD);
-//
-//        singleWardrobe.addArticle("tester1", Wardrobe.ClothingType.PANTS,
-//                Wardrobe.ClothingColor.BLUE, Wardrobe.ClothingFormality.FORMAL,
-//                Wardrobe.ClothingTemperature.COLD);
-//
-//        singleWardrobe.addArticle("tester2", Wardrobe.ClothingType.PANTS,
-//                Wardrobe.ClothingColor.RED, Wardrobe.ClothingFormality.CASUAL,
-//                Wardrobe.ClothingTemperature.COLD);
-//
-//        singleWardrobe.addArticle("tester3", Wardrobe.ClothingType.SHOES,
-//                Wardrobe.ClothingColor.RED, Wardrobe.ClothingFormality.FORMAL,
-//                Wardrobe.ClothingTemperature.COLD);
-//
-//        ArrayList viableBottoms;
-//        viableBottoms = Choose.removeBottomsItems(singleWardrobe.articleList, Wardrobe.ClothingFormality.FORMAL, Wardrobe.ClothingTemperature.COLD);
-//
-//        int len = viableBottoms.size();
-//        assertEquals(len, 2); //Removes casual shirt and formal shoe
-//        assertEquals(singleWardrobe.wardrobeLength(), 4);
-//        assertTrue(viableBottoms.contains(singleWardrobe.getArticle("tester")));
-//        assertTrue(viableBottoms.contains(singleWardrobe.getArticle("tester1")));
-//
-//    }
+
+    // CHOOSE CLASS TESTS
+    // Much of the testing for this class was done with the actual application (i.e. by running
+    // code and checking results visually). Were this a larger-scale project, we would have
+    // developed mock-up Android tests to handle more testing.
+
+
+
+
+
+
+
 }
