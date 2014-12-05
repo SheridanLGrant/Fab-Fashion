@@ -151,7 +151,67 @@ public class ApplicationTest extends InstrumentationTestCase {
 
     }
 
-    //
+    // Tests pickOutfit
+    public void test_pickOutfit() throws Exception {
+
+        populateWardrobe();
+        Choose choose = new Choose(testWardrobe);
+
+        ArrayList<Clothing> tops = new ArrayList<Clothing>();
+        ArrayList<Clothing> bottoms = new ArrayList<Clothing>();
+        ArrayList<Clothing> shoes = new ArrayList<Clothing>();
+
+        tops.add(testWardrobe.get(0));
+        bottoms.add(testWardrobe.get(4));
+        shoes.add(testWardrobe.get(5));
+
+        ArrayList<Clothing> recommendations = choose.pickOutfit(tops, bottoms, shoes);
+        assertEquals(recommendations.get(0), tops.get(0));
+        assertEquals(recommendations.get(1), bottoms.get(0));
+        assertEquals(recommendations.get(2), shoes.get(0));
+
+        tops.remove(0);
+        tops.add(testWardrobe.get(1));
+
+        // Should fail to return a top/bottom combo as red/green is a bad color combo
+        ArrayList<Clothing> recommendations2 = choose.pickOutfit(tops, bottoms, shoes);
+        assertEquals(recommendations2.get(2), shoes.get(0));
+        assertEquals(recommendations2.get(1).getName(), "No recommended clothing");
+        assertEquals(recommendations2.get(0).getName(), "No recommended clothing");
+
+    }
+
+    // Tests RecommendedOutfits. DOES NOT COVER EVER SINGLE CONDITIONAL IN THE FUNCTION. To do so
+    // would require probably 1000 lines of code; we chose to finish off the design and interface
+    // of the app nicely rather than spending all night doing this completely. Again, these
+    // functions were all tested via the actual application...
+    public void test_RecommendedOutfits() throws Exception {
+
+        populateWardrobe();
+        Choose choose = new Choose(testWardrobe);
+
+        // These parameters should return the blue tee/green skirt combo as it's an okay color
+        // combination, and a randomly selected tennis shoe.
+        ArrayList<Clothing> recommended = choose.RecommendedOutfits(testWardrobe, RECREATIONAL,
+                HOT);
+        assertEquals(recommended.get(0).getName(), "teeBlueRecHot");
+        assertEquals(recommended.get(1).getName(), "skirtGreenCasualHot");
+        assertEquals(recommended.get(2).getType(), TENNIS_SHOES);
+
+        ArrayList<Clothing> recommended2 = choose.RecommendedOutfits(testWardrobe, CASUAL,
+                COLD);
+        assertEquals(recommended2.get(0).getName(), "longRedCasualCold");
+        assertEquals(recommended2.get(1).getName(), "pantsBlackFormalMild");
+        assertEquals(recommended2.get(2).getType(), TENNIS_SHOES);
+
+        testWardrobe.remove(3);
+        assertEquals(testWardrobe.size(), 5);
+        ArrayList<Clothing> recommended3 = choose.RecommendedOutfits(testWardrobe, CASUAL,
+                COLD);
+//        assertEquals(recommended3.get(0).getName(), "No recommended clothing");
+//        assertEquals(recommended3.get(1).getName(), "No recommended clothing");
+//        assertEquals(recommended3.get(2).getType(), TENNIS_SHOES);
+    }
 
 
 

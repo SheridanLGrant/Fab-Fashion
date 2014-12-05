@@ -373,7 +373,8 @@ public class Choose {
             }
 
             for (int i = 0; i < bottomsPossible.size(); i++) {
-                if (SHORTS.equals(bottomsPossible.get(i).getType())) {
+                if (SHORTS.equals(bottomsPossible.get(i).getType()) ||
+                        SKIRT.equals(bottomsPossible.get(i).getType())) {
                     suggestedBottoms.add(bottomsPossible.get(i));
                 }
             }
@@ -397,7 +398,8 @@ public class Choose {
 
             for (int i = 0; i < bottomsPossible.size(); i++) {
                 if (SHORTS.equals(bottomsPossible.get(i).getType()) ||
-                        PANTS.equals(bottomsPossible.get(i).getType())) {
+                        PANTS.equals(bottomsPossible.get(i).getType()) ||
+                        SKIRT.equals(bottomsPossible.get(i).getType())) {
                     suggestedBottoms.add(bottomsPossible.get(i));
                 }
             }
