@@ -2,24 +2,29 @@ package edu.hmc.cs.personalstylist;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.HorizontalScrollView;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 
-// TODO: Max, comment this class por favorrrr.
 /**
+ * A customized Horizontal Scroll view with extended functionality.
+ *
+ * Keeps track of when the view has been scrolled, which allows the view to respond (i.e. by
+ * snapping an item to the center) when the user stops scrolling.
+ *
+ * Based on code from
+ * http://stackoverflow.com/questions/8181828/android-detect-when-scrollview-stops-scrolling
+ *
  * Created by Max on 11/17/2014.
  *
- * From http://stackoverflow.com/questions/8181828/android-detect-when-scrollview-stops-scrolling
+ * @see android.widget.HorizontalScrollView
  */
 public class MyScrollView extends HorizontalScrollView {
     private Runnable scrollerTask;
     private int initialPosition;
 
-    private int newCheck = 100;
+    private final int newCheck = 100;
 
     public interface OnScrollStoppedListener{
         void onScrollStopped();
@@ -27,6 +32,17 @@ public class MyScrollView extends HorizontalScrollView {
 
     private OnScrollStoppedListener onScrollStoppedListener;
 
+    /**
+     * Constructor for a MyScrollView object.
+     *
+     * Extends the functionality of a HorizontalScrollView to keep track of when the view has been
+     * scrolled.
+     *
+     * @param context
+     * @param attrs
+     *
+     * @see android.widget.HorizontalScrollView
+     */
     public MyScrollView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -59,6 +75,14 @@ public class MyScrollView extends HorizontalScrollView {
         MyScrollView.this.postDelayed(scrollerTask, newCheck);
     }
 
+    /**
+     * Centers an item in a LinearLayout in the view.
+     *
+     * Finds the item nearest to the center, and centers it. Does nothing if there are no items in
+     * the LinearLayout.
+     *
+     * @param myLayout A LinearLayout contained in the HorizontalScrollView.
+     */
     public void center(LinearLayout myLayout) {
         // From http://stackoverflow.com/questions/12424373/how-to-scroll-to-center-of-child-of-horizontalscrollview
         // get the center
@@ -97,8 +121,15 @@ public class MyScrollView extends HorizontalScrollView {
         }
     }
 
-    /// Helper function for Sheridan.
-    /// Will center the layout if necessary. Returns null if there are no clothes in the layout.
+    /**
+     * Finds the clothing item closest to the center of a LinearLayout in the view.
+     *
+     * The LinearLayout must contain clothing items for this function to work.
+     *
+     * @param myLayout A LinearLayout contained in the HorizontalScrollView.
+     * @return The Clothing object nearest to the center of the view, or null if the LinearLayout
+     *         is empty.
+     */
     public Clothing getCenterItem(LinearLayout myLayout) {
         center(myLayout);
 

@@ -12,7 +12,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,6 +30,8 @@ import java.util.ArrayList;
 
 
 /**
+ * Displays the recommended outfit based on the parameters from the ChooseOutfit screen.
+ *
  * Created by davidconnor on 11/6/14.
  */
 public class ViewOutfit extends Activity implements View.OnClickListener {
@@ -161,7 +162,11 @@ public class ViewOutfit extends Activity implements View.OnClickListener {
 
     }
 
-    // Populate scroll views, set them up correctly
+    /**
+     * Creates the scrolling views that store clothing items.
+     *
+     * Three scrolling views are created and initialized, for shirts, pants, and shoes.
+     */
     private void initializeScrollViews() {
         MyScrollView topScroller = (MyScrollView) findViewById(R.id.topScrollerChoose);
         MyScrollView bottomScroller = (MyScrollView) findViewById(R.id.bottomScrollerChoose);
@@ -189,7 +194,15 @@ public class ViewOutfit extends Activity implements View.OnClickListener {
         initialCenter(shoeScroller, shoeLayout);
     }
 
-    // Sets a MyScrollView object to automatically center itself after scrolling
+    /**
+     * Sets a MyScrollView object to automatically center itself after scrolling.
+     *
+     * When the user stops scrolling through this view, the clothing item nearest to the center
+     * snaps to the center.
+     *
+     * @param myView A view that should center clothing items.
+     * @param myLayout The LinearLayout contained in the view.
+     */
     private void initializeOneScrollView(final MyScrollView myView, final LinearLayout myLayout) {
         myView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -208,7 +221,12 @@ public class ViewOutfit extends Activity implements View.OnClickListener {
         });
     }
 
-    // Initializes a MyScrollView object to start with an item centered
+    /**
+     * Sets a MyScrollView object to initialize with an item centered.
+     *
+     * @param myView A view that should center clothing items.
+     * @param myLayout The LinearLayout contained in the view.
+     */
     private void initialCenter(final MyScrollView myView, final LinearLayout myLayout) {
         myView.post(new Runnable() {
             public void run() {
@@ -219,8 +237,15 @@ public class ViewOutfit extends Activity implements View.OnClickListener {
 
 
 
-    // Behold the mass of conditional code required to sort clothing items into the current 99
-    // possible combinations of type and color
+    /**
+     * Turns an article of clothing into a button.
+     *
+     * Creates an ImageButton with an image chosen based on the details of the clothing article. If
+     * there is no suitable article, display a placeholder icon.
+     *
+     * @param currentArticle The article of clothing to be represented by a button.
+     * @return The ImageButton for currentArticle.
+     */
     private ImageButton createImageButton(Clothing currentArticle) {
 
         ImageButton button = new ImageButton(this);
@@ -580,7 +605,11 @@ public class ViewOutfit extends Activity implements View.OnClickListener {
     }
 
 
-    // Displays an algorithm-suggested outfit
+    /**
+     * Display an outfit based on the suggestion of the clothing-choosing algorithm.
+     *
+     * @param suggestion The algorithmically-generated list of clothing suggestions.
+     */
     private void DisplaySuggestion(ArrayList<Clothing> suggestion) {
 
         ImageButton topButton = createImageButton(suggestion.get(0));
@@ -617,8 +646,12 @@ public class ViewOutfit extends Activity implements View.OnClickListener {
         popup.show();
     }
 
-    // Judges the currently-centered outfit (upon button press) for appropriateness in style and
-    // color. Displays a check for good, X for bad.
+    /**
+     * Judges the currently-centered outfit (upon button press) for appropriateness in style and
+     * color. Displays a check for good, X for bad.
+     *
+     * @param v
+     */
     public void judge(View v) {
         MyScrollView topScroll = (MyScrollView) findViewById(R.id.topScrollerChoose);
         MyScrollView bottomScroll = (MyScrollView) findViewById(R.id.bottomScrollerChoose);
@@ -639,7 +672,7 @@ public class ViewOutfit extends Activity implements View.OnClickListener {
             Clothing bottom = bottomScroll.getCenterItem(bottomLayout);
             Clothing shoe = shoeScroll.getCenterItem(shoeLayout);
 
-            Choose choose = new Choose(wardrobe); // TODO: THIS IS UNNECESSARY
+            Choose choose = new Choose(wardrobe);
 
             if (choose.judgeOutfit(top, bottom, shoe)) {
                 checkX.setImageResource(R.drawable.checkmark_48);

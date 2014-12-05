@@ -29,6 +29,13 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 
+/**
+ * MainActivity class for Personal Stylist
+ *
+ * This class handles the wardrobe that appears on the main screen. Its job is to display the
+ * user's clothing, which can be scrolled through. The menu bar allows the user to access other
+ * functionality of the application.
+ */
 public class MainActivity extends Activity implements OnClickListener, PopupMenu.OnMenuItemClickListener {
     // Clothing Types
     private final static String LONG_SLEEVE_SHIRT = "Long-sleeve shirt";
@@ -59,7 +66,14 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
     String file = "wardrobeData";
 
 
-    // On activity start, do this!
+    /**
+     * Runs when the application is launched.
+     *
+     * This method loads stored data (if any exists) about the user's wardrobe, and calls the
+     * functions that initialize the wardrobe display.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -111,7 +125,12 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
     }
 
 
-    // Displays the clothing in the wardrobe read from memory
+    /**
+     * Displays the clothing in the wardrobe read from memory.
+     *
+     * Each article is read from the stored array and sorted into the correct category, and
+     * displayed as an ImageButton.
+     */
     private void displayStoredWardrobe() {
 
         Clothing currentArticle;
@@ -139,9 +158,14 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
     }
 
 
-
-    // Behold the mass of conditional code required to sort clothing items into the current 99
-    // possible combinations of type and color
+    /**
+     * Turns an article of clothing into a button.
+     *
+     * Creates an ImageButton with an image chosen based on the details of the clothing article.
+     *
+     * @param currentArticle The article of clothing to be represented by a button.
+     * @return The ImageButton for currentArticle.
+     */
     private ImageButton createImageButton(Clothing currentArticle) {
 
         ImageButton button = new ImageButton(this);
@@ -455,7 +479,11 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
     }
 
 
-    // Sets up the three wardrobe scrollers with ImageButtons in them
+    /**
+     * Creates the scrolling views that store clothing items.
+     *
+     * Three scrolling views are created and initialized, for shirts, pants, and shoes.
+     */
     private void initializeScrollViews() {
 
         MyScrollView topScroller = (MyScrollView) findViewById(R.id.topScroller);
@@ -485,7 +513,15 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
     }
 
 
-    // Helper function for initializeScrollViews
+    /**
+     * Sets a MyScrollView object to automatically center itself after scrolling.
+     *
+     * When the user stops scrolling through this view, the clothing item nearest to the center
+     * snaps to the center.
+     *
+     * @param myView A view that should center clothing items.
+     * @param myLayout The LinearLayout contained in the view.
+     */
     private void initializeOneScrollView(final MyScrollView myView, final LinearLayout myLayout) {
         myView.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -505,7 +541,12 @@ public class MainActivity extends Activity implements OnClickListener, PopupMenu
     }
 
 
-    // TODO: What is this thing?
+    /**
+     * Sets a MyScrollView object to initialize with an item centered.
+     *
+     * @param myView A view that should center clothing items.
+     * @param myLayout The LinearLayout contained in the view.
+     */
     private void initialCenter(final MyScrollView myView, final LinearLayout myLayout) {
         myView.post(new Runnable() {
             public void run() {

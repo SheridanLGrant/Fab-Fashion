@@ -14,6 +14,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 /**
+ * This class takes and displays the restrictions the user wants to place on suggested clothing.
+ *
  * Created by Sheridan on 11/5/2014.
  */
 public class ChooseOutfit extends Activity implements PopupMenu.OnMenuItemClickListener {
@@ -59,7 +61,11 @@ public class ChooseOutfit extends Activity implements PopupMenu.OnMenuItemClickL
         return super.onOptionsItemSelected(item);
     }
 
-    // Creates Formality popup menu
+    /**
+     * Creates the Formality popup menu
+     *
+     * @param v The view where the menu should appear.
+     */
     public void showPopUpFormality(View v){
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
@@ -68,7 +74,11 @@ public class ChooseOutfit extends Activity implements PopupMenu.OnMenuItemClickL
         popup.show();
     }
 
-    // Creates Temperature popup menu
+    /**
+     * Creates the Temperature popup menu
+     *
+     * @param v The view where the menu should appear.
+     */
     public void showPopUpTemperature(View v){
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
@@ -78,7 +88,11 @@ public class ChooseOutfit extends Activity implements PopupMenu.OnMenuItemClickL
     }
 
 
-    // Called if the user does not enter a valid name or clothing type
+    /**
+     * Called if the user does not enter a valid name or clothing type.
+     *
+     * Restarts the activity to allow the user to try again and gives a warning toast.
+     */
     private void noInput() {
         Context context = getApplicationContext();
         CharSequence message = "No preferences entered";
@@ -93,8 +107,13 @@ public class ChooseOutfit extends Activity implements PopupMenu.OnMenuItemClickL
     }
 
 
-    // When the user presses the enter preferences button, send the next activity their preferences
-    // and ensure they have selected something
+    /**
+     * Called when the user presses the button to enter the selected preferences.
+     *
+     * Send the next activity the preferences and ensure the user has selected something.
+     *
+     * @param v
+     */
     public void moveToOutfitView(View v){
         Intent outfitChoose = new Intent(this, ViewOutfit.class);
         TextView tempText = (TextView) findViewById(R.id.choose_selected_temperature);

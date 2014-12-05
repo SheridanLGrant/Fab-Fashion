@@ -24,6 +24,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 /**
+ * This class handles entering a new item of clothing.
+ *
+ * Displays the clothing entry screen and saves the user's clothing parameters.
+ *
  * Created by Sheridan on 10/12/2014.
  */
 public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickListener {
@@ -122,7 +126,11 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
         return super.onOptionsItemSelected(item);
     }
 
-    // Inflate the Type drop-down menu
+    /**
+     * Inflate the Type drop-down menu
+     *
+     * @param v View where the menu should appear.
+     */
     public void showPopUpType(View v){
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
@@ -131,7 +139,11 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
         popup.show();
     }
 
-    // Inflate the Color drop-down menu
+    /**
+     * Inflate the Color drop-down menu
+     *
+     * @param v View where the menu should appear.
+     */
     public void showPopUpColor(View v){
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
@@ -140,7 +152,11 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
         popup.show();
     }
 
-    // Inflate the Formality drop-down menu
+    /**
+     * Inflate the Formality drop-down menu
+     *
+     * @param v View where the menu should appear.
+     */
     public void showPopUpFormality(View v){
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
@@ -149,7 +165,11 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
         popup.show();
     }
 
-    // Inflate the Temperature drop-down menu
+    /**
+     * Inflate the Temperature drop-down menu
+     *
+     * @param v View where the menu should appear.
+     */
     public void showPopUpTemperature(View v){
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
@@ -158,7 +178,17 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
         popup.show();
     }
 
-    // Adds the article of clothing to the wardrobe and memory
+    /**
+     * Saves the new article of clothing to the wardrobe.
+     *
+     * This method saves the new article of clothing and the information entered by the user. It
+     * then stores the information in memory so MainActivity may access it.
+     *
+     * Ends the current activity and any other background activities, and returns to MainActivity.
+     *
+     * @param view
+     * @throws IOException
+     */
     public void enterItem(View view) throws IOException {
 
         EditText clothingName = (EditText) findViewById(R.id.clothingName);
@@ -183,6 +213,7 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
             return;
         }
 
+        // Return to MainActivity and end other activities
         Intent returnToMain = new Intent(this, MainActivity.class);
         returnToMain.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -210,7 +241,12 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
         this.finish();
     }
 
-    // Called if the user does not enter a valid name or clothing type
+    /**
+     * Restarts the activity without saving the new clothing item.
+     *
+     * Called if the user does not enter correct parameters. Returns to the article entry screen so
+     * the user may take another attempt to enter the new article.
+     */
     private void quitWithoutSaving() {
         Context context = getApplicationContext();
         CharSequence message = "Article not saved: please enter a valid name and clothing type";
@@ -225,7 +261,12 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
     }
 
 
-    // Called if the user enters an article name that is already present
+    /**
+     * Restarts the activity without saving the new clothing item.
+     *
+     * Called if the user enters an article with a repeated name. Returns to the article entry
+     * screen so the user may take another attempt to enter the new article, and warns the user.
+     */
     private void sameName() {
         Context context = getApplicationContext();
         CharSequence message = "Article name already in wardrobe";
@@ -240,7 +281,11 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
     }
 
 
-    // Reads in the wardrobe data, just like in main activity
+    /**
+     * Reads the wardrobe data
+     *
+     * @param gson The GSon that stores the wardrobe data.
+     */
     private void readWardrobeData(Gson gson) {
         file = "wardrobeData";
         String temp="";
@@ -274,7 +319,11 @@ public class EnterArticle extends Activity implements PopupMenu.OnMenuItemClickL
     }
 
 
-    // Stores the wardrobe in memory
+    /**
+     * Stores the wardrobe in memory.
+     *
+     * @param wardrobeName The wardrobe to be saved.
+     */
     private void storeWardrobeData(String wardrobeName) {
         file = "wardrobeData";
         try {
