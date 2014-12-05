@@ -26,7 +26,8 @@ limitations under the License.-->
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,7 +38,8 @@ limitations under the License.-->
         <activity
             android:name=".ViewOutfit"
             android:label="@string/title_activity_view_outfits"
-            android:parentActivityName=".ChooseOutfit" >
+            android:parentActivityName=".ChooseOutfit"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.hmc.cs.ChooseOutfit" />
@@ -46,7 +48,8 @@ limitations under the License.-->
         <activity
             android:name="edu.hmc.cs.personalstylist.EnterArticle"
             android:label="@string/title_activity_enter_article"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.hmc.cs.MainActivity" />
@@ -55,7 +58,8 @@ limitations under the License.-->
         <activity
             android:name="edu.hmc.cs.personalstylist.ChooseOutfit"
             android:label="@string/title_activity_choose_outfit"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.hmc.cs.MainActivity" />
