@@ -603,14 +603,13 @@ public class Choose {
 
         String topColor = top.getColor();
         String bottomColor = bottom.getColor();
-        String shoeColor = shoe.getColor();
+        String shoeColor = shoe.getColor(); // not used, here for symmetry/ease of reading
 
         // Checks for bad type combinations
         if ((shoeType.equals(SANDALS) && bottomType.equals(PANTS)) ||
                 (topType.equals(SLEEVELESS_SHIRT) && bottomType.equals(PANTS)) ||
                 (topType.equals(LONG_SLEEVE_SHIRT) && shoeType.equals(SANDALS)) ||
                 (shoeType.equals(DRESS_SHOES) && bottomType.equals(SHORTS)) ||
-                (shoeType.equals(TENNIS_SHOES) && bottomType.equals(SKIRT)) ||
                 (shoeType.equals(DRESS_SHOES) && topType.equals(SLEEVELESS_SHIRT)) ||
                 (shoeType.equals(DRESS_SHOES) && topType.equals(SHORT_SLEEVE_SHIRT)) ||
                 (bottomType.equals(PANTS) && topType.equals(SLEEVELESS_SHIRT))) {

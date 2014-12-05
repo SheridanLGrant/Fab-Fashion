@@ -1,11 +1,6 @@
 package edu.hmc.cs.personalstylist;
 
-import android.app.Application;
-import android.test.ApplicationTestCase;
 import android.test.InstrumentationTestCase;
-import android.util.Log;
-
-import java.io.WriteAbortedException;
 import java.util.ArrayList;
 
 /**
@@ -204,13 +199,36 @@ public class ApplicationTest extends InstrumentationTestCase {
         assertEquals(recommended2.get(1).getName(), "pantsBlackFormalMild");
         assertEquals(recommended2.get(2).getType(), TENNIS_SHOES);
 
-        testWardrobe.remove(3);
+        // Remove the pants. Now there are no appropriate pants, so the algorithm only
+        // recommends shoes as there is no shirt/pants combo.
+        testWardrobe.remove(2);
         assertEquals(testWardrobe.size(), 5);
         ArrayList<Clothing> recommended3 = choose.RecommendedOutfits(testWardrobe, CASUAL,
                 COLD);
-//        assertEquals(recommended3.get(0).getName(), "No recommended clothing");
-//        assertEquals(recommended3.get(1).getName(), "No recommended clothing");
-//        assertEquals(recommended3.get(2).getType(), TENNIS_SHOES);
+        assertEquals(recommended3.get(0).getName(), "No recommended clothing");
+        assertEquals(recommended3.get(1).getName(), "No recommended clothing");
+        assertEquals(recommended3.get(2).getType(), TENNIS_SHOES);
+    }
+
+    // Tests judgeOutfit. Again, we can't cover every case, but if you look at the function
+    // you can see fairly easily that all the cases are of the exact same general format.
+    public void test_judgeOutfit() throws Exception {
+
+        populateWardrobe();
+        Choose choose = new Choose(testWardrobe);
+
+        // No offensive combinations of type or color here
+        assertTrue(choose.judgeOutfit(testWardrobe.get(0), testWardrobe.get(3),
+                testWardrobe.get(4)));
+
+        // Red and green--not a good idea!
+        assertFalse(choose.judgeOutfit(testWardrobe.get(1), testWardrobe.get(3),
+                testWardrobe.get(4)));
+
+        // tee shirt and dress shoes?!?! No thanks.
+        Clothing dressy = new Clothing("dressy", DRESS_SHOES, BLACK, FORMAL, MILD);
+        assertFalse(choose.judgeOutfit(testWardrobe.get(1), testWardrobe.get(3),
+                dressy));
     }
 
 
