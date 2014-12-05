@@ -683,4 +683,4 @@ public class ViewOutfit extends Activity implements View.OnClickListener {
             checkX.setImageResource(R.drawable.exclamation);
         }
     }
-}
+} 
