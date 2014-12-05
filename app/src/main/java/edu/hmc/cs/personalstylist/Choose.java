@@ -1,14 +1,8 @@
 package edu.hmc.cs.personalstylist;
 
 
-import android.util.Log;
-import android.widget.TextView;
-
-import java.util.Iterator;
 import java.util.ArrayList;
-import edu.hmc.cs.personalstylist.Wardrobe;
 import java.util.Random;
-import edu.hmc.cs.personalstylist.Clothing;
 
 /**
  * Created by davidconnor on 10/10/14.
