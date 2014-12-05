@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/button_enter_article"
         android:layout_below="@+id/selected_temperature"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentBottom="true" />
 
     <TextView
         android:text="@string/selected_type"

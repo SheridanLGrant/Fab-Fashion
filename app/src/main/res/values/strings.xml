@@ -19,10 +19,10 @@
     <string name="clothing_temperature">Clothing Temperature</string>
     <string name="enter_clothing_name">Enter this clothing article\'s name</string>
     <string name="enter_item">Enter this article of clothing</string>
-    <string name="selected_type">Selected Type</string>
-    <string name="selected_color">Selected Color</string>
-    <string name="selected_formality">Selected Formality</string>
-    <string name="selected_temperature">Selected Temperature</string>
+    <string name="selected_type">No Type Selected</string>
+    <string name="selected_color">No Color Selected</string>
+    <string name="selected_formality">No Formality Selected</string>
+    <string name="selected_temperature">No Temperature Selected</string>
 
 
     <string name="temperature_preference">Temperature Preference</string>

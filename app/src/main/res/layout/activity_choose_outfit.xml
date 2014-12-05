@@ -33,8 +33,6 @@
     <Button
         android:background="@drawable/text_buttons"
         style="@style/button_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/temperature_preference"
         android:id="@+id/temp_button"
         android:onClick="showPopUpTemperature"
@@ -44,6 +42,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="25dp"
         android:id="@+id/choose_selected_temperature"
         android:layout_below="@+id/temp_button"
         android:layout_centerHorizontal="true" />
@@ -51,8 +50,6 @@
     <Button
         android:background="@drawable/text_buttons"
         style="@style/button_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/formality_preference"
         android:id="@+id/form_button"
         android:onClick="showPopUpFormality"
@@ -62,6 +59,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="25dp"
         android:id="@+id/choose_selected_formality"
         android:layout_below="@+id/form_button"
         android:layout_centerHorizontal="true" />
@@ -69,8 +67,6 @@
     <Button
         android:background="@drawable/text_buttons"
         style="@style/button_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="@string/enter_preferences"
         android:id="@+id/enter_preferences"
         android:onClick="moveToOutfitView"
